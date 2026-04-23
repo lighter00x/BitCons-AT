@@ -1,0 +1,4 @@
+# 忽略当前项目根目录下的 outputs 文件夹
+outputs/
+logs/
+dataset/
