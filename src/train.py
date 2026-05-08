@@ -124,21 +124,21 @@ def main():
 
         scheduler.step()
 
-        test_acc = evaluate_natural(model, device, test_loader)
-        pgd10_acc = evaluate_pgd_10(model, device, test_loader)
+        test_acc = evaluate_natural(model, device, test_loader) # 自然样本上的原始准确率
+        pgd10_acc = evaluate_pgd_10(model, device, test_loader) # 自然样本 + pgd10 准确率
 
         pgd10_masked_acc = None
         natural_masked_acc = None
         if getattr(config, 'bitcons', False):
             bc_planes = list(getattr(config, 'bitcons_planes', [0, 1, 2]))
-            pgd10_masked_acc = evaluate_pgd_10_masked(model, device, test_loader, bc_planes)
-            natural_masked_acc = evaluate_natural_masked(model, device, test_loader, bc_planes)
+            pgd10_masked_acc = evaluate_pgd_10_masked(model, device, test_loader, bc_planes)    # 在pgd10 + bitcons下的准确率
+            natural_masked_acc = evaluate_natural_masked(model, device, test_loader, bc_planes) # 直接是干净样本 + bitcons下的准确率
 
         logger.log_metrics(epoch, train_loss, train_acc, test_acc, pgd10_acc,
                            pgd10_masked_acc=pgd10_masked_acc, natural_masked_acc=natural_masked_acc)
-
-        if pgd10_acc > best_pgd10_acc:
-            best_pgd10_acc = pgd10_acc
+        # 比较的是pgd + bitcons下的准确率
+        if pgd10_masked_acc > best_pgd10_acc:
+            best_pgd10_acc = pgd10_masked_acc
             save_checkpoint(model, optimizer, epoch, best_pgd10_acc, checkpoint_dir)
 
         if (epoch + 1) % 10 == 0 or epoch == 0:

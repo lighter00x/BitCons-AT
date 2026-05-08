@@ -12,26 +12,13 @@ from common.config import Config
 from datasets import get_loaders
 from models import get_model
 from evals import (
-    evaluate_natural, evaluate_pgd_10, evaluate_pgd_20, evaluate_pgd_50,
-    evaluate_cw, evaluate_aa
+    evaluate_natural, evaluate_natural_masked,
+    evaluate_pgd_10, evaluate_pgd_20, evaluate_pgd_50,
+    evaluate_pgd_10_masked, evaluate_pgd_20_masked, evaluate_pgd_50_masked,
+    evaluate_cw, evaluate_cw_masked,
+    evaluate_aa, evaluate_aa_masked,
 )
 from utils import load_checkpoint
-from losses import apply_bitplane_mask
-
-
-class _BitConsMaskedModel(nn.Module):
-    """Thin wrapper that applies fragile bit-plane masking before the model."""
-    def __init__(self, model: nn.Module, planes: list):
-        super().__init__()
-        self.model  = model
-        self.planes = planes
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # BPDA straight-through: forward uses masked value, backward treats
-        # the mask as identity so PGD gradient computation stays connected.
-        masked = apply_bitplane_mask(x, self.planes)
-        x_ste = x + (masked - x).detach()
-        return self.model(x_ste)
 
 
 def find_experiment_folder(exp_path):
@@ -211,8 +198,7 @@ def load_exp_config(exp_folder):
 
 def _complete_config(config):
     """补完配置的其他必要字段"""
-    project_root = Path(__file__).parent.parent
-    config['data_dir'] = str((project_root / 'dataset').resolve())
+    config['data_dir'] = f'./data/{config.get("dataset", "cifar10").upper()}'
     config['num_classes'] = 100 if config.get("dataset") == 'cifar100' else 10
     config['batch_size'] = 128
     config['num_workers'] = 4
@@ -260,8 +246,6 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
     # 评估相关参数
     parser.add_argument('--batch-size', type=int, default=128,
                         help='Batch size for evaluation (default: 128)')
-    parser.add_argument('--data-dir', type=str, default=None,
-                        help='Dataset root directory (default: infer from config/project)')
     parser.add_argument('--num-workers', type=int, default=4,
                         help='Number of workers for data loading (default: 4)')
 
@@ -314,23 +298,7 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
     config = load_exp_config(exp_folder)
     config['batch_size'] = args.batch_size
     config['num_workers'] = args.num_workers
-
-    project_root = Path(__file__).parent.parent
-    if args.data_dir:
-        eval_data_dir = Path(args.data_dir).expanduser()
-        if not eval_data_dir.is_absolute():
-            eval_data_dir = project_root / eval_data_dir
-    else:
-        eval_data_dir = Path(config.get('data_dir', project_root / 'dataset')).expanduser()
-        if not eval_data_dir.is_absolute():
-            eval_data_dir = project_root / eval_data_dir
-        if not eval_data_dir.exists():
-            fallback_data_dir = project_root / 'dataset'
-            if fallback_data_dir.exists():
-                print(f"⚠ data_dir not found: {eval_data_dir}")
-                print(f"  Falling back to: {fallback_data_dir}")
-                eval_data_dir = fallback_data_dir
-    config['data_dir'] = str(eval_data_dir)
+    config["data_dir"] = "/home/chenyu/ADV/data"
 
     if args.device == 'cuda':
         if not torch.cuda.is_available():
@@ -349,7 +317,6 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
         print(f"✓ Using CPU")
 
     print(f"\n✓ Loading {config.get('dataset', 'unknown')} dataset...")
-    print(f"✓ Data directory: {config.get('data_dir')}")
     try:
         _, test_loader = get_loaders(config)
     except Exception as e:
@@ -372,10 +339,11 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
         print(f"✗ Error loading checkpoint: {e}")
         return
 
+    bc_planes = None
     if args.bitcons_test:
-        planes = args.bitcons_planes
-        model  = _BitConsMaskedModel(model, planes).to(device)
-        print(f"✓ BitCons test-time masking enabled (planes: {planes})")
+        bc_planes = args.bitcons_planes
+        print(f"✓ BitCons test-time masking enabled (planes: {bc_planes})")
+        print(f"  Mode: attack original model first, then apply mask before inference")
 
     eval_attacks = {
         'natural': True,
@@ -392,29 +360,47 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
     results = {}
 
     try:
-        results['natural'] = evaluate_natural(model, device, test_loader)
+        if bc_planes is not None:
+            results['natural'] = evaluate_natural_masked(model, device, test_loader, bc_planes)
+        else:
+            results['natural'] = evaluate_natural(model, device, test_loader)
         print(f"✓ Natural Accuracy: {results['natural']:.2f}%")
 
         if eval_attacks['pgd10']:
-            results['pgd10'] = evaluate_pgd_10(model, device, test_loader)
+            if bc_planes is not None:
+                results['pgd10'] = evaluate_pgd_10_masked(model, device, test_loader, bc_planes)
+            else:
+                results['pgd10'] = evaluate_pgd_10(model, device, test_loader)
             print(f"✓ PGD-10 Accuracy: {results['pgd10']:.2f}%")
 
         if eval_attacks['pgd20']:
-            results['pgd20'] = evaluate_pgd_20(model, device, test_loader)
+            if bc_planes is not None:
+                results['pgd20'] = evaluate_pgd_20_masked(model, device, test_loader, bc_planes)
+            else:
+                results['pgd20'] = evaluate_pgd_20(model, device, test_loader)
             print(f"✓ PGD-20 Accuracy: {results['pgd20']:.2f}%")
 
         if eval_attacks['pgd50']:
-            results['pgd50'] = evaluate_pgd_50(model, device, test_loader)
+            if bc_planes is not None:
+                results['pgd50'] = evaluate_pgd_50_masked(model, device, test_loader, bc_planes)
+            else:
+                results['pgd50'] = evaluate_pgd_50(model, device, test_loader)
             print(f"✓ PGD-50 Accuracy: {results['pgd50']:.2f}%")
 
         if eval_attacks['cw']:
             print("Running C&W attack (L-infinity, eps=8/255)...")
-            results['cw'] = evaluate_cw(model, device, test_loader, eps=8/255, alpha=2/255, steps=50)
+            if bc_planes is not None:
+                results['cw'] = evaluate_cw_masked(model, device, test_loader, bc_planes, eps=8/255, alpha=2/255, steps=50)
+            else:
+                results['cw'] = evaluate_cw(model, device, test_loader, eps=8/255, alpha=2/255, steps=50)
             print(f"✓ C&W Accuracy: {results['cw']:.2f}%")
 
         if eval_attacks['aa']:
             print("Running AutoAttack (L-infinity, eps=8/255, this may take a while)...")
-            results['aa'] = evaluate_aa(model, device, test_loader, norm='Linf', eps=8/255, verbose=args.verbose)
+            if bc_planes is not None:
+                results['aa'] = evaluate_aa_masked(model, device, test_loader, bc_planes, norm='Linf', eps=8/255, verbose=args.verbose)
+            else:
+                results['aa'] = evaluate_aa(model, device, test_loader, norm='Linf', eps=8/255, verbose=args.verbose)
             print(f"✓ AutoAttack Accuracy: {results['aa']:.2f}%")
 
     except Exception as e:

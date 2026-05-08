@@ -1,5 +1,5 @@
 dataset: tinynet
-data_dir: /mnt/data/share/xq/projects/BitCons-AT-main/dataset/data
+data_dir: /home/xq/projects/BitCons-AT/dataset/data
 num_classes: 200
 image_size: 64
 batch_size: 128

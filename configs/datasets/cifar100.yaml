@@ -1,5 +1,5 @@
 dataset: cifar100
-data_dir: /mnt/data/share/xq/projects/BitCons-AT-main/dataset/data
+data_dir: /home/xq/projects/BitCons-AT/dataset/data
 num_classes: 100
 image_size: 32
 batch_size: 128

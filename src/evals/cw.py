@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from losses import apply_bitplane_mask
 
 
 class CW_Linf:
@@ -108,3 +109,25 @@ def evaluate_cw(model, device, test_loader, eps, alpha, steps):
 
     accuracy = 100.0 * correct / total
     return accuracy
+
+
+def evaluate_cw_masked(model, device, test_loader, planes, eps, alpha, steps):
+    """Generate adversarial examples against original model, apply bit-plane mask, then evaluate."""
+    model.eval()
+    cw_attack = CW_Linf(model=model, eps=eps, alpha=alpha, steps=steps, device=device)
+
+    correct = 0
+    total = 0
+
+    for images, labels in test_loader:
+        images, labels = images.to(device), labels.to(device)
+        images_adv = cw_attack(images, labels)
+        images_masked = apply_bitplane_mask(images_adv, planes)
+
+        with torch.no_grad():
+            logits = model(images_masked)
+            _, predicted = logits.max(1)
+            correct += predicted.eq(labels).sum().item()
+            total += labels.size(0)
+
+    return 100.0 * correct / total

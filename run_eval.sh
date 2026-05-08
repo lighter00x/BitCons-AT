@@ -214,3 +214,34 @@ fi
 
 echo "[SUMMARY] All $TOTAL_JOBS evaluation jobs completed successfully."
 echo "[SUMMARY] Logs: $LOG_DIR"
+
+#!/bin/bash
+mkdir -p logs
+nohup python src/eval.py \
+    --bitcons-planes 3 4 5 \
+    --bitcons-test \
+    --gpu 0 \
+    --aa \
+    --exp /home/chenyu/share01/cy_home/BitCons-AT/outputs/cifar10_resnet18_pgd_at_none_test/seed_42_20260308_125755 \
+    > logs/cifar10_eval.out 2>&1 & 
+
+# nohup python src/eval.py \
+#     --bitcons-planes 3 4 5 \
+#     --gpu 1 \
+#     --aa \
+#     --exp /home/chenyu/ADV/BitCons-AT/outputs/cifar10_resnet18_pgd_at_none_test/seed_42_20260307_173617 \
+#     > logs/cifar10_eval_pgd.out 2>&1 & 
+
+# nohup python src/eval.py \
+#     --bitcons-planes 3 4 5 \
+#     --gpu 2 \
+#     --aa \
+#     --exp /home/chenyu/ADV/BitCons-AT/outputs/cifar10_resnet18_rpat_none_test/seed_42_20260307_173617 \
+#     > logs/cifar10_eval_rpat.out 2>&1 & 
+
+# nohup python src/eval.py \
+#     --bitcons-planes 3 4 5 \
+#     --gpu 3 \
+#     --aa \
+#     --exp /home/chenyu/ADV/BitCons-AT/outputs/cifar10_resnet18_trades_none_test/seed_42_20260307_173617 \
+#     > logs/cifar10_eval_trades.out 2>&1 & 

@@ -25,10 +25,15 @@ class PGD_v2:
                 logits = model(x_adv)
                 loss = self.loss_fn(logits, y)
             if i == 0:
+                # 第 0 步（第一次迭代），保存模型对初始扰动样本的输出 logit
                 logits_orig = logits.detach()
 
             grad = torch.autograd.grad(loss, x_adv, create_graph=False)[0]
             x_adv = x_adv.detach() + self.alpha * torch.sign(grad)
+            # torch.clamp = 把张量里的所有数值，强行限制在 [min, max] 范围内
+            # 小于 min 的数 → 变成 min
+            # 大于 max 的数 → 变成 max
+            # 在中间的数 → 保持不变
             x_adv = torch.clamp(x_adv, min=x - self.eps, max=x + self.eps)
             x_adv = torch.clamp(x_adv, min=0, max=1)
 

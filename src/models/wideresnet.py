@@ -100,13 +100,15 @@ class WideResNet(nn.Module):
             elif isinstance(m, nn.Linear):
                 m.bias.data.zero_()
 
-    def forward(self, x):
+    def forward(self, x, return_feat=False):
         out = self.conv1(x)
         out = self.block1(out)
         out = self.block2(out)
         out = self.block3(out)
         out = self.relu(self.bn1(out))
         out = F.avg_pool2d(out, 8)
-        out = out.view(-1, self.nChannels)
-        logits = self.fc(out)
+        feat = out.view(-1, self.nChannels)
+        logits = self.fc(feat)
+        if return_feat:
+            return logits, feat
         return logits

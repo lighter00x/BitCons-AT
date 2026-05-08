@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # 定义可用资源和任务参数
-GPUS=(0 1)
-# DATASETS=("cifar10" "cifar100" "tinynet")
-DATASETS=("cifar100" "tinynet")
-MODELS=("resnet18" "wrn28_10" "wrn34_10" "preactresnet18")
-# MODELS=("resnet18")
-CONFIGS=("pgd_at" "trades" "mart" "rpat")
+GPUS=(0 3 4 7)
+DATASETS=("cifar10" "cifar100" "tinynet")
+# DATASETS=("tinynet")
+# MODELS=("resnet18" "wrn28_10" "wrn34_10" "preactresnet18")
+MODELS=("resnet18")
+# CONFIGS=("pgd_at" "trades" "mart" "rpat")
+CONFIGS=("trades" "mart" "rpat")
 # CONFIGS=("pgd_at")
-DESC="test"
-SEED=4242
+DESC="bitcons_true_contrast_true"
+SEED=4243
 
 RUN_TIME=$(date +%Y%m%d_%H%M%S)
 LOG_DIR="logs/train_${RUN_TIME}"

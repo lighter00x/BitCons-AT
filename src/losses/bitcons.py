@@ -16,6 +16,25 @@ import torch.nn.functional as F
 # Bit-plane masking
 # ─────────────────────────────────────────────────────────────────────────────
 
+def apply_unreliable_bitplane_mask(images: torch.Tensor, fragile_planes: list) -> torch.Tensor:
+    """Keep ONLY the fragile bit-planes (complement of apply_bitplane_mask).
+
+    Args:
+        images:         Float tensor in [0, 1], shape (B, C, H, W).
+        fragile_planes: List of bit-plane indices to keep (0 = LSB, 7 = MSB).
+
+    Returns:
+        Masked float tensor in [0, 1] containing only the unreliable bit-planes,
+        detached from the computation graph.
+    """
+    keep_mask = 0
+    for p in fragile_planes:
+        keep_mask |= (1 << p)
+    keep_mask &= 0xFF
+    images_int = (images.detach() * 255.0).long().clamp(0, 255)
+    return (images_int & keep_mask).float() / 255.0
+
+
 def apply_bitplane_mask(images: torch.Tensor, fragile_planes: list) -> torch.Tensor:
     """Zero out the specified bit-planes from images in [0, 1].
 
@@ -96,6 +115,61 @@ def bitcons_align_loss(
             f"Unknown BitCons alignment type: '{align_type}'. "
             "Choose from: 'js', 'kl', 'mse', 'kl_zscore'."
         )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Feature-space contrastive loss
+# ─────────────────────────────────────────────────────────────────────────────
+
+def bitcons_feature_contrastive_loss(
+    feat_bc: torch.Tensor,
+    feat_adv: torch.Tensor,
+    feat_ub: torch.Tensor,
+    temperature: float = 0.5,
+) -> torch.Tensor:
+    """NT-Xent contrastive loss on penultimate-layer features.
+
+    For each sample i in the batch:
+      - Anchor   : feat_bc_i   (reliable-bit stream)
+      - Positive : feat_adv_i  (adversarial stream, same image → same semantics)
+      - Negatives:
+          * feat_adv_j  for j ≠ i  (cross-sample adversarial features)
+          * feat_ub_j   for all j  (unreliable-bit stream, always noise)
+
+    Gradients flow only through feat_bc; feat_adv and feat_ub are detached.
+
+    Args:
+        feat_bc:     (B, D) features from the reliable-bit stream.
+        feat_adv:    (B, D) features from the adversarial stream.
+        feat_ub:     (B, D) features from the unreliable-bit stream.
+        temperature: Contrastive temperature τ.
+
+    Returns:
+        Scalar NT-Xent loss.
+    """
+    z_bc  = F.normalize(feat_bc,           dim=1)   # (B, D)
+    z_adv = F.normalize(feat_adv.detach(), dim=1)   # (B, D)
+    z_ub  = F.normalize(feat_ub.detach(),  dim=1)   # (B, D)
+
+    B = z_bc.size(0)
+
+    # Similarity matrices scaled by temperature
+    sim_adv = (z_bc @ z_adv.T) / temperature        # (B, B)
+    sim_ub  = (z_bc @ z_ub.T)  / temperature        # (B, B)
+
+    # Positive score: diagonal of sim_adv, shape (B, 1)
+    pos = sim_adv.diagonal().unsqueeze(1)
+
+    # Cross-sample adv negatives: mask out diagonal (= the positive)
+    mask = torch.eye(B, dtype=torch.bool, device=z_bc.device)
+    sim_adv_neg = sim_adv.masked_fill(mask, float('-inf'))   # (B, B)
+
+    # Concatenate: [positive | adv cross-negatives | ub negatives]
+    # Shape: (B, 1 + B + B)
+    logits = torch.cat([pos, sim_adv_neg, sim_ub], dim=1)
+    labels = torch.zeros(B, dtype=torch.long, device=z_bc.device)
+
+    return F.cross_entropy(logits, labels)
 
 
 # ─────────────────────────────────────────────────────────────────────────────

@@ -62,15 +62,19 @@ class ResNet(nn.Module):
             self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
 
-    def forward(self, x):
+    def forward(self, x, return_feat=False):
         out = torch.relu(self.bn1(self.conv1(x)))
         out = self.layer1(out)
         out = self.layer2(out)
         out = self.layer3(out)
         out = self.layer4(out)
         out = self.avgpool(out)
-        out = out.view(out.size(0), -1)
-        logits = self.fc(out)
+        # 展平操作（Flatten）：将池化后的多维张量展平为二维矩阵，形状变为 [batch_size, features]。
+        # 这里的 feat 就是网络提取到的紧凑的特征表示向量。
+        feat = out.view(out.size(0), -1)
+        logits = self.fc(feat)
+        if return_feat:
+            return logits, feat
         return logits
 
 

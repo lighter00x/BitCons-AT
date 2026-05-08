@@ -131,3 +131,13 @@ def evaluate_pgd_masked(model, device, test_loader, planes, eps, alpha, steps):
 def evaluate_pgd_10_masked(model, device, test_loader, planes):
     return evaluate_pgd_masked(model, device, test_loader, planes,
                                eps=8/255, alpha=2/255, steps=10)
+
+
+def evaluate_pgd_20_masked(model, device, test_loader, planes):
+    return evaluate_pgd_masked(model, device, test_loader, planes,
+                               eps=8/255, alpha=2/255, steps=20)
+
+
+def evaluate_pgd_50_masked(model, device, test_loader, planes):
+    return evaluate_pgd_masked(model, device, test_loader, planes,
+                               eps=8/255, alpha=2/255, steps=50)

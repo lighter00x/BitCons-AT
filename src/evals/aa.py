@@ -1,5 +1,6 @@
 import torch
 from tqdm import tqdm
+from losses import apply_bitplane_mask
 
 
 def evaluate_aa(model, device, test_loader, norm='Linf', eps=8/255, verbose=False):
@@ -73,5 +74,45 @@ def evaluate_aa(model, device, test_loader, norm='Linf', eps=8/255, verbose=Fals
 
     if verbose:
         print(f"AutoAttack Robust Accuracy: {robust_accuracy:.2f}%")
+
+    return robust_accuracy
+
+
+def evaluate_aa_masked(model, device, test_loader, planes, norm='Linf', eps=8/255, verbose=False):
+    """Generate adversarial examples against original model, apply bit-plane mask, then evaluate."""
+    try:
+        import autoattack
+    except ImportError:
+        raise ImportError(
+            "AutoAttack not installed. Install with:\n"
+            "  pip install autoattack"
+        )
+
+    model.eval()
+
+    all_images = []
+    all_labels = []
+    with torch.no_grad():
+        for images, labels in test_loader:
+            all_images.append(images.cpu())
+            all_labels.append(labels.cpu())
+
+    x_test = torch.cat(all_images).to(device)
+    y_test = torch.cat(all_labels).to(device)
+
+    adversary = autoattack.AutoAttack(model, norm=norm, eps=eps, version='standard')
+    x_adv = adversary.run_standard_evaluation(x_test, y_test, bs=128)
+
+    x_masked = apply_bitplane_mask(x_adv, planes)
+
+    with torch.no_grad():
+        logits = model(x_masked)
+        _, predicted = logits.max(1)
+        correct = predicted.eq(y_test).sum().item()
+
+    robust_accuracy = 100.0 * correct / len(y_test)
+
+    if verbose:
+        print(f"AutoAttack (masked) Robust Accuracy: {robust_accuracy:.2f}%")
 
     return robust_accuracy

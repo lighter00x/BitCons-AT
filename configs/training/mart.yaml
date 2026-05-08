@@ -1,6 +1,6 @@
 method: mart
 
-epochs: 120
+epochs: 110
 lr_init: 0.1
 lr_scheduler: multi_step
 lr_steps: [100, 105]
@@ -34,6 +34,14 @@ bitcons_planes: [3,4,5]      # bit-planes to zero out (0=LSB, 7=MSB)
 bitcons_align: kl              # js | kl | mse | kl_zscore
 temperature: 0.5               # softmax temperature for js alignment
 bitcons_alpha: 1              # final alignment loss weight α
-bitcons_warmup: 60             # epochs to ramp α from 0 → bitcons_alpha (0 = no warmup)
+bitcons_warmup: 100             # epochs to ramp α from 0 → bitcons_alpha (0 = no warmup)
 bitcons_warmup_schedule: linear  # linear | cosine
+# ── BitCons Feature Contrastive Loss ──────────────────────────────────────
+# NT-Xent on penultimate-layer features; requires bitcons: true
+# Positive : (feat_bc_i, feat_clean_i)  reliable-bit vs clean, same image
+# Negatives: (feat_bc_i, feat_ub_j)     reliable-bit vs unreliable-bit (all j)
+#          + (feat_bc_i, feat_clean_j)  cross-sample clean (j≠i)
+bitcons_contrast: true
+bitcons_contrast_lam: 1.0   # weight relative to bc_alpha
+bitcons_contrast_temp: 0.5  # NT-Xent temperature τ
 # ──────────────────────────────────────────────────────────────────────────

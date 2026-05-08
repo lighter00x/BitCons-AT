@@ -5,7 +5,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='UAWP Adversarial Training')
 
     parser.add_argument('--dataset', type=str, default='cifar10',
-                        choices=['cifar10', 'cifar100', 'svhn'],
+                        choices=['cifar10', 'cifar100', 'tinynet'],
                         help='Dataset name')
     parser.add_argument('--data_dir', type=str, default=None,
                         help='Dataset root directory (overrides dataset YAML)')
