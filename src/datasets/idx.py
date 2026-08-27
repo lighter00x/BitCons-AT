@@ -7,6 +7,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from PIL import Image
 
+from .utils import load_torchvision_dataset
+
 class SVHN_idx(datasets.SVHN):
     def __init__(self, root, train=True, transform=None, target_transform=None, download=False):
         super(SVHN_idx, self).__init__(root, train=train, transform=transform,
@@ -113,17 +115,17 @@ def get_cifar10_loaders_idx(config):
     transform_test = transforms.Compose([
         transforms.ToTensor(),
     ])
-    train_dataset = CIFAR10_idx(
+    train_dataset = load_torchvision_dataset(
+        CIFAR10_idx,
         root=config.data_dir,
         train=True,
-        download=True,
         transform=transform_train
     )
 
-    test_dataset = CIFAR10_idx(
+    test_dataset = load_torchvision_dataset(
+        CIFAR10_idx,
         root=config.data_dir,
         train=False,
-        download=True,
         transform=transform_test
     )
 
@@ -156,17 +158,17 @@ def get_cifar100_loaders_idx(config):
     transform_test = transforms.Compose([
         transforms.ToTensor(),
     ])
-    train_dataset = CIFAR100_idx(
+    train_dataset = load_torchvision_dataset(
+        CIFAR100_idx,
         root=config.data_dir,
         train=True,
-        download=True,
         transform=transform_train
     )
 
-    test_dataset = CIFAR100_idx(
+    test_dataset = load_torchvision_dataset(
+        CIFAR100_idx,
         root=config.data_dir,
         train=False,
-        download=True,
         transform=transform_test
     )
 
@@ -196,17 +198,17 @@ def get_svhn_loaders_idx(config):
     transform_test = transforms.Compose([
         transforms.ToTensor(),
     ])
-    train_dataset = SVHN_idx(
+    train_dataset = load_torchvision_dataset(
+        SVHN_idx,
         root=config.data_dir,
         split='train',
-        download=True,
         transform=transform_train
     )
 
-    test_dataset = SVHN_idx(
+    test_dataset = load_torchvision_dataset(
+        SVHN_idx,
         root=config.data_dir,
         split='test',
-        download=True,
         transform=transform_test
     )
 

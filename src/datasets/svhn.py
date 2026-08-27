@@ -3,6 +3,8 @@ import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
 
+from .utils import load_torchvision_dataset
+
 class AddGaussianNoise(object):
     def __init__(self, mean=0.0, std=1.0):
         self.mean = mean
@@ -35,17 +37,17 @@ def get_svhn_loaders(config):
     ])
     if config.config == "cons_at":
         transform_train = MultiDataTransform(transform_train)
-    train_dataset = torchvision.datasets.SVHN(
+    train_dataset = load_torchvision_dataset(
+        torchvision.datasets.SVHN,
         root=config.data_dir,
         split='train',
-        download=True,
         transform=transform_train
     )
 
-    test_dataset = torchvision.datasets.SVHN(
+    test_dataset = load_torchvision_dataset(
+        torchvision.datasets.SVHN,
         root=config.data_dir,
         split='test',
-        download=True,
         transform=transform_test
     )
 

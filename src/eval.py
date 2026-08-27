@@ -89,10 +89,14 @@ def load_exp_config(exp_folder):
     exp_folder = Path(exp_folder)
     config = Config()
 
+    saved_config = exp_folder / 'config.yaml'
+    if saved_config.exists():
+        config.load_yaml(str(saved_config))
+        return _complete_config(config)
+
     # 已知的模型和 perturbation 列表
     MODELS = ['resnet18', 'wrn28_10', 'wrn34_10', 'preactresnet18']
-    PERTURBATIONS = ['none', 'awp', 'rwp', 'uawp']
-    DATASETS = ['cifar10', 'cifar100', 'svhn']
+    PERTURBATIONS = ['none', 'awp', 'rwp']
 
     # 检查是否为新结构：主文件夹存在且不以时间戳结尾
     parent_dir = exp_folder.parent
@@ -198,11 +202,23 @@ def load_exp_config(exp_folder):
 
 def _complete_config(config):
     """补完配置的其他必要字段"""
-    config['data_dir'] = f'./data/{config.get("dataset", "cifar10").upper()}'
-    config['num_classes'] = 100 if config.get("dataset") == 'cifar100' else 10
-    config['batch_size'] = 128
-    config['num_workers'] = 4
-    config['pin_memory'] = True
+    dataset = config.get('dataset', 'cifar10')
+    num_classes = {
+        'cifar10': 10,
+        'cifar100': 100,
+        'svhn': 10,
+        'tinynet': 200,
+    }.get(dataset, 10)
+    defaults = {
+        'data_dir': f'./data/{dataset.upper()}',
+        'num_classes': num_classes,
+        'batch_size': 128,
+        'num_workers': 4,
+        'pin_memory': True,
+    }
+    for key, value in defaults.items():
+        if config.get(key) is None:
+            config[key] = value
     return config
 
 
@@ -248,6 +264,8 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
                         help='Batch size for evaluation (default: 128)')
     parser.add_argument('--num-workers', type=int, default=4,
                         help='Number of workers for data loading (default: 4)')
+    parser.add_argument('--data-dir', type=str, default=None,
+                        help='Dataset root (default: <project>/dataset/data)')
 
     # 攻击方法选择
     parser.add_argument('--pgd10', action='store_true', default=True,
@@ -271,9 +289,9 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
     # BitCons test-time masking
     parser.add_argument('--bitcons-test', action='store_true',
                         help='Apply fragile bit-plane masking to inputs at test time')
-    parser.add_argument('--bitcons-planes', nargs='+', type=int, default=[0, 1, 2],
+    parser.add_argument('--bitcons-planes', nargs='+', type=int, default=None,
                         metavar='P',
-                        help='Bit-plane indices to mask at test time (default: 0 1 2)')
+                        help='Bit-plane indices to mask (default: training config)')
 
     args = parser.parse_args()
 
@@ -298,7 +316,11 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
     config = load_exp_config(exp_folder)
     config['batch_size'] = args.batch_size
     config['num_workers'] = args.num_workers
-    config["data_dir"] = "/home/chenyu/ADV/data"
+    project_root = Path(__file__).parent.parent
+    data_dir = Path(args.data_dir).expanduser() if args.data_dir else project_root / 'dataset' / 'data'
+    if not data_dir.is_absolute():
+        data_dir = project_root / data_dir
+    config["data_dir"] = str(data_dir)
 
     if args.device == 'cuda':
         if not torch.cuda.is_available():
@@ -331,7 +353,9 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
         return
 
     try:
-        checkpoint = torch.load(checkpoint_file, map_location=device)
+        checkpoint = torch.load(
+            checkpoint_file, map_location=device, weights_only=False
+        )
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
         print(f"✓ Loaded checkpoint")
@@ -341,7 +365,7 @@ Examples (New structure: outputs/{dataset}_{model}_{method}_{perturbation}/seed_
 
     bc_planes = None
     if args.bitcons_test:
-        bc_planes = args.bitcons_planes
+        bc_planes = args.bitcons_planes or config.get('bitcons_planes', [0, 1, 2])
         print(f"✓ BitCons test-time masking enabled (planes: {bc_planes})")
         print(f"  Mode: attack original model first, then apply mask before inference")
 

@@ -47,17 +47,20 @@ class Config:
         project_dir = src_dir.parent
 
         dataset_config = project_dir / f'configs/datasets/{args.dataset}.yaml'
-        if dataset_config.exists():
-            self.load_yaml(str(dataset_config))
+        if not dataset_config.exists():
+            raise FileNotFoundError(f'Dataset config not found: {dataset_config}')
+        self.load_yaml(str(dataset_config))
 
         # 模型配置通过 get_model() 函数直接处理，无需加载 YAML 文件
         # 只需通过 args.model 指定模型名称
 
         train_config = project_dir / f'configs/training/{args.config}.yaml'
-        if train_config.exists():
-            self.load_yaml(str(train_config))
+        if not train_config.exists():
+            raise FileNotFoundError(f'Training config not found: {train_config}')
+        self.load_yaml(str(train_config))
 
         self._apply_overrides(args)
+        self._normalize_and_validate(args)
 
     def _apply_overrides(self, args: argparse.Namespace) -> None:
         # 先添加必要的参数（dataset, model, config）
@@ -73,6 +76,66 @@ class Config:
             if value is None or key in ['dataset', 'model', 'config']:
                 continue
             self.data[key] = value
+
+        for perturbation in ('awp', 'rwp'):
+            nested = deepcopy(self.data.get(perturbation, {}))
+            for field in ('gamma', 'warmup'):
+                override = self.data.get(f'{perturbation}_{field}')
+                if override is not None:
+                    nested[field] = override
+            if nested:
+                self.data[perturbation] = nested
+
+    def _normalize_and_validate(self, args: argparse.Namespace) -> None:
+        bitcons = bool(self.data.get('bitcons', False))
+        contrast = bool(self.data.get('bitcons_contrast', False))
+
+        if not bitcons:
+            if getattr(args, 'bitcons_contrast', None) is True:
+                raise ValueError('BitCons contrast requires --bitcons')
+            self.data['bitcons_contrast'] = False
+            contrast = False
+        elif contrast:
+            self.data['bitcons_contrast'] = True
+
+        if contrast and self.data.get('method') == 'cons_at':
+            raise ValueError('BitCons contrast is not implemented for cons_at')
+
+        planes = self.data.get('bitcons_planes', [])
+        if any(plane < 0 or plane > 7 for plane in planes):
+            raise ValueError('bitcons_planes values must be between 0 and 7')
+
+        align_type = self.data.get('bitcons_align', 'js')
+        if align_type not in ('js', 'kl', 'mse', 'kl_zscore'):
+            raise ValueError(f'Unknown bitcons_align: {align_type}')
+
+        warmup_schedule = self.data.get('bitcons_warmup_schedule', 'linear')
+        if warmup_schedule not in ('linear', 'cosine'):
+            raise ValueError(
+                f'Unknown bitcons_warmup_schedule: {warmup_schedule}'
+            )
+
+        if self.data.get('bitcons_alpha', 0) < 0:
+            raise ValueError('bitcons_alpha must be non-negative')
+        if self.data.get('bitcons_ce_weight', 0) < 0:
+            raise ValueError('bitcons_ce_weight must be non-negative')
+        if self.data.get('bitcons_align_weight', 0) < 0:
+            raise ValueError('bitcons_align_weight must be non-negative')
+        if self.data.get('bitcons_warmup', 0) < 0:
+            raise ValueError('bitcons_warmup must be non-negative')
+        if self.data.get('bitcons_contrast_lam', 0) < 0:
+            raise ValueError('bitcons_contrast_lam must be non-negative')
+        if self.data.get('bitcons_contrast_temp', 1) <= 0:
+            raise ValueError('bitcons_contrast_temp must be positive')
+        if self.data.get('temperature', 1) <= 0:
+            raise ValueError('temperature must be positive')
+
+        for key in ('epochs', 'batch_size', 'n_steps'):
+            if self.data.get(key, 0) <= 0:
+                raise ValueError(f'{key} must be positive')
+        for key in ('lr_init', 'epsilon', 'alpha'):
+            if self.data.get(key, 0) < 0:
+                raise ValueError(f'{key} must be non-negative')
 
     def get(self, key: str, default: Any = None) -> Any:
         return self.data.get(key, default)

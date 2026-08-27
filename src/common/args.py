@@ -2,7 +2,7 @@ import argparse
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description='UAWP Adversarial Training')
+    parser = argparse.ArgumentParser(description='BitCons Adversarial Training')
 
     parser.add_argument('--dataset', type=str, default='cifar10',
                         choices=['cifar10', 'cifar100', 'tinynet'],
@@ -14,14 +14,14 @@ def get_args():
                         help='Model architecture')
     parser.add_argument('--config', type=str, default='pgd_at',
                         help='Training config name (in configs/training/)')
-    parser.add_argument('--desc', type=str, default='test',
+    parser.add_argument('--desc', type=str, default=None,
                         help='Description for the experiment')
     
     parser.add_argument('--epochs', type=int, default=None)
     parser.add_argument('--batch_size', type=int, default=None)
     parser.add_argument('--lr_init', type=float, default=None)
     parser.add_argument('--lr_scheduler', type=str, default=None,
-                        choices=['multi_step', 'cosine', 'cyclic'])
+                        choices=['multi_step', 'cosine'])
     parser.add_argument('--optimizer', type=str, default=None,
                         choices=['sgd', 'adam'])
     parser.add_argument('--momentum', type=float, default=None)
@@ -33,35 +33,26 @@ def get_args():
     parser.add_argument('--beta', type=float, default=None)
 
     parser.add_argument('--perturbation', type=str, default=None,
-                        choices=['none', 'awp', 'rwp', 'cwp', 'uawp'],
+                        choices=['none', 'awp', 'rwp'],
                         help='Weight perturbation method')
 
     parser.add_argument('--awp_gamma', type=float, default=None)
     parser.add_argument('--awp_warmup', type=int, default=None)
+    parser.add_argument('--awp_lr', type=float, default=None)
     parser.add_argument('--rwp_gamma', type=float, default=None)
     parser.add_argument('--rwp_warmup', type=int, default=None)
-    parser.add_argument('--cwp_gamma', type=float, default=None)
-    parser.add_argument('--cwp_warmup', type=int, default=None)
-    parser.add_argument('--cwp_top_k_ratio', type=float, default=None)
-    parser.add_argument('--cwp_mode', type=str, default=None,
-                        choices=['easy', 'hard'])
-
-    parser.add_argument('--uawp_gamma', type=float, default=None,
-                        help='UAWP weight perturbation coefficient')
-    parser.add_argument('--uawp_warmup', type=int, default=None,
-                        help='UAWP warmup epochs')
-    parser.add_argument('--uawp_lr', type=float, default=None,
-                        help='UAWP proxy model learning rate')
-    parser.add_argument('--uawp_kl_sensitivity', type=float, default=None,
-                        help='UAWP KL divergence sensitivity (default: 1.0)')
-    parser.add_argument('--uawp_iterations', type=int, default=None,
-                        help='UAWP weight perturbation iterations (default: 10)')
+    parser.add_argument('--rwp_lr', type=float, default=None)
 
     parser.add_argument('--lam', type=float, default=None)
     parser.add_argument('--temperature', type=float, default=None)
 
     # ── BitCons: Fragile Bit-Plane Masking Stream ──────────────────────────
-    # Enable by using a *_bitcons.yaml config; these args override YAML values.
+    parser.add_argument('--bitcons', action=argparse.BooleanOptionalAction,
+                        default=None,
+                        help='Enable or disable the BitCons training stream')
+    parser.add_argument('--bitcons_contrast', action=argparse.BooleanOptionalAction,
+                        default=None,
+                        help='Enable or disable BitCons feature contrastive loss')
     parser.add_argument('--bitcons_planes', nargs='+', type=int, default=None,
                         metavar='P',
                         help='Bit-plane indices to mask (0=LSB … 7=MSB). '
@@ -71,16 +62,25 @@ def get_args():
                         help='Alignment loss type between BitCons and main stream')
     parser.add_argument('--bitcons_alpha', type=float, default=None,
                         help='Final weight α for the BitCons alignment loss')
+    parser.add_argument('--bitcons_ce_weight', type=float, default=None,
+                        help='Masked-view classification loss weight inside BitCons')
+    parser.add_argument('--bitcons_align_weight', type=float, default=None,
+                        help='Logit alignment loss weight inside BitCons')
     parser.add_argument('--bitcons_warmup', type=int, default=None,
                         help='Epochs to warm up α from 0 → bitcons_alpha')
     parser.add_argument('--bitcons_warmup_schedule', type=str, default=None,
                         choices=['linear', 'cosine'],
                         help='Warmup schedule shape (default: linear)')
+    parser.add_argument('--bitcons_contrast_lam', type=float, default=None,
+                        help='Feature contrastive loss weight relative to BitCons alpha')
+    parser.add_argument('--bitcons_contrast_temp', type=float, default=None,
+                        help='Feature contrastive temperature')
     # ──────────────────────────────────────────────────────────────────────
 
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--num_workers', type=int, default=4)
-    parser.add_argument('--pin_memory', action='store_true')
+    parser.add_argument('--pin_memory', action=argparse.BooleanOptionalAction,
+                        default=None)
     parser.add_argument('--device', type=str, default='cuda')
     parser.add_argument('--gpu_id', type=int, default=None,
                         help='GPU ID to use (default: auto-select)')

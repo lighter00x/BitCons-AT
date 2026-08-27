@@ -1,5 +1,6 @@
 import os
 import csv
+import yaml
 from pathlib import Path
 from .plotter import MetricsPlotter
 
@@ -21,6 +22,7 @@ class Logger:
         self.log_dir.mkdir(parents=True, exist_ok=True)
 
         self.metrics_file = self.log_dir / 'metrics.csv'
+        self.loss_components_file = self.log_dir / 'loss_components.csv'
         self.results_file = self.log_dir / 'eval_results.txt'
 
         self.metrics_data = {
@@ -77,10 +79,31 @@ class Logger:
             for key, value in results_dict.items():
                 f.write(f'{key}: {value}\n')
 
+    def log_loss_components(self, epoch, components):
+        """Write detailed loss terms separately from the stable metrics CSV."""
+        fieldnames = ['epoch', *components.keys()]
+        write_header = not self.loss_components_file.exists()
+        row = {'epoch': epoch}
+        row.update({
+            key: ('N/A' if value is None else f'{value:.6f}')
+            for key, value in components.items()
+        })
+        with open(self.loss_components_file, 'a', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            if write_header:
+                writer.writeheader()
+            writer.writerow(row)
+
     def get_checkpoint_dir(self):
         ckpt_dir = self.log_dir / 'checkpoints'
         ckpt_dir.mkdir(exist_ok=True)
         return ckpt_dir
+
+    def save_config(self, config):
+        config_path = self.log_dir / 'config.yaml'
+        with open(config_path, 'w') as f:
+            yaml.safe_dump(config, f, sort_keys=False)
+        return config_path
 
     def finalize(self, total_training_time=None):
         """
@@ -121,6 +144,14 @@ class Logger:
             best_pgd10_acc_str = f"{best_pgd10_acc:.2f}%" if isinstance(best_pgd10_acc, (int, float)) else str(best_pgd10_acc)
             f.write(f"  Best PGD-10 Accuracy:    {best_pgd10_acc_str} (Epoch {best_pgd10_acc_epoch})\n")
 
+            best_masked_acc = best_metrics.get('best_pgd10_masked_acc')
+            if best_masked_acc is not None:
+                best_masked_epoch = best_metrics['best_pgd10_masked_acc_epoch']
+                f.write(
+                    f"  Best PGD-10 Masked Acc:  {best_masked_acc:.2f}% "
+                    f"(Epoch {best_masked_epoch})\n"
+                )
+
             # 计算鲁棒性间隙
             if isinstance(best_test_acc, (int, float)) and isinstance(best_pgd10_acc, (int, float)):
                 robustness_gap = best_test_acc - best_pgd10_acc
@@ -138,6 +169,10 @@ class Logger:
 
             f.write("Output Files:\n")
             f.write(f"  - Metrics CSV:  {self.metrics_file.name}\n")
+            if self.loss_components_file.exists():
+                f.write(
+                    f"  - Loss Components CSV: {self.loss_components_file.name}\n"
+                )
             f.write(f"  - Metrics Plot: metrics.png\n")
             f.write(f"  - Summary Plot: summary.png\n")
             f.write(f"  - Checkpoints:  checkpoints/\n")

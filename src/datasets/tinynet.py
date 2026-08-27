@@ -92,11 +92,16 @@ class TinyImageNet200(data.Dataset):
         self.train = train  # training set or test set
         self.fpath = os.path.join(root, self.download_fname)
 
-        if download:
-            self.download()
+        if not self._is_extracted():
+            if download:
+                self.download()
+            else:
+                raise RuntimeError(
+                    'Dataset not found or incomplete. You can use download=True to download it'
+                )
 
-        if not check_integrity(self.fpath, self.md5):
-            raise RuntimeError('Dataset not found or corrupted.' + ' You can use download=True to download it')
+        if not self._is_extracted():
+            raise RuntimeError('Dataset extraction is incomplete: ' + self.root)
 
         _, class_to_idx = find_classes(os.path.join(self.root, self.base_folder, 'wnids.txt'))
         # self.classes = classes
@@ -136,19 +141,28 @@ class TinyImageNet200(data.Dataset):
     def __len__(self):
         return len(self.data_info)
 
+    def _is_extracted(self):
+        dataset_dir = os.path.join(self.root, self.base_folder)
+        required_paths = [
+            os.path.join(dataset_dir, 'wnids.txt'),
+            os.path.join(dataset_dir, 'train'),
+            os.path.join(dataset_dir, 'val', 'images'),
+            os.path.join(dataset_dir, 'val', 'val_annotations.txt'),
+        ]
+        return all(os.path.exists(path) for path in required_paths)
+
     def download(self):
         import zipfile
 
-        if check_integrity(self.fpath, self.md5):
-            print('Files already downloaded and verified')
+        if self._is_extracted():
+            print('TinyImageNet is already extracted; skipping download')
             return
 
-        download_url(self.url, self.root, self.download_fname, self.md5)
+        if not check_integrity(self.fpath, self.md5):
+            download_url(self.url, self.root, self.download_fname, self.md5)
 
-        # extract file
-        dataset_zip = zipfile.ZipFile(self.fpath)
-        dataset_zip.extractall(self.root)
-        dataset_zip.close()
+        with zipfile.ZipFile(self.fpath) as dataset_zip:
+            dataset_zip.extractall(self.root)
 
 class MultiDataTransform(object):
     def __init__(self, transform):
@@ -161,13 +175,14 @@ class MultiDataTransform(object):
 
 
 def get_tinynet_loaders(config):
+    transform_train = train_transform_tiny_imagenet
     if config.config == "cons_at":
         transform_train = MultiDataTransform(transform_train)
     train_set = TinyImageNet200(
         config.data_dir,
         train=True,
         download=True,
-        transform=train_transform_tiny_imagenet,
+        transform=transform_train,
     )
 
     test_set = TinyImageNet200(
@@ -175,10 +190,18 @@ def get_tinynet_loaders(config):
     )
 
     train_loader = torch.utils.data.DataLoader(
-        train_set, batch_size=128, shuffle=True, num_workers=4
+        train_set,
+        batch_size=config.batch_size,
+        shuffle=True,
+        num_workers=config.num_workers,
+        pin_memory=config.pin_memory,
     )
     test_loader = torch.utils.data.DataLoader(
-        test_set, batch_size=128, shuffle=False, num_workers=4
+        test_set,
+        batch_size=config.batch_size,
+        shuffle=False,
+        num_workers=config.num_workers,
+        pin_memory=config.pin_memory,
     )
 
     return train_loader, test_loader

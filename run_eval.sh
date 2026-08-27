@@ -19,11 +19,13 @@ DATASET="${DATASET:-cifar10}"
 MODEL="${MODEL:-resnet18}"
 DESC="${DESC:-a100_run}"
 OUT_DIR="${OUT_DIR:-outputs}"
-DATA_DIR="${DATA_DIR:-$ROOT_DIR/dataset}"
+DATA_DIR="${DATA_DIR:-$ROOT_DIR/dataset/data}"
 
 METHODS="${METHODS:-pgd_at trades mart rpat}"
 PERTURBATION="${PERTURBATION:-none}"
 CKPT="${CKPT:-best}"
+BITCONS="${BITCONS:-false}"
+BITCONS_CONTRAST="${BITCONS_CONTRAST:-false}"
 
 GPUS="${GPUS:-0 1}"
 PER_GPU_JOBS="${PER_GPU_JOBS:-1}"
@@ -50,6 +52,21 @@ fi
 
 if [[ "$PER_GPU_JOBS" -lt 1 ]]; then
     echo "[ERROR] PER_GPU_JOBS must be >= 1."
+    exit 1
+fi
+
+if [[ "$BITCONS" != "true" && "$BITCONS" != "false" ]]; then
+    echo "[ERROR] BITCONS must be true or false."
+    exit 1
+fi
+
+if [[ "$BITCONS_CONTRAST" != "true" && "$BITCONS_CONTRAST" != "false" ]]; then
+    echo "[ERROR] BITCONS_CONTRAST must be true or false."
+    exit 1
+fi
+
+if [[ "$BITCONS_CONTRAST" == "true" && "$BITCONS" != "true" ]]; then
+    echo "[ERROR] BITCONS_CONTRAST=true requires BITCONS=true."
     exit 1
 fi
 
@@ -106,11 +123,12 @@ reap_finished() {
 }
 
 pick_gpu() {
+    SELECTED_GPU=""
     while true; do
         # Pick the first GPU whose running jobs are below PER_GPU_JOBS.
         for gpu in "${GPU_ARR[@]}"; do
             if [[ "${GPU_RUNNING[$gpu]}" -lt "$PER_GPU_JOBS" ]]; then
-                echo "$gpu"
+                SELECTED_GPU="$gpu"
                 return
             fi
         done
@@ -121,18 +139,32 @@ pick_gpu() {
 
 resolve_exp_name() {
     local method="$1"
-    local base_name="${DATASET}_${MODEL}_${method}_${PERTURBATION}"
-    local with_desc="${base_name}_${DESC}"
+    local base_name="${DATASET}_${MODEL}_${method}_${PERTURBATION}_bitcons_${BITCONS}_contrast_${BITCONS_CONTRAST}"
+    local legacy_base_name="${DATASET}_${MODEL}_${method}_${PERTURBATION}"
 
-    # Prefer folder with desc suffix; fallback to folder without desc.
-    if [[ -d "$OUT_DIR/$with_desc" ]]; then
-        echo "$with_desc"
-        return 0
-    fi
+    if [[ -n "$DESC" ]]; then
+        local with_desc="${base_name}_${DESC}"
+        local legacy_with_desc="${legacy_base_name}_${DESC}"
 
-    if [[ -d "$OUT_DIR/$base_name" ]]; then
-        echo "$base_name"
-        return 0
+        if [[ -d "$OUT_DIR/$with_desc" ]]; then
+            echo "$with_desc"
+            return 0
+        fi
+
+        if [[ -d "$OUT_DIR/$legacy_with_desc" ]]; then
+            echo "$legacy_with_desc"
+            return 0
+        fi
+    else
+        if [[ -d "$OUT_DIR/$base_name" ]]; then
+            echo "$base_name"
+            return 0
+        fi
+
+        if [[ -d "$OUT_DIR/$legacy_base_name" ]]; then
+            echo "$legacy_base_name"
+            return 0
+        fi
     fi
 
     return 1
@@ -143,7 +175,7 @@ launch_eval_job() {
     local gpu="$2"
     local exp_name="$3"
 
-    local tag="${DATASET}_${MODEL}_${method}_${CKPT}"
+    local tag="${DATASET}_${MODEL}_${method}_bitcons_${BITCONS}_contrast_${BITCONS_CONTRAST}_${CKPT}"
     local log_file="${LOG_DIR}/${tag}_gpu${gpu}.log"
 
     # Build base eval command first, then append optional switches.
@@ -180,6 +212,7 @@ launch_eval_job() {
 
 echo "[INFO] dataset=$DATASET model=$MODEL desc=$DESC ckpt=$CKPT"
 echo "[INFO] methods=$METHODS"
+echo "[INFO] bitcons=$BITCONS contrast=$BITCONS_CONTRAST"
 echo "[INFO] gpus=$GPUS per_gpu_jobs=$PER_GPU_JOBS"
 echo "[INFO] data_dir=$DATA_DIR"
 echo "[INFO] enable_aa=$ENABLE_AA bitcons_test=$ENABLE_BITCONS_TEST"
@@ -192,7 +225,8 @@ for method in "${METHOD_ARR[@]}"; do
     fi
 
     # Block until at least one GPU has a free slot.
-    gpu="$(pick_gpu)"
+    pick_gpu
+    gpu="$SELECTED_GPU"
     launch_eval_job "$method" "$gpu" "$exp_name"
     reap_finished
 done
@@ -214,34 +248,3 @@ fi
 
 echo "[SUMMARY] All $TOTAL_JOBS evaluation jobs completed successfully."
 echo "[SUMMARY] Logs: $LOG_DIR"
-
-#!/bin/bash
-mkdir -p logs
-nohup python src/eval.py \
-    --bitcons-planes 3 4 5 \
-    --bitcons-test \
-    --gpu 0 \
-    --aa \
-    --exp /home/chenyu/share01/cy_home/BitCons-AT/outputs/cifar10_resnet18_pgd_at_none_test/seed_42_20260308_125755 \
-    > logs/cifar10_eval.out 2>&1 & 
-
-# nohup python src/eval.py \
-#     --bitcons-planes 3 4 5 \
-#     --gpu 1 \
-#     --aa \
-#     --exp /home/chenyu/ADV/BitCons-AT/outputs/cifar10_resnet18_pgd_at_none_test/seed_42_20260307_173617 \
-#     > logs/cifar10_eval_pgd.out 2>&1 & 
-
-# nohup python src/eval.py \
-#     --bitcons-planes 3 4 5 \
-#     --gpu 2 \
-#     --aa \
-#     --exp /home/chenyu/ADV/BitCons-AT/outputs/cifar10_resnet18_rpat_none_test/seed_42_20260307_173617 \
-#     > logs/cifar10_eval_rpat.out 2>&1 & 
-
-# nohup python src/eval.py \
-#     --bitcons-planes 3 4 5 \
-#     --gpu 3 \
-#     --aa \
-#     --exp /home/chenyu/ADV/BitCons-AT/outputs/cifar10_resnet18_trades_none_test/seed_42_20260307_173617 \
-#     > logs/cifar10_eval_trades.out 2>&1 & 

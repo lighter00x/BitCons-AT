@@ -7,11 +7,7 @@ def evaluate_aa(model, device, test_loader, norm='Linf', eps=8/255, verbose=Fals
     """
     使用AutoAttack评估模型的对抗鲁棒性
 
-    AutoAttack 是最强的对抗攻击之一，包含以下攻击方法：
-    - PGD (Projected Gradient Descent)
-    - FGSM (Fast Gradient Sign Method)
-    - C&W (Carlini & Wagner)
-    - AutoFool
+    标准 AutoAttack 组合包含 APGD-CE、APGD-DLR、FAB 和 Square Attack。
 
     Args:
         model: 要评估的模型
@@ -29,7 +25,7 @@ def evaluate_aa(model, device, test_loader, norm='Linf', eps=8/255, verbose=Fals
     except ImportError:
         raise ImportError(
             "AutoAttack not installed. Install with:\n"
-            "  pip install autoattack"
+            "  pip install git+https://github.com/fra31/auto-attack.git"
         )
 
     model.eval()
@@ -85,7 +81,7 @@ def evaluate_aa_masked(model, device, test_loader, planes, norm='Linf', eps=8/25
     except ImportError:
         raise ImportError(
             "AutoAttack not installed. Install with:\n"
-            "  pip install autoattack"
+            "  pip install git+https://github.com/fra31/auto-attack.git"
         )
 
     model.eval()

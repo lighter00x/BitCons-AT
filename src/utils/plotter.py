@@ -158,7 +158,7 @@ class MetricsPlotter:
         best_test_acc_idx = np.argmax(self.metrics['test_acc'])
         best_pgd10_acc_idx = np.argmax(self.metrics['pgd10_acc'])
 
-        return {
+        best_metrics = {
             'best_test_acc': self.metrics['test_acc'][best_test_acc_idx],
             'best_test_acc_epoch': self.metrics['epoch'][best_test_acc_idx],
             'best_pgd10_acc': self.metrics['pgd10_acc'][best_pgd10_acc_idx],
@@ -166,3 +166,10 @@ class MetricsPlotter:
             'final_train_loss': self.metrics['train_loss'][-1],
             'final_train_acc': self.metrics['train_acc'][-1],
         }
+        if self.metrics['pgd10_masked_acc']:
+            best_masked_idx = np.argmax(self.metrics['pgd10_masked_acc'])
+            best_metrics.update({
+                'best_pgd10_masked_acc': self.metrics['pgd10_masked_acc'][best_masked_idx],
+                'best_pgd10_masked_acc_epoch': self.metrics['epoch'][best_masked_idx],
+            })
+        return best_metrics

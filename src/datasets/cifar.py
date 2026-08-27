@@ -3,6 +3,8 @@ import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
 
+from .utils import load_torchvision_dataset
+
 class MultiDataTransform(object):
     def __init__(self, transform):
         self.transform = transform
@@ -26,17 +28,17 @@ def get_cifar10_loaders(config):
     ])
     if config.config == "cons_at":
         transform_train = MultiDataTransform(transform_train)
-    train_dataset = torchvision.datasets.CIFAR10(
+    train_dataset = load_torchvision_dataset(
+        torchvision.datasets.CIFAR10,
         root=config.data_dir,
         train=True,
-        download=True,
         transform=transform_train
     )
 
-    test_dataset = torchvision.datasets.CIFAR10(
+    test_dataset = load_torchvision_dataset(
+        torchvision.datasets.CIFAR10,
         root=config.data_dir,
         train=False,
-        download=True,
         transform=transform_test
     )
 
@@ -71,17 +73,17 @@ def get_cifar100_loaders(config):
     ])
     if config.config == "cons_at":
         transform_train = MultiDataTransform(transform_train)
-    train_dataset = torchvision.datasets.CIFAR100(
+    train_dataset = load_torchvision_dataset(
+        torchvision.datasets.CIFAR100,
         root=config.data_dir,
         train=True,
-        download=True,
         transform=transform_train
     )
 
-    test_dataset = torchvision.datasets.CIFAR100(
+    test_dataset = load_torchvision_dataset(
+        torchvision.datasets.CIFAR100,
         root=config.data_dir,
         train=False,
-        download=True,
         transform=transform_test
     )
 

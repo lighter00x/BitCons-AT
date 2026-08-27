@@ -29,19 +29,21 @@ rwp:
 
 # ── BitCons: Fragile Bit-Plane Masking Stream ─────────────────────────────
 # Set bitcons: true to enable the third training stream.
-bitcons: true
-bitcons_planes: [3,4,5]      # bit-planes to zero out (0=LSB, 7=MSB)
+bitcons: false
+bitcons_planes: [0,1,2]      # low bits; masking changes an 8-bit value by at most 7/255
 bitcons_align: kl              # js | kl | mse | kl_zscore
 temperature: 0.5               # softmax temperature for js alignment
-bitcons_alpha: 1              # final alignment loss weight α
-bitcons_warmup: 100             # epochs to ramp α from 0 → bitcons_alpha (0 = no warmup)
+bitcons_alpha: 0.25           # final weight of the complete auxiliary branch
+bitcons_ce_weight: 1.0        # masked-view CE weight inside the BitCons branch
+bitcons_align_weight: 1.0     # logit alignment weight inside the BitCons branch
+bitcons_warmup: 60              # epochs to ramp α from 0 → bitcons_alpha (0 = no warmup)
 bitcons_warmup_schedule: linear  # linear | cosine
 # ── BitCons Feature Contrastive Loss ──────────────────────────────────────
 # NT-Xent on penultimate-layer features; requires bitcons: true
-# Positive : (feat_bc_i, feat_clean_i)  reliable-bit vs clean, same image
+# Positive : (feat_bc_i, feat_adv_i)    masked-adversarial vs adversarial
 # Negatives: (feat_bc_i, feat_ub_j)     reliable-bit vs unreliable-bit (all j)
-#          + (feat_bc_i, feat_clean_j)  cross-sample clean (j≠i)
-bitcons_contrast: true
-bitcons_contrast_lam: 1.0   # weight relative to bc_alpha
+#          + (feat_bc_i, feat_adv_j)    cross-sample adversarial (j≠i)
+bitcons_contrast: false
+bitcons_contrast_lam: 0.001 # weight relative to bc_alpha
 bitcons_contrast_temp: 0.5  # NT-Xent temperature τ
 # ──────────────────────────────────────────────────────────────────────────

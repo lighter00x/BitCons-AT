@@ -2,7 +2,7 @@
 BitCons: Fragile Bit-Plane Masking Stream utilities.
 
 Provides:
-  - apply_bitplane_mask : zero out fragile bit-planes from clean images
+  - apply_bitplane_mask : zero out fragile bit-planes from input images
   - bitcons_align_loss  : alignment loss between the BitCons stream and the
                           main adversarial stream (JS / KL / MSE / KL-Zscore)
   - get_bitcons_weight  : warmup schedule for the alignment loss coefficient α
@@ -31,7 +31,7 @@ def apply_unreliable_bitplane_mask(images: torch.Tensor, fragile_planes: list) -
     for p in fragile_planes:
         keep_mask |= (1 << p)
     keep_mask &= 0xFF
-    images_int = (images.detach() * 255.0).long().clamp(0, 255)
+    images_int = (images.detach() * 255.0).round().long().clamp(0, 255)
     return (images_int & keep_mask).float() / 255.0
 
 
@@ -48,7 +48,7 @@ def apply_bitplane_mask(images: torch.Tensor, fragile_planes: list) -> torch.Ten
     keep_mask = 0xFF
     for p in fragile_planes:
         keep_mask &= ~(1 << p) & 0xFF
-    images_int = (images.detach() * 255.0).long().clamp(0, 255)
+    images_int = (images.detach() * 255.0).round().long().clamp(0, 255)
     return (images_int & keep_mask).float() / 255.0
 
 
@@ -57,7 +57,7 @@ def apply_bitplane_mask(images: torch.Tensor, fragile_planes: list) -> torch.Ten
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _kl_div(logit1: torch.Tensor, logit2: torch.Tensor) -> torch.Tensor:
-    """KL(softmax(logit1) || softmax(logit2))."""
+    """KL(softmax(logit2) || softmax(logit1))."""
     return F.kl_div(
         F.log_softmax(logit1, dim=1),
         F.softmax(logit2, dim=1),
@@ -90,7 +90,7 @@ def bitcons_align_loss(
     """Compute alignment loss between the BitCons stream and the reference stream.
 
     Args:
-        logit_bc:    Raw logits from the BitCons (masked-clean) stream.
+        logit_bc:    Raw logits from the BitCons masked-adversarial stream.
         logit_ref:   Raw logits from the reference (adversarial) stream.
                      Should be detached so gradients only flow through logit_bc.
         align_type:  One of {'js', 'kl', 'mse', 'kl_zscore'}.
@@ -187,7 +187,8 @@ def get_bitcons_weight(config, epoch: int) -> float:
         bitcons_warmup           (int,   default 0)    : warmup duration in epochs
         bitcons_warmup_schedule  (str,   default 'linear') : 'linear' or 'cosine'
     """
-    alpha    = float(getattr(config, 'bitcons_alpha',           1.0)     or 1.0)
+    alpha_value = getattr(config, 'bitcons_alpha', 1.0)
+    alpha    = float(1.0 if alpha_value is None else alpha_value)
     warmup   = int(  getattr(config, 'bitcons_warmup',          0)       or 0)
     schedule =       getattr(config, 'bitcons_warmup_schedule', 'linear') or 'linear'
 

@@ -39,11 +39,16 @@ def main():
     if not data_dir.is_absolute():
         data_dir = project_root / data_dir
     if not data_dir.exists():
-        fallback_data_dir = project_root / "dataset"
-        if fallback_data_dir.exists():
-            print(f"[WARN] data_dir not found: {data_dir}")
-            print(f"[WARN] Falling back to: {fallback_data_dir}")
-            data_dir = fallback_data_dir
+        fallback_data_dirs = [
+            project_root / "dataset" / "data",
+            project_root / "dataset",
+        ]
+        for fallback_data_dir in fallback_data_dirs:
+            if fallback_data_dir.exists():
+                print(f"[WARN] data_dir not found: {data_dir}")
+                print(f"[WARN] Falling back to: {fallback_data_dir}")
+                data_dir = fallback_data_dir
+                break
     config["data_dir"] = str(data_dir)
 
     if config.device == "cuda" and torch.cuda.is_available():
@@ -58,9 +63,19 @@ def main():
     # 生成实验名称和文件夹结构
     # 主文件夹格式: {dataset}_{model}_{method}_{perturbation}
     # 子文件夹格式: seed_{seed}_{timestamp}
-    main_exp_dir = (
-        f"{config.dataset}_{config.model}_{config.method}_{config.perturbation}_{args.desc}"
-    )
+    bitcons_enabled = bool(getattr(config, 'bitcons', False))
+    contrast_enabled = bitcons_enabled and bool(getattr(config, 'bitcons_contrast', False))
+    experiment_parts = [
+        config.dataset,
+        config.model,
+        config.method,
+        config.perturbation,
+        f"bitcons_{str(bitcons_enabled).lower()}",
+        f"contrast_{str(contrast_enabled).lower()}",
+    ]
+    if args.desc:
+        experiment_parts.append(args.desc)
+    main_exp_dir = "_".join(experiment_parts)
     if config.exp_name is not None:
         sub_exp_dir = f"seed_{config.seed}_{config.exp_name}"
     else:
@@ -78,6 +93,7 @@ def main():
 
     # 创建 Logger 时传入主文件夹和子文件夹
     logger = Logger(str(out_dir), main_exp_dir, sub_exp_dir)
+    logger.save_config(config.to_dict())
     checkpoint_dir = logger.get_checkpoint_dir()
 
     train_loader, test_loader = get_loaders(config)
@@ -94,12 +110,14 @@ def main():
     train_fn = get_train_fn(config)
 
     start_epoch = 0
-    best_pgd10_acc = 0
+    best_robust_acc = float('-inf')
 
     if config.resume:
         from utils import load_checkpoint
         # 会记录保存的时候的训练epoch，可恢复到之前的训练状态（包括模型权重、优化器状态、学习率调度器状态等）
-        start_epoch, best_pgd10_acc = load_checkpoint(model, optimizer, config.resume)
+        start_epoch, best_robust_acc = load_checkpoint(
+            model, optimizer, config.resume, scheduler=scheduler
+        )
 
     print(f"Training {config.method} on {config.dataset} with {config.model}")
     print(f"Perturbation: {config.perturbation}")
@@ -111,7 +129,7 @@ def main():
 
     for epoch in range(start_epoch, config.epochs):
 
-        train_loss, train_acc = train_fn(
+        train_loss, train_acc, loss_components = train_fn(
             config,
             model,
             device,
@@ -136,10 +154,20 @@ def main():
 
         logger.log_metrics(epoch, train_loss, train_acc, test_acc, pgd10_acc,
                            pgd10_masked_acc=pgd10_masked_acc, natural_masked_acc=natural_masked_acc)
-        # 比较的是pgd + bitcons下的准确率
-        if pgd10_masked_acc > best_pgd10_acc:
-            best_pgd10_acc = pgd10_masked_acc
-            save_checkpoint(model, optimizer, epoch, best_pgd10_acc, checkpoint_dir)
+        logger.log_loss_components(epoch, loss_components)
+        # Base and BitCons runs must use the same checkpoint-selection metric.
+        # Masked accuracy is a mechanism diagnostic, not the threat-model score.
+        robust_acc = pgd10_acc
+        if robust_acc > best_robust_acc:
+            best_robust_acc = robust_acc
+            save_checkpoint(
+                model,
+                optimizer,
+                epoch,
+                best_robust_acc,
+                checkpoint_dir,
+                scheduler=scheduler,
+            )
 
         if (epoch + 1) % 10 == 0 or epoch == 0:
             masked_str = f" | PGD-10 Masked Acc: {pgd10_masked_acc:.2f}%" if pgd10_masked_acc is not None else ""
@@ -153,7 +181,13 @@ def main():
             )
 
     save_checkpoint(
-        model, optimizer, epoch, test_acc, checkpoint_dir, filename="final_model.pt"
+        model,
+        optimizer,
+        epoch,
+        best_robust_acc,
+        checkpoint_dir,
+        filename="final_model.pt",
+        scheduler=scheduler,
     )
 
     # 计算总训练时间
@@ -161,7 +195,7 @@ def main():
     total_training_time = training_end_time - training_start_time
 
     print(f"\nTraining completed.")
-    print(f"  Best PGD-10 Accuracy:  {best_pgd10_acc:.2f}%")
+    print(f"  Best PGD-10 Accuracy:  {best_robust_acc:.2f}%")
     print(
         f"Total training time: {total_training_time:.2f}s ({total_training_time/3600:.2f}h)"
     )

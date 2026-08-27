@@ -29,11 +29,12 @@ rwp:
 
 # ── BitCons: Fragile Bit-Plane Masking Stream ─────────────────────────────
 # Set bitcons: true to enable the third training stream.
-bitcons: true
-bitcons_planes: [3,4,5]      # bit-planes to zero out (0=LSB, 7=MSB)
+bitcons: false
+bitcons_planes: [0,1,2]      # low bits; masking changes an 8-bit value by at most 7/255
 bitcons_align: kl              # js | kl | mse | kl_zscore
-temperature: 0.5               # softmax temperature for js alignment
-bitcons_alpha: 1             # final alignment loss weight α
-bitcons_warmup: 100             # epochs to ramp α from 0 → bitcons_alpha (0 = no warmup)
+bitcons_alpha: 0.25          # final weight of the complete auxiliary branch
+bitcons_ce_weight: 1.0       # masked-view CE weight inside the BitCons branch
+bitcons_align_weight: 1.0    # logit alignment weight inside the BitCons branch
+bitcons_warmup: 60              # epochs to ramp α from 0 → bitcons_alpha (0 = no warmup)
 bitcons_warmup_schedule: linear  # linear | cosine
 # ──────────────────────────────────────────────────────────────────────────

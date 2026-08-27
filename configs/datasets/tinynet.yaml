@@ -1,7 +1,6 @@
 dataset: tinynet
-data_dir: /home/xq/projects/BitCons-AT/dataset/data
+data_dir: dataset/data
 num_classes: 200
-image_size: 64
 batch_size: 128
 num_workers: 4
 pin_memory: true
