@@ -130,6 +130,30 @@ class Config:
         if self.data.get('temperature', 1) <= 0:
             raise ValueError('temperature must be positive')
 
+        if self.data.get('method') == 'bitmax_at':
+            bitmax_planes = sorted(set(self.data.get('bitmax_planes', [])))
+            if (
+                not bitmax_planes
+                or bitmax_planes != list(range(bitmax_planes[-1] + 1))
+            ):
+                raise ValueError(
+                    'bitmax_planes must be contiguous low bits starting at 0'
+                )
+            if self.data.get('bitmax_candidates', 0) <= 0:
+                raise ValueError('bitmax_candidates must be positive')
+            if self.data.get('bitmax_refine_steps', -1) < 0:
+                raise ValueError('bitmax_refine_steps must be non-negative')
+
+        if self.data.get('method') == 'bitplane_at':
+            bitplane_planes = sorted(set(self.data.get('bitplane_planes', [])))
+            if (
+                not bitplane_planes
+                or bitplane_planes != list(range(bitplane_planes[-1] + 1))
+            ):
+                raise ValueError(
+                    'bitplane_planes must be contiguous low bits starting at 0'
+                )
+
         for key in ('epochs', 'batch_size', 'n_steps'):
             if self.data.get(key, 0) <= 0:
                 raise ValueError(f'{key} must be positive')

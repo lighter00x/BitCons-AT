@@ -28,6 +28,7 @@ def pgd_at_train(
         alpha=config.alpha / 255,
         steps=config.n_steps,
         loss_fn=criterion,
+        model_eval=True,
     )
 
     use_bitcons = bool(getattr(config, 'bitcons', False))

@@ -1,6 +1,7 @@
 from .resnet import ResNet18
 from .preactresnet import PreActResNet18
 from .wideresnet import WideResNet
+from .bitplane import BitPlaneBPDA, QuantizeBPDA
 
 
 def get_model(config):
@@ -16,12 +17,19 @@ def get_model(config):
     model_name = config.model.lower()
 
     if model_name == 'resnet18':
-        return ResNet18(num_classes=config.num_classes)
+        model = ResNet18(num_classes=config.num_classes)
     elif model_name == 'preactresnet18':
-        return PreActResNet18(num_classes=config.num_classes)
+        model = PreActResNet18(num_classes=config.num_classes)
     elif model_name == 'wrn28_10':
-        return WideResNet(depth=28, widen_factor=10, num_classes=config.num_classes, dropRate=0.0)
+        model = WideResNet(depth=28, widen_factor=10, num_classes=config.num_classes, dropRate=0.0)
     elif model_name == 'wrn34_10':
-        return WideResNet(depth=34, widen_factor=10, num_classes=config.num_classes, dropRate=0.0)
+        model = WideResNet(depth=34, widen_factor=10, num_classes=config.num_classes, dropRate=0.0)
     else:
         raise ValueError(f"Unknown model: {config.model}. Supported: resnet18, wrn28_10, wrn34_10, preactresnet18")
+
+    method = getattr(config, 'method', None)
+    if method == 'bitplane_at':
+        model = BitPlaneBPDA(model, config.bitplane_planes)
+    elif method == 'quantize_at':
+        model = QuantizeBPDA(model)
+    return model

@@ -1,0 +1,82 @@
+[SUITE] run_id=cifar10_r18_s4243_110e dataset=cifar10 model=resnet18 seed=4243 epochs=110
+[SUITE] stage=all gpus=0 1 conda_env=bit tasks=17 final_eval=0
+[SUITE] logs=/mnt/data/share/xq/source/BitCons-AT/logs/suite_cifar10_r18_s4243_110e
+PyTorch 2.5.0+cu118 | visible GPUs 2 | selected [0, 1]
+AutoAttack import: OK
+----------------------------------------------------------------------
+Ran 19 tests in 2.577s
+
+OK
+[INFO] MissingDataset not found or invalid at /tmp/missing-dataset; downloading it.
+[TASK][GPU 0] pgd_at_base (comparison, method=pgd_at, modules=0/0/0)
+[TASK][GPU 1] pgd_at_core (comparison, method=pgd_at, modules=1/1/0)
+[TRAIN][GPU 0] pgd_at_base
+[TRAIN][GPU 1] pgd_at_core
+[EVAL][GPU 0] pgd_at_base checkpoint=best
+[EVAL][GPU 1] pgd_at_core checkpoint=best
+[DONE][GPU 0] pgd_at_base
+[TASK][GPU 0] pgd_at_full (comparison, method=pgd_at, modules=1/1/1)
+[TRAIN][GPU 0] pgd_at_full
+[DONE][GPU 1] pgd_at_core
+[TASK][GPU 1] trades_base (comparison, method=trades, modules=0/0/0)
+[TRAIN][GPU 1] trades_base
+[EVAL][GPU 1] trades_base checkpoint=best
+[EVAL][GPU 0] pgd_at_full checkpoint=best
+[DONE][GPU 1] trades_base
+[TASK][GPU 1] trades_full (comparison, method=trades, modules=1/1/1)
+[TRAIN][GPU 1] trades_full
+[DONE][GPU 0] pgd_at_full
+[TASK][GPU 0] trades_core (comparison, method=trades, modules=1/1/0)
+[TRAIN][GPU 0] trades_core
+[EVAL][GPU 0] trades_core checkpoint=best
+[EVAL][GPU 1] trades_full checkpoint=best
+[DONE][GPU 1] trades_full
+[TASK][GPU 1] mart_core (comparison, method=mart, modules=1/1/0)
+[TRAIN][GPU 1] mart_core
+[DONE][GPU 0] trades_core
+[TASK][GPU 0] mart_base (comparison, method=mart, modules=0/0/0)
+[TRAIN][GPU 0] mart_base
+[EVAL][GPU 0] mart_base checkpoint=best
+[EVAL][GPU 1] mart_core checkpoint=best
+[DONE][GPU 0] mart_base
+[TASK][GPU 0] mart_full (comparison, method=mart, modules=1/1/1)
+[TRAIN][GPU 0] mart_full
+[DONE][GPU 1] mart_core
+[TASK][GPU 1] rpat_base (comparison, method=rpat, modules=0/0/0)
+[TRAIN][GPU 1] rpat_base
+[EVAL][GPU 1] rpat_base checkpoint=best
+[EVAL][GPU 0] mart_full checkpoint=best
+[DONE][GPU 1] rpat_base
+[TASK][GPU 1] rpat_full (comparison, method=rpat, modules=1/1/1)
+[TRAIN][GPU 1] rpat_full
+[DONE][GPU 0] mart_full
+[TASK][GPU 0] rpat_core (comparison, method=rpat, modules=1/1/0)
+[TRAIN][GPU 0] rpat_core
+[EVAL][GPU 1] rpat_full checkpoint=best
+[EVAL][GPU 0] rpat_core checkpoint=best
+[DONE][GPU 1] rpat_full
+[TASK][GPU 1] pgd_at_align_only (ablation, method=pgd_at, modules=0/1/0)
+[TRAIN][GPU 1] pgd_at_align_only
+[DONE][GPU 0] rpat_core
+[TASK][GPU 0] pgd_at_mask_only (ablation, method=pgd_at, modules=1/0/0)
+[TRAIN][GPU 0] pgd_at_mask_only
+[EVAL][GPU 1] pgd_at_align_only checkpoint=best
+[EVAL][GPU 0] pgd_at_mask_only checkpoint=best
+[DONE][GPU 1] pgd_at_align_only
+[TASK][GPU 1] pgd_at_mask_contrast (ablation, method=pgd_at, modules=1/0/1)
+[TRAIN][GPU 1] pgd_at_mask_contrast
+[DONE][GPU 0] pgd_at_mask_only
+[TASK][GPU 0] pgd_at_contrast_only (ablation, method=pgd_at, modules=0/0/1)
+[TRAIN][GPU 0] pgd_at_contrast_only
+[EVAL][GPU 1] pgd_at_mask_contrast checkpoint=best
+[EVAL][GPU 0] pgd_at_contrast_only checkpoint=best
+[DONE][GPU 1] pgd_at_mask_contrast
+[DONE][GPU 0] pgd_at_contrast_only
+[TASK][GPU 0] pgd_at_align_contrast (ablation, method=pgd_at, modules=0/1/1)
+[TRAIN][GPU 0] pgd_at_align_contrast
+[EVAL][GPU 0] pgd_at_align_contrast checkpoint=best
+[DONE][GPU 0] pgd_at_align_contrast
+[SUMMARY] All 17 tasks completed successfully.
+[SUMMARY] Manifest: /mnt/data/share/xq/source/BitCons-AT/logs/suite_cifar10_r18_s4243_110e/manifest.tsv
+[SUMMARY] Status:   /mnt/data/share/xq/source/BitCons-AT/logs/suite_cifar10_r18_s4243_110e/summary.tsv
+[SUMMARY] Results:  /mnt/data/share/xq/source/BitCons-AT/logs/suite_cifar10_r18_s4243_110e/results.tsv

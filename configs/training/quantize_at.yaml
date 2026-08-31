@@ -1,0 +1,29 @@
+method: quantize_at
+
+epochs: 110
+lr_init: 0.1
+lr_scheduler: multi_step
+lr_steps: [100, 105]
+lr_gamma: 0.1
+optimizer: sgd
+momentum: 0.9
+weight_decay: 5e-4
+
+epsilon: 8
+alpha: 2
+n_steps: 10
+
+perturbation: none
+
+awp:
+  gamma: 0.01
+  warmup: 0
+
+rwp:
+  gamma: 0.01
+  warmup: 0
+
+# Forward: round(x * 255) / 255. Backward: identity BPDA/STE.
+# No bit-plane is cleared in this causal control.
+bitcons: false
+bitcons_contrast: false

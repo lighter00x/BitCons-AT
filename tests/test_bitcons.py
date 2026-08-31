@@ -60,6 +60,7 @@ class BatchNormIsolationTest(unittest.TestCase):
         variance_before = batchnorm.running_var.clone()
 
         with freeze_batchnorm_stats(model):
+            self.assertTrue(batchnorm.training)
             output = model(inputs)
         output.sum().backward()
 

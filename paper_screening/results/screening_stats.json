@@ -1,0 +1,114 @@
+{
+  "rules_version": 2,
+  "sources": {
+    "cvpr2026_papers.json": {
+      "total": 5024,
+      "selected": 72,
+      "missing_abstract": 955,
+      "tiers": {
+        "D-Exclude": 4952,
+        "C-Foundation": 65,
+        "B-Method": 6,
+        "A-Core": 1
+      },
+      "selected_groups": {
+        "adaptive_evaluation": 3,
+        "adversarial_core": 72,
+        "vision_context": 51,
+        "classification_context": 10,
+        "evaluation_protocol": 3,
+        "input_transform_compression": 1
+      }
+    },
+    "iclr2026_papers.json": {
+      "total": 10000,
+      "selected": 174,
+      "missing_abstract": 0,
+      "tiers": {
+        "D-Exclude": 9826,
+        "C-Foundation": 150,
+        "B-Method": 13,
+        "A-Core": 11
+      },
+      "selected_groups": {
+        "adaptive_evaluation": 7,
+        "adversarial_core": 174,
+        "classification_context": 42,
+        "consistency_alignment": 2,
+        "input_transform_compression": 10,
+        "vision_context": 102,
+        "input_bit_quantization": 1,
+        "evaluation_protocol": 9
+      }
+    },
+    "icml2024_papers.json": {
+      "total": 2610,
+      "selected": 62,
+      "missing_abstract": 0,
+      "tiers": {
+        "C-Foundation": 55,
+        "D-Exclude": 2548,
+        "A-Core": 2,
+        "B-Method": 5
+      },
+      "selected_groups": {
+        "adaptive_evaluation": 2,
+        "adversarial_core": 62,
+        "classification_context": 13,
+        "vision_context": 29,
+        "input_transform_compression": 1,
+        "evaluation_protocol": 4
+      }
+    },
+    "icml2025_papers.json": {
+      "total": 3330,
+      "selected": 54,
+      "missing_abstract": 0,
+      "tiers": {
+        "D-Exclude": 3276,
+        "C-Foundation": 51,
+        "B-Method": 2,
+        "A-Core": 1
+      },
+      "selected_groups": {
+        "adaptive_evaluation": 1,
+        "adversarial_core": 54,
+        "consistency_alignment": 1,
+        "vision_context": 29,
+        "input_transform_compression": 2,
+        "classification_context": 13,
+        "evaluation_protocol": 1
+      }
+    },
+    "neurips2025_papers.json": {
+      "total": 5540,
+      "selected": 97,
+      "missing_abstract": 0,
+      "tiers": {
+        "D-Exclude": 5443,
+        "B-Method": 7,
+        "C-Foundation": 87,
+        "A-Core": 3
+      },
+      "selected_groups": {
+        "adversarial_core": 97,
+        "classification_context": 18,
+        "input_transform_compression": 4,
+        "vision_context": 55,
+        "adaptive_evaluation": 3,
+        "evaluation_protocol": 3,
+        "discrete_worst_case": 1
+      }
+    }
+  },
+  "deduplication": {
+    "selected_before_deduplication": 459,
+    "selected_after_deduplication": 458,
+    "duplicate_records_removed": 1,
+    "tiers": {
+      "A-Core": 18,
+      "B-Method": 33,
+      "C-Foundation": 407
+    }
+  }
+}

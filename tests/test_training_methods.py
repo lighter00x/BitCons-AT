@@ -12,6 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / 'src'))
 
 from training.methods.cons_at import cons_at_train
+from training.methods.bitmax_at import bitmax_at_train
 from training.methods.mart import mart_train
 from training.methods.pgd_at import pgd_at_train
 from training.methods.rpat import rpat_train
@@ -63,6 +64,9 @@ def make_config(ce_weight=1.0, align_weight=1.0, contrast=False):
         bitcons_contrast=contrast,
         bitcons_contrast_lam=1.0,
         bitcons_contrast_temp=0.5,
+        bitmax_planes=[0, 1, 2],
+        bitmax_candidates=2,
+        bitmax_refine_steps=1,
         perturbation='none',
         awp={'gamma': 0.01, 'warmup': 0},
         rwp={'gamma': 0.01, 'warmup': 0},
@@ -111,7 +115,7 @@ class TrainingMethodsSmokeTest(unittest.TestCase):
         self.assertGreaterEqual(accuracy, 0.0)
         self.assertLessEqual(accuracy, 100.0)
         self.assertTrue(math.isfinite(loss_components['host_loss']))
-        if loss_components['bitcons_weighted_loss'] is not None:
+        if loss_components.get('bitcons_weighted_loss') is not None:
             self.assertTrue(
                 math.isfinite(loss_components['bitcons_weighted_loss'])
             )
@@ -139,6 +143,11 @@ class TrainingMethodsSmokeTest(unittest.TestCase):
 
     def test_cons_at_core_bitcons_trains(self):
         self.run_method(cons_at_train, make_config(contrast=False), paired=True)
+
+    def test_bitmax_at_trains(self):
+        config = make_config(contrast=False)
+        config.bitcons = False
+        self.run_method(bitmax_at_train, config)
 
     def test_weight_perturbations_train_with_full_bitcons(self):
         for perturbation_name in ('awp', 'rwp'):

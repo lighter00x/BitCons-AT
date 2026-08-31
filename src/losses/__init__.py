@@ -12,7 +12,7 @@ from .bitcons import (
 
 
 def get_criterion(config):
-    if config.method == 'pgd_at':
+    if config.method in ('pgd_at', 'bitmax_at', 'bitplane_at', 'quantize_at'):
         return nn.CrossEntropyLoss()
     elif config.method == 'trades':
         return nn.CrossEntropyLoss()

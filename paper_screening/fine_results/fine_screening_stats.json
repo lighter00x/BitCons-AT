@@ -1,0 +1,38 @@
+{
+  "input_candidates": 458,
+  "included": 48,
+  "manual_fulltext_needed": 1,
+  "excluded": 409,
+  "priorities": {
+    "P0": 9,
+    "P1": 22,
+    "P2": 17
+  },
+  "included_categories": {
+    "adaptive_input_defense": 3,
+    "adaptive_evaluation": 3,
+    "input_discretization": 1,
+    "discrete_representation": 1,
+    "compression_evaluation": 1,
+    "compression_mechanism": 3,
+    "quantization_adjacent": 1,
+    "bitmax_support": 3,
+    "compression_adjacent": 1,
+    "input_purification": 8,
+    "evaluation_support": 7,
+    "alignment_defense": 1,
+    "consistency_support": 2,
+    "failure_mechanism": 5,
+    "randomized_defense": 1,
+    "adversarial_training_support": 7
+  },
+  "exclusion_categories": {
+    "general_robustness": 97,
+    "different_domain": 113,
+    "lexical_false_positive": 56,
+    "attack_only": 83,
+    "certification_only": 24,
+    "different_security_problem": 31,
+    "missing_abstract": 5
+  }
+}

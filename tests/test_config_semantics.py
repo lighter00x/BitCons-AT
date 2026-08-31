@@ -75,6 +75,41 @@ class ConfigSemanticsTest(unittest.TestCase):
         self.assertEqual(get_bitcons_weight(config, 0), 0.0)
         self.assertEqual(get_bitcons_weight(config, 109), 0.0)
 
+    def test_bitmax_defaults_and_cli_overrides(self):
+        config = load_config('--config', 'bitmax_at')
+        self.assertEqual(config.method, 'bitmax_at')
+        self.assertEqual(config.bitmax_planes, [0, 1, 2])
+        self.assertEqual(config.bitmax_candidates, 2)
+        self.assertEqual(config.bitmax_refine_steps, 2)
+        self.assertFalse(config.bitcons)
+
+        overridden = load_config(
+            '--config', 'bitmax_at',
+            '--bitmax_planes', '0', '1',
+            '--bitmax_candidates', '4',
+        )
+        self.assertEqual(overridden.bitmax_planes, [0, 1])
+        self.assertEqual(overridden.bitmax_candidates, 4)
+
+    def test_bitplane_bpda_defaults_and_override(self):
+        config = load_config('--config', 'bitplane_at')
+        self.assertEqual(config.method, 'bitplane_at')
+        self.assertEqual(config.bitplane_planes, [0, 1, 2])
+        self.assertFalse(config.bitcons)
+
+        overridden = load_config(
+            '--config', 'bitplane_at', '--bitplane_planes', '0', '1'
+        )
+        self.assertEqual(overridden.bitplane_planes, [0, 1])
+
+    def test_quantize_at_is_an_explicit_control(self):
+        config = load_config('--config', 'quantize_at')
+
+        self.assertEqual(config.method, 'quantize_at')
+        self.assertFalse(config.bitcons)
+        self.assertFalse(config.bitcons_contrast)
+        self.assertIsNone(config.bitplane_planes)
+
     def test_ablation_weights_accept_zero(self):
         config = load_config(
             '--config', 'pgd_at',

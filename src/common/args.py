@@ -77,6 +77,17 @@ def get_args():
                         help='Feature contrastive temperature')
     # ──────────────────────────────────────────────────────────────────────
 
+    parser.add_argument('--bitmax_planes', nargs='+', type=int, default=None,
+                        metavar='P',
+                        help='Contiguous low bit-planes explored by BitMax')
+    parser.add_argument('--bitmax_candidates', type=int, default=None,
+                        help='Number of projected low-bit candidates per sample')
+    parser.add_argument('--bitmax_refine_steps', type=int, default=None,
+                        help='PGD refinement steps after each discrete bit jump')
+    parser.add_argument('--bitplane_planes', nargs='+', type=int, default=None,
+                        metavar='P',
+                        help='Low bit-planes masked by the BPDA model wrapper')
+
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--num_workers', type=int, default=4)
     parser.add_argument('--pin_memory', action=argparse.BooleanOptionalAction,

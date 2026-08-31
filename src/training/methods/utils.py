@@ -5,19 +5,19 @@ from torch.nn.modules.batchnorm import _BatchNorm
 
 @contextmanager
 def freeze_batchnorm_stats(model):
-    """Run auxiliary forwards without updating BatchNorm running statistics."""
+    """Preserve BN running state without changing train-mode computation."""
     batchnorm_states = {
-        module: module.training
+        module: module.track_running_stats
         for module in model.modules()
         if isinstance(module, _BatchNorm)
     }
     try:
         for module in batchnorm_states:
-            module.eval()
+            module.track_running_stats = False
         yield
     finally:
-        for module, was_training in batchnorm_states.items():
-            module.train(was_training)
+        for module, track_running_stats in batchnorm_states.items():
+            module.track_running_stats = track_running_stats
 
 
 class LossComponentMeter:

@@ -1,0 +1,39 @@
+[
+  {
+    "paper_id": "cvpr2026_papers:1495",
+    "venue": "CVPR",
+    "year": "2026",
+    "source_file": "cvpr2026_papers.json",
+    "title": "Robust Alignment: Harmonizing Clean Accuracy and Adversarial Robustness in Adversarial Training",
+    "abstract": "",
+    "authors": [],
+    "keywords": [],
+    "pdf": "",
+    "url": "https://cvpr.thecvf.com/virtual/2026/poster/40589",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Robust Alignment: Harmonizing Clean Accuracy and Adversarial Robustness in Adversarial Training"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": false,
+    "normalized_title": "robust alignment harmonizing clean accuracy and adversarial robustness in adversarial training",
+    "also_in_sources": [
+      "cvpr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": false,
+    "fine_evidence": [],
+    "fine_decision": "manual_fulltext_needed",
+    "fine_category": "missing_abstract",
+    "priority": "P1-pending",
+    "relevance_score_100": null,
+    "fine_reason": "The title is relevant to BitCons alignment, but the crawled record has no abstract; inspect the PDF before inclusion."
+  }
+]

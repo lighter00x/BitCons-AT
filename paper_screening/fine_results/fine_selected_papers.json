@@ -1,0 +1,2610 @@
+[
+  {
+    "paper_id": "iclr2026_papers:2378",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "DRIFT: Divergent Response in Filtered Transformations for Robust Adversarial Defense",
+    "abstract": "Deep neural networks remain highly vulnerable to adversarial examples, and most defenses collapse once gradients can be reliably estimated. We identify \\emph{gradient consensus}—the tendency of randomized transformations to yield aligned gradients—as a key driver of adversarial transferability. Attackers exploit this consensus to construct perturbations that remain effective across transformations. We introduce \\textbf{DRIFT} (Divergent Response in Filtered Transformations), a stochastic ensemble of lightweight, learnable filters trained to actively disrupt gradient consensus. Unlike prior randomized defenses that rely on gradient masking, DRIFT enforces \\emph{gradient dissonance} by maximizing divergence in Jacobian- and logit-space responses while preserving natural predictions. Our contributions are threefold: (i) we formalize gradient consensus and provide a theoretical analysis linking consensus to transferability; (ii) we propose a consensus-divergence training strategy combining prediction consistency, Jacobian separation, logit-space separation, and adversarial robustness; and (iii) we show that DRIFT achieves substantial robustness gains on ImageNet across CNNs and Vision Transformers, outperforming state-of-the-art preprocessing, adversarial training, and diffusion-based defenses under adaptive white-box, transfer-based, and gradient-free attacks. DRIFT delivers these improvements with negligible runtime and memory cost, establishing gradient divergence as a practical and generalizable principle for adversarial defense.",
+    "authors": [
+      "Amira Guesmi",
+      "Muhammad Shafique"
+    ],
+    "keywords": [
+      "Adversarial Robustness",
+      "Transferability of Adversarial Attacks",
+      "Randomized Defenses",
+      "Gradient Consensus"
+    ],
+    "pdf": "https://openreview.net/pdf/bad6c91aaf674abb3240050cc351fd965e5ebd88.pdf",
+    "url": "https://openreview.net/forum?id=AYH7uBK1Gg",
+    "score": 26,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adaptive_evaluation",
+      "adversarial_core",
+      "classification_context",
+      "consistency_alignment",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ergent Response in Filtered Transformations for Robust Adversarial Defense Deep neural networks remain highly vulnerable to adver"
+      ],
+      "input_transform_compression": [
+        "We identify \\emph{gradient consensus}—the tendency of randomized transformations to yield aligned gradients—as a key driver of adversar"
+      ],
+      "adaptive_evaluation": [
+        "nsensus. Unlike prior randomized defenses that rely on gradient masking, DRIFT enforces \\emph{gradient dissonance} by maximizi"
+      ],
+      "consistency_alignment": [
+        "ose a consensus-divergence training strategy combining prediction consistency, Jacobian separation, logit-space separation, and adve"
+      ],
+      "vision_context": [
+        "bstantial robustness gains on ImageNet across CNNs and Vision Transformers, outperforming state-of-the-art preproces",
+        "ow that DRIFT achieves substantial robustness gains on ImageNet across CNNs and Vision Transformers, outperforming sta"
+      ],
+      "classification_context": [
+        "hieves substantial robustness gains on ImageNet across CNNs and Vision Transformers, outperforming state-of-the-ar",
+        "ow that DRIFT achieves substantial robustness gains on ImageNet across CNNs and Vision Transformers, outperforming sta"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "drift divergent response in filtered transformations for robust adversarial defense",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Deep neural networks remain highly vulnerable to adversarial examples, and most defenses collapse once gradients can be reliably estimated.",
+      "We identify \\emph{gradient consensus}—the tendency of randomized transformations to yield aligned gradients—as a key driver of adversarial transferability.",
+      "We introduce \\textbf{DRIFT} (Divergent Response in Filtered Transformations), a stochastic ensemble of lightweight, learnable filters trained to actively disrupt gradient consensus.",
+      "Unlike prior randomized defenses that rely on gradient masking, DRIFT enforces \\emph{gradient dissonance} by maximizing divergence in Jacobian- and logit-space responses while preserving natural predictions."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adaptive_input_defense",
+    "priority": "P0",
+    "relevance_score_100": 98,
+    "fine_reason": "Directly studies transformed-input defenses, adaptive attacks, gradient masking, and prediction/logit behavior."
+  },
+  {
+    "paper_id": "iclr2026_papers:8452",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Keep It Real: Challenges in Attacking Compression-Based Adversarial Purification",
+    "abstract": "Previous work has suggested that preprocessing images through lossy compression can defend against adversarial perturbations, but comprehensive attack evaluations have been lacking. In this paper, we construct strong white-box and adaptive attacks against various compression models and identify a critical challenge for attackers: high realism in reconstructed images significantly increases attack difficulty. Through rigorous evaluation across multiple attack scenarios, we demonstrate that compression models capable of producing realistic, high-fidelity reconstructions are substantially more resistant to our attacks. In contrast, low-realism compression models can be broken. Our analysis reveals that this is not due to gradient masking. Rather, realistic reconstructions maintaining distributional alignment with natural images seem to offer inherent robustness. This work highlights a significant obstacle for future adversarial attacks and suggests that developing more effective techniques to overcome realism represents an essential challenge for comprehensive security evaluation.",
+    "authors": [
+      "Samuel Räber",
+      "Till Aczel",
+      "Andreas Plesner",
+      "Roger Wattenhofer"
+    ],
+    "keywords": [
+      "Compression",
+      "adversarial purification",
+      "realism in compression",
+      "adversarial defense",
+      "adversarial attacks"
+    ],
+    "pdf": "https://openreview.net/pdf/33227300ef007c79acfd3a8bf20daeacde8ce07c.pdf",
+    "url": "https://openreview.net/forum?id=2xUp4TBZkL",
+    "score": 23,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adaptive_evaluation",
+      "adversarial_core",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ng images through lossy compression can defend against adversarial perturbations, but comprehensive attack evaluations have been lackin"
+      ],
+      "input_transform_compression": [
+        "ersarial Purification Previous work has suggested that preprocessing images through lossy compression can defend against adversari",
+        "s work has suggested that preprocessing images through lossy compression can defend against adversarial perturbations, but comp",
+        "Keep It Real: Challenges in Attacking Compression-Based Adversarial Purification Previous work has suggested that preproce",
+        "eep It Real: Challenges in Attacking Compression-Based Adversarial Purification Previous work has suggested that preprocessing images"
+      ],
+      "adaptive_evaluation": [
+        "king. In this paper, we construct strong white-box and adaptive attacks against various compression models and identify a crit",
+        "e broken. Our analysis reveals that this is not due to gradient masking. Rather, realistic reconstructions maintaining distrib"
+      ],
+      "vision_context": [
+        "ication Previous work has suggested that preprocessing images through lossy compression can defend against adversari"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "keep it real challenges in attacking compression based adversarial purification",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Previous work has suggested that preprocessing images through lossy compression can defend against adversarial perturbations, but comprehensive attack evaluations have been lacking.",
+      "In this paper, we construct strong white-box and adaptive attacks against various compression models and identify a critical challenge for attackers: high realism in reconstructed images significantly increases attack difficulty.",
+      "Through rigorous evaluation across multiple attack scenarios, we demonstrate that compression models capable of producing realistic, high-fidelity reconstructions are substantially more resistant to our attacks.",
+      "In contrast, low-realism compression models can be broken."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adaptive_evaluation",
+    "priority": "P0",
+    "relevance_score_100": 97,
+    "fine_reason": "Direct adaptive evaluation of lossy-compression preprocessing and explicit analysis of gradient masking."
+  },
+  {
+    "paper_id": "iclr2026_papers:9065",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Randomized Feature Squeezing against Unseen $ {l_p} $ Attacks without Adversarial Training",
+    "abstract": "Deep learning has made tremendous progress in the last decades; however, it is not robust to adversarial attacks. The most effective approach is perhaps adversarial training, although it is impractical because it requires prior knowledge about the attackers and incurs high computational costs. In this paper, we propose a novel approach that can train a robust network only through standard training with clean images without awareness of the attacker's strategy. We add a specially designed network input layer, which accomplishes a randomized feature squeezing to reduce the malicious perturbation. It achieves excellent robustness against unseen ${l_0,l_1,l_2}$ and $ {l_\\infty} $ attacks at one time in terms of the computational cost of the attacker versus the defender through just 100/50 epochs of standard training with clean images in CIFAR-10/ImageNet. The thorough experimental results validate the high performance. Moreover, it can also defend against unlearnable examples generated by One-Pixel Shortcut which breaks down the adversarial training approach.",
+    "authors": [
+      "Jing Wang",
+      "Zhuang Tian",
+      "Liang Cao"
+    ],
+    "keywords": [
+      "Randomized Feature Squeezing",
+      "Unseen $ {l_p} $ Attacks"
+    ],
+    "pdf": "https://openreview.net/pdf/76a1b5dee87f4e47c1169d7b514a16c4ea2d521e.pdf",
+    "url": "https://openreview.net/forum?id=3MyTiaYpVs",
+    "score": 19,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_bit_quantization",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ure Squeezing against Unseen $ {l_p} $ Attacks without Adversarial Training Deep learning has made tremendous progress in the last",
+        "ndous progress in the last decades; however, it is not robust to adversarial attacks. The most effective approach is perhaps advers"
+      ],
+      "input_bit_quantization": [
+        "Randomized Feature Squeezing against Unseen $ {l_p} $ Attacks without Adversarial T"
+      ],
+      "vision_context": [
+        "bust network only through standard training with clean images without awareness of the attacker's strategy. We add a",
+        "o defend against unlearnable examples generated by One-Pixel Shortcut which breaks down the adversarial training ap",
+        "00/50 epochs of standard training with clean images in CIFAR-10/ImageNet. The thorough experimental results validate t",
+        "chs of standard training with clean images in CIFAR-10/ImageNet. The thorough experimental results validate the high p"
+      ],
+      "classification_context": [
+        "00/50 epochs of standard training with clean images in CIFAR-10/ImageNet. The thorough experimental results validate t",
+        "chs of standard training with clean images in CIFAR-10/ImageNet. The thorough experimental results validate the high p"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "randomized feature squeezing against unseen l p attacks without adversarial training",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "The most effective approach is perhaps adversarial training, although it is impractical because it requires prior knowledge about the attackers and incurs high computational costs.",
+      "It achieves excellent robustness against unseen ${l_0,l_1,l_2}$ and $ {l_\\infty} $ attacks at one time in terms of the computational cost of the attacker versus the defender through just 100/50 epochs of standard training with clean images in CIFAR-10/ImageNet.",
+      "Moreover, it can also defend against unlearnable examples generated by One-Pixel Shortcut which breaks down the adversarial training approach."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_discretization",
+    "priority": "P0",
+    "relevance_score_100": 96,
+    "fine_reason": "Direct input-layer feature squeezing defense and the closest recent work to bit-depth reduction."
+  },
+  {
+    "paper_id": "neurips2025_papers:5048",
+    "venue": "NEURIPS",
+    "year": "2025",
+    "source_file": "neurips2025_papers.json",
+    "title": "DiffBreak: Is Diffusion-Based Purification Robust?",
+    "abstract": "Diffusion-based purification (DBP) has become a cornerstone defense against adversarial examples (AEs), regarded as robust due to its use of diffusion models (DMs) that project AEs onto the natural data manifold. We refute this core claim, theoretically proving that gradient-based attacks effectively target the DM rather than the classifier, causing DBP's outputs to align with adversarial distributions. This prompts a reassessment of DBP's robustness, accrediting it two critical factors: inaccurate gradients and improper evaluation protocols that test only a single random purification of the AE. We show that when accounting for stochasticity and resubmission risk, DBP collapses. To support this, we introduce DiffBreak, the first reliable toolkit for differentiation through DBP, eliminating gradient mismatches that previously further inflated robustness estimates. We also analyze the current defense scheme used for DBP where classification relies on a single purification, pinpointing its inherent invalidity. We provide a statistically grounded majority-vote (MV) alternative that aggregates predictions across multiple purified copies, showing partial but meaningful robustness gain. We then propose a novel adaptation of an optimization method against deepfake watermarking, crafting systemic perturbations that defeat DBP even under MV, challenging DBP's viability.",
+    "authors": [
+      "Andre Kassis",
+      "Urs Hengartner",
+      "Yaoliang Yu"
+    ],
+    "keywords": [
+      "Adaptive Adversarial Attacks",
+      "Adversarial Purification",
+      "Diffusion Models"
+    ],
+    "pdf": "https://openreview.net/pdf/65941ec073a7d6a98b9aa4a67a35beab0db963a9.pdf",
+    "url": "https://openreview.net/forum?id=Z7eXOBcxE9",
+    "score": 11,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "input_transform_compression"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ication (DBP) has become a cornerstone defense against adversarial examples (AEs), regarded as robust due to its use of diffusion"
+      ],
+      "input_transform_compression": [
+        "llenging DBP's viability. Adaptive Adversarial Attacks Adversarial Purification Diffusion Models"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "diffbreak is diffusion based purification robust",
+    "also_in_sources": [
+      "neurips2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Diffusion-based purification (DBP) has become a cornerstone defense against adversarial examples (AEs), regarded as robust due to its use of diffusion models (DMs) that project AEs onto the natural data manifold.",
+      "We refute this core claim, theoretically proving that gradient-based attacks effectively target the DM rather than the classifier, causing DBP's outputs to align with adversarial distributions.",
+      "This prompts a reassessment of DBP's robustness, accrediting it two critical factors: inaccurate gradients and improper evaluation protocols that test only a single random purification of the AE.",
+      "To support this, we introduce DiffBreak, the first reliable toolkit for differentiation through DBP, eliminating gradient mismatches that previously further inflated robustness estimates."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adaptive_evaluation",
+    "priority": "P0",
+    "relevance_score_100": 95,
+    "fine_reason": "Shows how inaccurate gradients and improper stochastic evaluation inflate preprocessing-defense robustness."
+  },
+  {
+    "paper_id": "cvpr2026_papers:284",
+    "venue": "CVPR",
+    "year": "2026",
+    "source_file": "cvpr2026_papers.json",
+    "title": "A Combination of Noise and Bilateral Filters Achieve Supralinear and Scalable Adversarial Robustness in CNNs",
+    "abstract": "The vulnerability of deep neural networks to adversarial examples poses a significant challenge for real-world deployment. Existing techniques to enhance deep network robustness rely on adversarial training, an approach that is powerful but computationally intensive and typically tailored to specific attack types. To address these limitations, existing works have explored techniques such as adding gaussian noise or filtering images, both of which can boost the network robustness to various adversarial attacks, albeit modestly. Here, we theoretically demonstrate that these two approaches enhance robustness against adversarial attacks through complementary mechanisms, resulting in supralinear robustness when combined.Building on this insight, we experimentally show that a simple preprocessor combining Gaussian noise and bilateral filtering yields supralinear improvements in adversarial robustness with minimal computational cost. Next, we combine our preprocessor with adversarial training and test on RobustBench to assess its supralinear improvement over state-of-the-art defenses. First, this combination ranks second on AutoAttack and third overall, while using only $\\sim$35\\% of the training FLOPs, using a model with 50\\% less parametets, trained with $\\sim$33\\% of the epochs and $\\sim$15\\% the data compared to state-of-the-art defenses. Second, our method scales efficiently, matching the accuracy of competing models with roughly 2–8× less total compute across $\\sim$3 orders of magnitude. Overall, our approach provides a principled and easily integrable framework for enhancing adversarial robustness, offering negligible computational overhead and a simple yet theoretically grounded design.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2026/papers/Stalder_A_Combination_of_Noise_and_Bilateral_Filters_Achieve_Supralinear_and_CVPR_2026_paper.pdf",
+    "url": "https://cvpr.thecvf.com/virtual/2026/poster/37609",
+    "score": 13,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "evaluation_protocol",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "and Bilateral Filters Achieve Supralinear and Scalable Adversarial Robustness in CNNs The vulnerability of deep neural networks to a",
+        "etically demonstrate that these two approaches enhance robustness against adversarial attacks through complementary mechanisms, resulting in",
+        "-art defenses. First, this combination ranks second on AutoAttack and third overall, while using only $\\sim$35\\% of the"
+      ],
+      "evaluation_protocol": [
+        "-art defenses. First, this combination ranks second on AutoAttack and third overall, while using only $\\sim$35\\% of the",
+        "our preprocessor with adversarial training and test on RobustBench to assess its supralinear improvement over state-of-th"
+      ],
+      "vision_context": [
+        "techniques such as adding gaussian noise or filtering images, both of which can boost the network robustness to var"
+      ],
+      "classification_context": [
+        "eve Supralinear and Scalable Adversarial Robustness in CNNs The vulnerability of deep neural networks to adversari"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "a combination of noise and bilateral filters achieve supralinear and scalable adversarial robustness in cnns",
+    "also_in_sources": [
+      "cvpr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Existing techniques to enhance deep network robustness rely on adversarial training, an approach that is powerful but computationally intensive and typically tailored to specific attack types.",
+      "Here, we theoretically demonstrate that these two approaches enhance robustness against adversarial attacks through complementary mechanisms, resulting in supralinear robustness when combined.Building on this insight, we experimentally show that a simple preprocessor combining Gaussian noise and bilateral filtering yields supralinear improvements in adversarial robustness with minimal computational cost.",
+      "Next, we combine our preprocessor with adversarial training and test on RobustBench to assess its supralinear improvement over state-of-the-art defenses.",
+      "First, this combination ranks second on AutoAttack and third overall, while using only $\\sim$35\\% of the training FLOPs, using a model with 50\\% less parametets, trained with $\\sim$33\\% of the epochs and $\\sim$15\\% the data compared to state-of-the-art defenses."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adaptive_input_defense",
+    "priority": "P0",
+    "relevance_score_100": 94,
+    "fine_reason": "Evaluates a simple input preprocessor combined with adversarial training and AutoAttack."
+  },
+  {
+    "paper_id": "iclr2026_papers:5865",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "On the Adversarial Robustness of Discrete Image Tokenizers",
+    "abstract": "Discrete image tokenizers encode visual inputs in a sequence of tokens from a finite vocabulary. Pre-trained tokenizers, typically trained together with a decoder for image reconstruction, are an increasingly popular alternative to CLIP image encoders for multimodal systems, including encoder-only, encoder-decoder and decoder-only models. However, unlike CLIP encoders, their vulnerability to adversarial attacks has not been explored. Ours being the first work studying this topic, we first formulate attacks that aim to perturb the features extracted by discrete tokenizers, and thus change the extracted tokens. Since the attacks target only the image encoding, they are computationally efficient, agnostic of the downstream application, and effective on classification, multimodal retrieval and captioning tasks. Second, to defend against this vulnerability, inspired by recent work on robust CLIP encoders, we fine-tune popular tokenizers with unsupervised adversarial training, while keeping all other components frozen. While unsupervised and task-agnostic, our approach significantly improves robustness to both unsupervised and end-to-end attacks. Unlike standard supervised adversarial training, our method can generalize well to unseen tasks and data while also being able to directly leverage any amount of unlabeled images. Overall, our work demonstrates that the resistance of image tokenizers to adversarial attacks strongly impacts the robustness in downstream tasks, and presents an important step in developing generalizable and safe multimodal foundation models.",
+    "authors": [
+      "Rishika Bhagwatkar",
+      "Irina Rish",
+      "Nicolas Flammarion",
+      "Francesco Croce"
+    ],
+    "keywords": [
+      "adversarial robustness",
+      "unsupervised attacks",
+      "discrete image tokenizers"
+    ],
+    "pdf": "https://openreview.net/pdf/d8e1e039624d9ef857185ec8a963fe40dda40845.pdf",
+    "url": "https://openreview.net/forum?id=4ihxXIakoY",
+    "score": 7,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "On the Adversarial Robustness of Discrete Image Tokenizers Discrete image tokenizers"
+      ],
+      "vision_context": [
+        "On the Adversarial Robustness of Discrete Image Tokenizers Discrete image tokenizers encode visual inp",
+        "rete Image Tokenizers Discrete image tokenizers encode visual inputs in a sequence of tokens from a finite vocabular"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "on the adversarial robustness of discrete image tokenizers",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Discrete image tokenizers encode visual inputs in a sequence of tokens from a finite vocabulary.",
+      "Ours being the first work studying this topic, we first formulate attacks that aim to perturb the features extracted by discrete tokenizers, and thus change the extracted tokens.",
+      "Second, to defend against this vulnerability, inspired by recent work on robust CLIP encoders, we fine-tune popular tokenizers with unsupervised adversarial training, while keeping all other components frozen.",
+      "Unlike standard supervised adversarial training, our method can generalize well to unseen tasks and data while also being able to directly leverage any amount of unlabeled images."
+    ],
+    "fine_decision": "include",
+    "fine_category": "discrete_representation",
+    "priority": "P0",
+    "relevance_score_100": 93,
+    "fine_reason": "Directly analyzes adversarial vulnerability and adversarial training of discrete visual representations."
+  },
+  {
+    "paper_id": "iclr2026_papers:5658",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "NIC-RobustBench: A Comprehensive Open-Source Toolkit for Neural Image Compression and Robustness Analysis",
+    "abstract": "Adversarial robustness of neural networks is a rapidly developing and important research area, ensuring the reliable use of neural network models in areas such as computer vision, natural language processing, and others. With the emergence of neural image compression (NIC) methods and the introduction of the first standard, JPEG AI, the question of robustness has also become critical in image compression. Unstable NIC models are more prone to producing distortions and can be exploited to compromise downstream vision tasks that rely on compressed data. Most existing benchmarks for NIC focus primarily on compression efficiency and reconstruction quality, while prior robustness studies have been limited to a small number of codecs and attacks. To address this gap, we introduce \\textbf{NIC-RobustBench}, the first open-source framework for evaluating the adversarial robustness of NIC methods. It integrates 6 adversarial attacks and 7 defense strategies in addition to traditional Rate-Distortion (RD) evaluation. The framework includes the largest number of codec types among all known NIC libraries and is easily scalable. The paper provides a comprehensive overview of NIC-RobustBench alongside an extensive robustness evaluation of modern NIC methods. Our code is publicly available at \\textit{link hidden for blind review}. We believe our framework will become an essential tool for developing robust neural image compression techniques.",
+    "authors": [
+      "Georgii Bychkov",
+      "Khaled Abud",
+      "Egor Kovalev",
+      "Aleksandr Gushchin",
+      "Sergey Lavrushkin",
+      "Dmitriy S. Vatolin",
+      "Anastasia Antsiferova"
+    ],
+    "keywords": [
+      "image сompression",
+      "adversarial robustness",
+      "open-source model",
+      "algorithm library"
+    ],
+    "pdf": "https://openreview.net/pdf/8e3af2958ae1e7b9aa5839f4aa3ffae22e1e6b2a.pdf",
+    "url": "https://openreview.net/forum?id=4FNeXikOgt",
+    "score": 17,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "evaluation_protocol",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "t for Neural Image Compression and Robustness Analysis Adversarial robustness of neural networks is a rapidly developing and importa"
+      ],
+      "input_transform_compression": [
+        "C-RobustBench: A Comprehensive Open-Source Toolkit for Neural Image Compression and Robustness Analysis Adversarial robustness of neural networks is"
+      ],
+      "evaluation_protocol": [
+        "NIC-RobustBench: A Comprehensive Open-Source Toolkit for Neural Image",
+        "ive overview of NIC-RobustBench alongside an extensive robustness evaluation of modern NIC methods. Our code is publicly available"
+      ],
+      "vision_context": [
+        "tBench: A Comprehensive Open-Source Toolkit for Neural Image Compression and Robustness Analysis Adversarial robust",
+        "use of neural network models in areas such as computer vision, natural language processing, and others. With the eme"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "nic robustbench a comprehensive open source toolkit for neural image compression and robustness analysis",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "With the emergence of neural image compression (NIC) methods and the introduction of the first standard, JPEG AI, the question of robustness has also become critical in image compression.",
+      "Unstable NIC models are more prone to producing distortions and can be exploited to compromise downstream vision tasks that rely on compressed data.",
+      "Most existing benchmarks for NIC focus primarily on compression efficiency and reconstruction quality, while prior robustness studies have been limited to a small number of codecs and attacks.",
+      "We believe our framework will become an essential tool for developing robust neural image compression techniques."
+    ],
+    "fine_decision": "include",
+    "fine_category": "compression_evaluation",
+    "priority": "P0",
+    "relevance_score_100": 92,
+    "fine_reason": "Provides attacks, defenses, and evaluation infrastructure for neural image compression robustness."
+  },
+  {
+    "paper_id": "iclr2026_papers:6000",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Diffusion Models Improve Adversarial Robustness by Compressing Image Space",
+    "abstract": "Recent work suggests that diffusion models significantly enhance empirical adversarial robustness. While several intuitive explanations have been proposed, the precise mechanisms remain unclear. In this work, we systematically investigate how diffusion models improve adversarial robustness. First, we observe that diffusion models intriguingly increase, rather than decrease, the $\\ell_p$ distance to clean samples—challenging the notion that purification denoises inputs closer to the clean data. Second, we find that the purified images are heavily influenced by the internal randomness of diffusion models. When the randomness of the diffusion model is fixed, diffusion models substantially compress the image space. Importantly, we discover a lawful relationship between the adversarial robustness gain and the model’s ability to compress the image space, quantified by the expected compression rate (CR). Further theoretical analyses show that (i) convergent score fields encoded in diffusion models explain these compression effects, and (ii) under a low-dimensional data manifold hypothesis, the expected CR captures the compression along off-manifold directions. Our findings uncover the precise mechanisms underlying diffusion-based purification and offer guidance for developing more effective and principled adversarial purification systems.",
+    "authors": [
+      "Liu Yuezhang",
+      "Xue-Xin Wei"
+    ],
+    "keywords": [
+      "Diffusion Models",
+      "Adversarial Purification",
+      "Compression"
+    ],
+    "pdf": "https://openreview.net/pdf/37f638b67c451f33e69334cd3ae834d742b30633.pdf",
+    "url": "https://openreview.net/forum?id=P0XgfEmceK",
+    "score": 13,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Diffusion Models Improve Adversarial Robustness by Compressing Image Space Recent work suggests that d"
+      ],
+      "input_transform_compression": [
+        "guidance for developing more effective and principled adversarial purification systems. Diffusion Models Adversarial Purification Com",
+        "Diffusion Models Improve Adversarial Robustness by Compressing Image Space Recent work suggests that diffusion models significant"
+      ],
+      "vision_context": [
+        "n Models Improve Adversarial Robustness by Compressing Image Space Recent work suggests that diffusion models signi"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "diffusion models improve adversarial robustness by compressing image space",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "First, we observe that diffusion models intriguingly increase, rather than decrease, the $\\ell_p$ distance to clean samples—challenging the notion that purification denoises inputs closer to the clean data.",
+      "Second, we find that the purified images are heavily influenced by the internal randomness of diffusion models.",
+      "When the randomness of the diffusion model is fixed, diffusion models substantially compress the image space.",
+      "Importantly, we discover a lawful relationship between the adversarial robustness gain and the model’s ability to compress the image space, quantified by the expected compression rate (CR)."
+    ],
+    "fine_decision": "include",
+    "fine_category": "compression_mechanism",
+    "priority": "P0",
+    "relevance_score_100": 90,
+    "fine_reason": "Mechanistic analysis connecting image-space compression to adversarial robustness gains."
+  },
+  {
+    "paper_id": "cvpr2026_papers:3566",
+    "venue": "CVPR",
+    "year": "2026",
+    "source_file": "cvpr2026_papers.json",
+    "title": "Towards Reliable Evaluation of Adversarial Robustness for Spiking Neural Networks",
+    "abstract": "Spiking Neural Networks (SNNs) utilize spike-based activations to mimic the brain's energy-efficient information processing. However, the binary and discontinuous nature of spike activations causes vanishing gradients, making adversarial robustness evaluation via gradient descent unreliable. While improved surrogate gradient methods have been proposed, their effectiveness under strong adversarial attacks remains unclear. We propose a more reliable framework for evaluating SNN adversarial robustness. We theoretically analyze the degree of gradient vanishing in surrogate gradients and introduce the Adaptive Sharpness Surrogate Gradient (ASSG), which adaptively evolves the shape of the surrogate function according to the input distribution during attack iterations, thereby enhancing gradient accuracy while mitigating gradient vanishing. In addition, we design an adversarial attack with adaptive step size under the $L_\\infty$ constraint—Stable Adaptive Projected Gradient Descent (SA-PGD), achieving faster and more stable convergence under imprecise gradients. Extensive experiments show that our approach substantially increases attack success rates across diverse adversarial training schemes, SNN architectures and neuron models, providing a more generalized and reliable evaluation of SNN adversarial robustness. The experimental results further reveal that the robustness of current SNNs has been significantly overestimated and highlighting the need for more dependable adversarial training methods.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2026/papers/Wang_Towards_Reliable_Evaluation_of_Adversarial_Robustness_for_Spiking_Neural_Networks_CVPR_2026_paper.pdf",
+    "url": "https://cvpr.thecvf.com/virtual/2026/poster/38348",
+    "score": 8,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "evaluation_protocol"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Towards Reliable Evaluation of Adversarial Robustness for Spiking Neural Networks Spiking Neural Networks (S"
+      ],
+      "evaluation_protocol": [
+        "vations causes vanishing gradients, making adversarial robustness evaluation via gradient descent unreliable. While improved surrog"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "towards reliable evaluation of adversarial robustness for spiking neural networks",
+    "also_in_sources": [
+      "cvpr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "However, the binary and discontinuous nature of spike activations causes vanishing gradients, making adversarial robustness evaluation via gradient descent unreliable.",
+      "While improved surrogate gradient methods have been proposed, their effectiveness under strong adversarial attacks remains unclear.",
+      "We theoretically analyze the degree of gradient vanishing in surrogate gradients and introduce the Adaptive Sharpness Surrogate Gradient (ASSG), which adaptively evolves the shape of the surrogate function according to the input distribution during attack iterations, thereby enhancing gradient accuracy while mitigating gradient vanishing.",
+      "In addition, we design an adversarial attack with adaptive step size under the $L_\\infty$ constraint—Stable Adaptive Projected Gradient Descent (SA-PGD), achieving faster and more stable convergence under imprecise gradients."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adaptive_evaluation",
+    "priority": "P0",
+    "relevance_score_100": 89,
+    "fine_reason": "Surrogate-gradient evaluation of a discontinuous model is methodologically analogous to BPDA validation."
+  },
+  {
+    "paper_id": "iclr2026_papers:3390",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "TriQDef: Disrupting Semantic and Gradient Alignment to Prevent Adversarial Patch Transferability in Quantized Neural Networks",
+    "abstract": "Quantized Neural Networks (QNNs) are widely deployed in edge and resource-constrained environments for their efficiency in computation and memory. While quantization distorts gradient landscapes and weakens pixel-level attacks, it offers limited robustness against patch-based adversarial attacks—localized, high-saliency perturbations that remain highly transferable across bit-widths. Existing defenses either overfit to specific quantization settings or fail to address this cross-bit vulnerability. We propose \\textbf{TriQDef}, a tri-level quantization-aware defense framework that disrupts the transferability of patch-based attacks across QNNs. TriQDef integrates: (1) a \\emph{Feature Disalignment Penalty (FDP)} that enforces semantic inconsistency by penalizing perceptual similarity in intermediate features; (2) a \\emph{Gradient Perceptual Dissonance Penalty (GPDP)} that misaligns input gradients across quantization levels using structural metrics such as Edge IoU and HOG Cosine; and (3) a \\emph{Joint Quantization-Aware Training Protocol} that applies these penalties within a \\emph{shared backbone} jointly optimized across multiple quantizers. Extensive experiments on CIFAR-10 and ImageNet show that TriQDef lowers Attack Success Rates (ASR) by over 40\\% on unseen patch and quantization combinations while preserving high clean accuracy. These results highlight the importance of disrupting both semantic and perceptual gradient alignment to mitigate patch transferability in QNNs.",
+    "authors": [
+      "Amira Guesmi",
+      "Bassem ouni",
+      "Muhammad Shafique"
+    ],
+    "keywords": [
+      "Patch-based attacks",
+      "adversarial transferability",
+      "model quantization"
+    ],
+    "pdf": "https://openreview.net/pdf/a30984b249ce68fc91380d7b40d3efbce9000c90.pdf",
+    "url": "https://openreview.net/forum?id=acQP99PU8y",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "acks, it offers limited robustness against patch-based adversarial attacks—localized, high-saliency perturbations that remain hig"
+      ],
+      "vision_context": [
+        "quantization distorts gradient landscapes and weakens pixel-level attacks, it offers limited robustness against pa",
+        "d across multiple quantizers. Extensive experiments on CIFAR-10 and ImageNet show that TriQDef lowers Attack Success R",
+        "iple quantizers. Extensive experiments on CIFAR-10 and ImageNet show that TriQDef lowers Attack Success Rates (ASR) by"
+      ],
+      "classification_context": [
+        "d across multiple quantizers. Extensive experiments on CIFAR-10 and ImageNet show that TriQDef lowers Attack Success R",
+        "iple quantizers. Extensive experiments on CIFAR-10 and ImageNet show that TriQDef lowers Attack Success Rates (ASR) by"
+      ]
+    },
+    "penalties": {
+      "weight_quantization_only": [
+        "QNNs. Patch-based attacks adversarial transferability model quantization",
+        "such as Edge IoU and HOG Cosine; and (3) a \\emph{Joint Quantization-Aware Training Protocol} that applies these penalties within a \\emph{"
+      ]
+    },
+    "has_abstract": true,
+    "normalized_title": "triqdef disrupting semantic and gradient alignment to prevent adversarial patch transferability in quantized neural networks",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Quantized Neural Networks (QNNs) are widely deployed in edge and resource-constrained environments for their efficiency in computation and memory.",
+      "While quantization distorts gradient landscapes and weakens pixel-level attacks, it offers limited robustness against patch-based adversarial attacks—localized, high-saliency perturbations that remain highly transferable across bit-widths.",
+      "Existing defenses either overfit to specific quantization settings or fail to address this cross-bit vulnerability.",
+      "We propose \\textbf{TriQDef}, a tri-level quantization-aware defense framework that disrupts the transferability of patch-based attacks across QNNs."
+    ],
+    "fine_decision": "include",
+    "fine_category": "quantization_adjacent",
+    "priority": "P1",
+    "relevance_score_100": 86,
+    "fine_reason": "Studies cross-bit adversarial behavior and semantic/gradient alignment in quantized networks; weights rather than inputs."
+  },
+  {
+    "paper_id": "icml2024_papers:2551",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Towards Efficient Training and Evaluation of Robust Models against $l_0$ Bounded Adversarial Perturbations",
+    "abstract": "This work studies sparse adversarial perturbations bounded by $l_0$ norm. We propose a white-box PGD-like attack method named sparse-PGD to effectively and efficiently generate such perturbations. Furthermore, we combine sparse-PGD with a black-box attack to comprehensively and more reliably evaluate the models’ robustness against $l_0$ bounded adversarial perturbations. Moreover, the efficiency of sparse-PGD enables us to conduct adversarial training to build robust models against sparse perturbations. Extensive experiments demonstrate that our proposed attack algorithm exhibits strong performance in different scenarios. More importantly, compared with other robust models, our adversarially trained model demonstrates state-of-the-art robustness against various sparse attacks. Codes are available at https://github.com/CityU-MLO/sPGD.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/zhong24c/zhong24c.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "and Evaluation of Robust Models against $l_0$ Bounded Adversarial Perturbations This work studies sparse adversarial perturbations bou"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "towards efficient training and evaluation of robust models against l 0 bounded adversarial perturbations",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Moreover, the efficiency of sparse-PGD enables us to conduct adversarial training to build robust models against sparse perturbations.",
+      "Extensive experiments demonstrate that our proposed attack algorithm exhibits strong performance in different scenarios."
+    ],
+    "fine_decision": "include",
+    "fine_category": "bitmax_support",
+    "priority": "P1",
+    "relevance_score_100": 84,
+    "fine_reason": "Directly addresses sparse/discrete pixel perturbations, reliable attacks, and adversarial training."
+  },
+  {
+    "paper_id": "neurips2025_papers:3535",
+    "venue": "NEURIPS",
+    "year": "2025",
+    "source_file": "neurips2025_papers.json",
+    "title": "Understanding and Improving Fast Adversarial Training against $l_0$ Bounded Perturbations",
+    "abstract": "This work studies fast adversarial training against sparse adversarial perturbations bounded by $l_0$ norm. We first demonstrate the unique challenges of employing $1$-step attacks on $l_0$ bounded perturbations, especially catastrophic overfitting (CO) that cannnot be properly addressed by existing fast adversarial training method for other $l_p$ norms ($p \\geq 1$). We highlight that CO in $l_0$ adversarial training arises from sub-optimal perturbation locations of $1$-step attack. Some strategies like multi-$\\epsilon$ can mitigate this sub-optimality to some extent, they lead to unstable training in turn. Theoretical and numerical analyses also reveal that the loss landscape of $l_0$ adversarial training is more craggy than its $l_\\infty$, $l_2$ and $l_1$ counterparts, which exaggerates CO. To address this issue, we adopt soft labels and the trade-off loss function to smooth the adversarial loss landscape. Extensive experiments demonstrate our method can overcome the challenge of CO, achieve state-of-the-art performance, and narrow the performance gap between $1$-step and multi-step adversarial training against sparse attacks.",
+    "authors": [
+      "Xuyang Zhong",
+      "Yixiao Huang",
+      "Chen Liu"
+    ],
+    "keywords": [
+      "adversarial robustness",
+      "adversarial training"
+    ],
+    "pdf": "https://openreview.net/pdf/e742e8229f3f7975fe08a28ade1634b40f9dc934.pdf",
+    "url": "https://openreview.net/forum?id=YOv9CANvDv",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Understanding and Improving Fast Adversarial Training against $l_0$ Bounded Perturbations This work studies"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "understanding and improving fast adversarial training against l 0 bounded perturbations",
+    "also_in_sources": [
+      "neurips2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "This work studies fast adversarial training against sparse adversarial perturbations bounded by $l_0$ norm.",
+      "We first demonstrate the unique challenges of employing $1$-step attacks on $l_0$ bounded perturbations, especially catastrophic overfitting (CO) that cannnot be properly addressed by existing fast adversarial training method for other $l_p$ norms ($p \\geq 1$).",
+      "We highlight that CO in $l_0$ adversarial training arises from sub-optimal perturbation locations of $1$-step attack.",
+      "Theoretical and numerical analyses also reveal that the loss landscape of $l_0$ adversarial training is more craggy than its $l_\\infty$, $l_2$ and $l_1$ counterparts, which exaggerates CO."
+    ],
+    "fine_decision": "include",
+    "fine_category": "bitmax_support",
+    "priority": "P1",
+    "relevance_score_100": 83,
+    "fine_reason": "Explains optimization difficulty and perturbation-location selection for discrete sparse attacks."
+  },
+  {
+    "paper_id": "icml2024_papers:256",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Robust Classification via a Single Diffusion Model",
+    "abstract": "Diffusion models have been applied to improve adversarial robustness of image classifiers by purifying the adversarial noises or generating realistic data for adversarial training. However, diffusion-based purification can be evaded by stronger adaptive attacks while adversarial training does not perform well under unseen threats, exhibiting inevitable limitations of these methods. To better harness the expressive power of diffusion models, this paper proposes Robust Diffusion Classifier (RDC), a generative classifier that is constructed from a pre-trained diffusion model to be adversarially robust. RDC first maximizes the data likelihood of a given input and then predicts the class probabilities of the optimized input using the conditional likelihood estimated by the diffusion model through Bayes’ theorem. To further reduce the computational cost, we propose a new diffusion backbone called multi-head diffusion and develop efficient sampling strategies. As RDC does not require training on particular adversarial attacks, we demonstrate that it is more generalizable to defend against multiple unseen threats. In particular, RDC achieves $75.67%$ robust accuracy against various $\\ell_\\infty$ norm-bounded adaptive attacks with $\\epsilon_\\infty=8/255$ on CIFAR-10, surpassing the previous state-of-the-art adversarial training models by $+4.77%$. The results highlight the potential of generative classifiers by employing pre-trained diffusion models for adversarial robustness compared with the commonly studied discriminative classifiers.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/chen24k/chen24k.pdf",
+    "url": "",
+    "score": 19,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adaptive_evaluation",
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "on Model Diffusion models have been applied to improve adversarial robustness of image classifiers by purifying the adversarial nois",
+        "e unseen threats. In particular, RDC achieves $75.67%$ robust accuracy against various $\\ell_\\infty$ norm-bounded adaptive at"
+      ],
+      "adaptive_evaluation": [
+        "diffusion-based purification can be evaded by stronger adaptive attacks while adversarial training does not perform well under"
+      ],
+      "vision_context": [
+        "have been applied to improve adversarial robustness of image classifiers by purifying the adversarial noises or gen",
+        "unded adaptive attacks with $\\epsilon_\\infty=8/255$ on CIFAR-10, surpassing the previous state-of-the-art adversarial"
+      ],
+      "classification_context": [
+        "have been applied to improve adversarial robustness of image classifiers by purifying the adversarial noises or generating real",
+        "unded adaptive attacks with $\\epsilon_\\infty=8/255$ on CIFAR-10, surpassing the previous state-of-the-art adversarial",
+        "e unseen threats. In particular, RDC achieves $75.67%$ robust accuracy against various $\\ell_\\infty$ norm-bounded adaptive at"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "robust classification via a single diffusion model",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Diffusion models have been applied to improve adversarial robustness of image classifiers by purifying the adversarial noises or generating realistic data for adversarial training.",
+      "However, diffusion-based purification can be evaded by stronger adaptive attacks while adversarial training does not perform well under unseen threats, exhibiting inevitable limitations of these methods.",
+      "In particular, RDC achieves $75.67%$ robust accuracy against various $\\ell_\\infty$ norm-bounded adaptive attacks with $\\epsilon_\\infty=8/255$ on CIFAR-10, surpassing the previous state-of-the-art adversarial training models by $+4.77%$."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adaptive_input_defense",
+    "priority": "P1",
+    "relevance_score_100": 82,
+    "fine_reason": "Image classification defense evaluated against adaptive L-infinity attacks at the same 8/255 scale."
+  },
+  {
+    "paper_id": "iclr2026_papers:5488",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Treating Neural Image Compression via Modular Adversarial Optimization: From Global Distortion to Local Artifacts",
+    "abstract": "The rapid progress in neural image compression (NIC) led to the deployment of advanced codecs, such as JPEG AI, which significantly outperform conventional approaches. However, despite extensive research on the adversarial robustness of neural networks in various computer vision tasks, the vulnerability of NIC models to adversarial attacks remains underexplored. Moreover, the existing adversarial attacks on NIC are ineffective against modern codecs. In this paper, we introduce a novel adversarial attack targeting NIC models. Our approach is built upon two core stages: (1) optimization of global-local distortions, and (2) a selective masking strategy that enhances attack stealthiness. Experimental evaluations demonstrate that the proposed method outperforms prior attacks on both JPEG AI and other NIC models, achieving greater distortion on decoded images and lower perceptibility of adversarial images. We also provide a theoretical analysis and discuss the underlying reasons for the effectiveness of our attack, offering new insights into the security and robustness of learned image compression.",
+    "authors": [
+      "Egor Kovalev",
+      "Khaled Abud",
+      "Anastasia Antsiferova",
+      "Dmitriy S. Vatolin"
+    ],
+    "keywords": [
+      "Adversarial Robustness",
+      "Neural Image Compression",
+      "Adversarial Attacks"
+    ],
+    "pdf": "https://openreview.net/pdf/698e2af8dc72eb48519f45df5bcb7f6bfa4f06f4.pdf",
+    "url": "https://openreview.net/forum?id=qfeSpu5FBE",
+    "score": 7,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "approaches. However, despite extensive research on the adversarial robustness of neural networks in various computer vision tasks, t"
+      ],
+      "vision_context": [
+        "Treating Neural Image Compression via Modular Adversarial Optimization: From",
+        "rial robustness of neural networks in various computer vision tasks, the vulnerability of NIC models to adversarial"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "treating neural image compression via modular adversarial optimization from global distortion to local artifacts",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "The rapid progress in neural image compression (NIC) led to the deployment of advanced codecs, such as JPEG AI, which significantly outperform conventional approaches.",
+      "Our approach is built upon two core stages: (1) optimization of global-local distortions, and (2) a selective masking strategy that enhances attack stealthiness.",
+      "We also provide a theoretical analysis and discuss the underlying reasons for the effectiveness of our attack, offering new insights into the security and robustness of learned image compression."
+    ],
+    "fine_decision": "include",
+    "fine_category": "compression_adjacent",
+    "priority": "P1",
+    "relevance_score_100": 82,
+    "fine_reason": "Adversarial optimization over neural image compression is useful for understanding discrete/compressed image spaces."
+  },
+  {
+    "paper_id": "iclr2026_papers:1647",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Feature compression is the root cause of adversarial fragility in neural networks",
+    "abstract": "In this paper, we uniquely study the adversarial robustness of deep neural networks (NN) for classification tasks against that of optimal classifiers. We look at the smallest magnitude of possible additive perturbations that can change a classifier's output. We provide a matrix-theoretic explanation of the adversarial fragility of deep neural networks for classification. In particular, our theoretical results show that a neural network's adversarial robustness can degrade as the input dimension $d$ increases. Analytically, we show that neural networks' adversarial robustness can be only $1/\\sqrt{d}$ of the best possible adversarial robustness of optimal classifiers. Our theories match remarkably well with numerical experiments of practically trained NN, including NN for ImageNet images. The matrix-theoretic explanation is consistent with an earlier information-theoretic feature-compression-based explanation for the adversarial fragility of neural networks.",
+    "authors": [
+      "Jingchao Gao",
+      "Ziqing Lu",
+      "Raghu Mudumbai",
+      "Xiaodong Wu",
+      "Jirong Yi",
+      "Myung Cho",
+      "Catherine Xu",
+      "Hui Xie",
+      "Weiyu Xu"
+    ],
+    "keywords": [
+      "Adversarial learning",
+      "Deep neural network",
+      "Robust learning"
+    ],
+    "pdf": "https://openreview.net/pdf/301bc94b7411fc5587b381b5b336ce0d691c962c.pdf",
+    "url": "https://openreview.net/forum?id=UYM3yaiUX9",
+    "score": 14,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "n neural networks In this paper, we uniquely study the adversarial robustness of deep neural networks (NN) for classification tasks"
+      ],
+      "input_transform_compression": [
+        "Feature compression is the root cause of adversarial fragility in neural n"
+      ],
+      "vision_context": [
+        "s of practically trained NN, including NN for ImageNet images. The matrix-theoretic explanation is consistent with a",
+        "xperiments of practically trained NN, including NN for ImageNet images. The matrix-theoretic explanation is consistent"
+      ],
+      "classification_context": [
+        "xperiments of practically trained NN, including NN for ImageNet images. The matrix-theoretic explanation is consistent"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "feature compression is the root cause of adversarial fragility in neural networks",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Our theories match remarkably well with numerical experiments of practically trained NN, including NN for ImageNet images.",
+      "The matrix-theoretic explanation is consistent with an earlier information-theoretic feature-compression-based explanation for the adversarial fragility of neural networks."
+    ],
+    "fine_decision": "include",
+    "fine_category": "compression_mechanism",
+    "priority": "P1",
+    "relevance_score_100": 80,
+    "fine_reason": "Provides a theoretical feature-compression explanation for classifier adversarial fragility."
+  },
+  {
+    "paper_id": "icml2024_papers:2452",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Improving Accuracy-robustness Trade-off via Pixel Reweighted Adversarial Training",
+    "abstract": "Adversarial training (AT) trains models using adversarial examples (AEs), which are natural images modified with specific perturbations to mislead the model. These perturbations are constrained by a predefined perturbation budget $\\epsilon$ and are equally applied to each pixel within an image. However, in this paper, we discover that not all pixels contribute equally to the accuracy on AEs (i.e., robustness) and accuracy on natural images (i.e., accuracy). Motivated by this finding, we propose Pixel-reweighted AdveRsarial Training (PART), a new framework that partially reduces $\\epsilon$ for less influential pixels, guiding the model to focus more on key regions that affect its outputs. Specifically, we first use class activation mapping (CAM) methods to identify important pixel regions, then we keep the perturbation budget for these regions while lowering it for the remaining regions when generating AEs. In the end, we use these pixel-reweighted AEs to train a model. PART achieves a notable improvement in accuracy without compromising robustness on CIFAR-10, SVHN and TinyImagenet-200, justifying the necessity to allocate distinct weights to different pixel regions in robust classification.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/zhang24am/zhang24am.pdf",
+    "url": "",
+    "score": 9,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ing Accuracy-robustness Trade-off via Pixel Reweighted Adversarial Training Adversarial training (AT) trains models using adversar"
+      ],
+      "vision_context": [
+        "ls using adversarial examples (AEs), which are natural images modified with specific perturbations to mislead the mo",
+        "Improving Accuracy-robustness Trade-off via Pixel Reweighted Adversarial Training Adversarial training (",
+        "ovement in accuracy without compromising robustness on CIFAR-10, SVHN and TinyImagenet-200, justifying the necessity t",
+        "accuracy without compromising robustness on CIFAR-10, SVHN and TinyImagenet-200, justifying the necessity to allo"
+      ],
+      "classification_context": [
+        "ovement in accuracy without compromising robustness on CIFAR-10, SVHN and TinyImagenet-200, justifying the necessity t"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "improving accuracy robustness trade off via pixel reweighted adversarial training",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial training (AT) trains models using adversarial examples (AEs), which are natural images modified with specific perturbations to mislead the model.",
+      "Motivated by this finding, we propose Pixel-reweighted AdveRsarial Training (PART), a new framework that partially reduces $\\epsilon$ for less influential pixels, guiding the model to focus more on key regions that affect its outputs.",
+      "PART achieves a notable improvement in accuracy without compromising robustness on CIFAR-10, SVHN and TinyImagenet-200, justifying the necessity to allocate distinct weights to different pixel regions in robust classification."
+    ],
+    "fine_decision": "include",
+    "fine_category": "bitmax_support",
+    "priority": "P1",
+    "relevance_score_100": 79,
+    "fine_reason": "Uses spatially nonuniform pixel perturbation budgets, relevant to structured pixel/bit inner maximization."
+  },
+  {
+    "paper_id": "neurips2025_papers:4597",
+    "venue": "NEURIPS",
+    "year": "2025",
+    "source_file": "neurips2025_papers.json",
+    "title": "Adversary Aware Optimization for Robust Defense",
+    "abstract": "Deep neural networks remain highly susceptible to adversarial attacks, where small, subtle perturbations to input images may induce misclassification. We propose a novel optimization-based purification framework that directly removes these perturbations by maximizing a Bayesian-inspired objective combining a pretrained diffusion prior with a likelihood term tailored to the adversarial perturbation space. Our method iteratively refines a given input through gradient-based updates of a combined score-based loss to guide the purification process. Unlike existing optimization-based defenses that treat adversarial noise as generic corruption, our approach explicitly integrates the adversarial landscape into the objective. Experiments performed on CIFAR-10 and CIFAR-100 demonstrate strong robust accuracy against a range of common adversarial attacks. Our work offers a principled test-time defense grounded in probabilistic inference using score-based generative models. Our code can be found at \\url{ https://github.com/rooshenasgroup/aaopt }.",
+    "authors": [
+      "Daniel Wesego",
+      "Pedram Rooshenas"
+    ],
+    "keywords": [
+      "Adversarial robustness",
+      "Adversarial purification",
+      "optimization",
+      "Adversarial training"
+    ],
+    "pdf": "https://openreview.net/pdf/a485b6c42a0b8012fbdced19e77994d5a49d3f29.pdf",
+    "url": "https://openreview.net/forum?id=VNbvk5pMS7",
+    "score": 16,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ense Deep neural networks remain highly susceptible to adversarial attacks, where small, subtle perturbations to input images may",
+        "performed on CIFAR-10 and CIFAR-100 demonstrate strong robust accuracy against a range of common adversarial attacks. Our wor"
+      ],
+      "input_transform_compression": [
+        "hub.com/rooshenasgroup/aaopt }. Adversarial robustness Adversarial purification optimization Adversarial training"
+      ],
+      "vision_context": [
+        "al attacks, where small, subtle perturbations to input images may induce misclassification. We propose a novel optim",
+        "landscape into the objective. Experiments performed on CIFAR-10 and CIFAR-100 demonstrate strong robust accuracy again"
+      ],
+      "classification_context": [
+        "landscape into the objective. Experiments performed on CIFAR-10 and CIFAR-100 demonstrate strong robust accuracy again",
+        "performed on CIFAR-10 and CIFAR-100 demonstrate strong robust accuracy against a range of common adversarial attacks. Our wor"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "adversary aware optimization for robust defense",
+    "also_in_sources": [
+      "neurips2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "We propose a novel optimization-based purification framework that directly removes these perturbations by maximizing a Bayesian-inspired objective combining a pretrained diffusion prior with a likelihood term tailored to the adversarial perturbation space.",
+      "Our method iteratively refines a given input through gradient-based updates of a combined score-based loss to guide the purification process.",
+      "Experiments performed on CIFAR-10 and CIFAR-100 demonstrate strong robust accuracy against a range of common adversarial attacks."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 78,
+    "fine_reason": "Optimization-based test-time input purification inside an explicit adversarial perturbation space."
+  },
+  {
+    "paper_id": "iclr2026_papers:9341",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Boosting Adversarial Robustness and Generalization with Dictionary Structure",
+    "abstract": "This work investigates a novel approach to boost adversarial robustness and generalization by incorporating structural prior into the design of deep learning models. Specifically, our study surprisingly reveals that existing dictionary learning-inspired convolutional neural networks (CNNs) provide a false sense of security against adversarial attacks. To address this, we propose Elastic Dictionary Learning Networks (EDLNets), a novel ResNet architecture that significantly enhances adversarial robustness and generalization. Extensive and reliable experiments demonstrate consistent and significant performance improvement on open robustness leaderboards such as RobustBench, surpassing state-of-the-art baselines. To the best of our knowledge, this is the first work to discover and validate that dictionary structure can reliably enhance deep learning robustness under strong adaptive attacks, unveiling a promising direction for future research.",
+    "authors": [
+      "Zhichao Hou",
+      "Weizhi Gao",
+      "Hamid Krim",
+      "Xiaorui Liu"
+    ],
+    "keywords": [
+      "Adversarial Robustness",
+      "Structural Prior",
+      "Adversarial Training"
+    ],
+    "pdf": "https://openreview.net/pdf/7c0789d161121fc29ff3c00568c96e84820ba725.pdf",
+    "url": "https://openreview.net/forum?id=c7rcjMTe4e",
+    "score": 18,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adaptive_evaluation",
+      "adversarial_core",
+      "classification_context",
+      "evaluation_protocol"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Boosting Adversarial Robustness and Generalization with Dictionary Structure This work"
+      ],
+      "adaptive_evaluation": [
+        "reliably enhance deep learning robustness under strong adaptive attacks, unveiling a promising direction for future research."
+      ],
+      "evaluation_protocol": [
+        "ce improvement on open robustness leaderboards such as RobustBench, surpassing state-of-the-art baselines. To the best of"
+      ],
+      "classification_context": [
+        "onary learning-inspired convolutional neural networks (CNNs) provide a false sense of security against adversarial",
+        "lastic Dictionary Learning Networks (EDLNets), a novel ResNet architecture that significantly enhances adversarial r"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "boosting adversarial robustness and generalization with dictionary structure",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Extensive and reliable experiments demonstrate consistent and significant performance improvement on open robustness leaderboards such as RobustBench, surpassing state-of-the-art baselines.",
+      "To the best of our knowledge, this is the first work to discover and validate that dictionary structure can reliably enhance deep learning robustness under strong adaptive attacks, unveiling a promising direction for future research."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P1",
+    "relevance_score_100": 78,
+    "fine_reason": "Explicitly identifies false security and validates robustness under strong adaptive attacks and RobustBench."
+  },
+  {
+    "paper_id": "iclr2026_papers:3256",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "On the Interaction of Compressibility and Adversarial Robustness",
+    "abstract": "As demands for resource efficiency and safety in modern neural networks intensify, substantial research effort has gone into model compression and adversarial robustness. Yet despite progress on each in isolation, a systematic understanding of how compressibility shapes robustness remains elusive. In this paper, we develop a principled framework to analyze how different forms of structured compressibility - such as neuron-level and spectral compressibility - affect adversarial robustness. We show that structured compressibility can induce a small number of highly sensitive directions in the representation space, which adversaries can exploit to construct effective perturbations. Our analysis yields a robustness bound that reveals how neuron and spectral compressibility impact $\\ell_\\infty$ and $\\ell_2$ robustness via their effects on the learned representations. Crucially, the vulnerabilities we identify arise irrespective of how compressibility is achieved - whether via regularization, architectural bias, or learning dynamics. Through empirical evaluations across synthetic and realistic tasks, we confirm our theoretical predictions, and further demonstrate that these vulnerabilities persist under adversarial training and transfer learning, and contribute to the emergence of universal adversarial examples. Our findings show a fundamental tension between structured compressibility and robustness and highlight new pathways for designing models that are efficient and safe.",
+    "authors": [
+      "Melih Barsbey",
+      "Antônio H. Ribeiro",
+      "Umut Simsekli",
+      "Tolga Birdal"
+    ],
+    "keywords": [
+      "compressibility",
+      "compression",
+      "adversarial robustness",
+      "generalization",
+      "safety"
+    ],
+    "pdf": "https://openreview.net/pdf/a695bc035829daffd52d00b1a9f019994b011dc2.pdf",
+    "url": "https://openreview.net/forum?id=zSsNzxjWP4",
+    "score": 11,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "input_transform_compression"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "On the Interaction of Compressibility and Adversarial Robustness As demands for resource efficiency and safety in moder"
+      ],
+      "input_transform_compression": [
+        "On the Interaction of Compressibility and Adversarial Robustness As demands for resource efficiency and safety in moder"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "on the interaction of compressibility and adversarial robustness",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "As demands for resource efficiency and safety in modern neural networks intensify, substantial research effort has gone into model compression and adversarial robustness.",
+      "Yet despite progress on each in isolation, a systematic understanding of how compressibility shapes robustness remains elusive.",
+      "In this paper, we develop a principled framework to analyze how different forms of structured compressibility - such as neuron-level and spectral compressibility - affect adversarial robustness.",
+      "We show that structured compressibility can induce a small number of highly sensitive directions in the representation space, which adversaries can exploit to construct effective perturbations."
+    ],
+    "fine_decision": "include",
+    "fine_category": "compression_mechanism",
+    "priority": "P1",
+    "relevance_score_100": 78,
+    "fine_reason": "Analyzes how structured model/representation compressibility creates adversarially sensitive directions."
+  },
+  {
+    "paper_id": "icml2024_papers:122",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Adversarial Robustness Limits via Scaling-Law and Human-Alignment Studies",
+    "abstract": "This paper revisits the simple, long-studied, yet still unsolved problem of making image classifiers robust to imperceptible perturbations. Taking CIFAR10 as an example, SOTA clean accuracy is about $100$%, but SOTA robustness to $\\ell_{\\infty}$-norm bounded perturbations barely exceeds $70$%. To understand this gap, we analyze how model size, dataset size, and synthetic data quality affect robustness by developing the first scaling laws for adversarial training. Our scaling laws reveal inefficiencies in prior art and provide actionable feedback to advance the field. For instance, we discovered that SOTA methods diverge notably from compute-optimal setups, using excess compute for their level of robustness. Leveraging a compute-efficient setup, we surpass the prior SOTA with $20$% ($70$%) fewer training (inference) FLOPs. We trained various compute-efficient models, with our best achieving $74$% AutoAttack accuracy ($+3$% gain). However, our scaling laws also predict robustness slowly grows then plateaus at $90$%: dwarfing our new SOTA by scaling is impractical, and perfect robustness is impossible. To better understand this predicted limit, we carry out a small-scale human evaluation on the AutoAttack data that fools our top-performing model. Concerningly, we estimate that human performance also plateaus near $90$%, which we show to be attributable to $\\ell_{\\infty}$-constrained attacks’ generation of invalid images not consistent with their original labels. Having characterized limiting roadblocks, we outline promising paths for future research.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/bartoldson24a/bartoldson24a.pdf",
+    "url": "",
+    "score": 13,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "evaluation_protocol",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Adversarial Robustness Limits via Scaling-Law and Human-Alignment Studies Thi",
+        "ompute-efficient models, with our best achieving $74$% AutoAttack accuracy ($+3$% gain). However, our scaling laws also"
+      ],
+      "evaluation_protocol": [
+        "ompute-efficient models, with our best achieving $74$% AutoAttack accuracy ($+3$% gain). However, our scaling laws also"
+      ],
+      "vision_context": [
+        "le, long-studied, yet still unsolved problem of making image classifiers robust to imperceptible perturbations. Tak",
+        "ssifiers robust to imperceptible perturbations. Taking CIFAR10 as an example, SOTA clean accuracy is about $100$%, bu"
+      ],
+      "classification_context": [
+        "le, long-studied, yet still unsolved problem of making image classifiers robust to imperceptible perturbations. Taking CIFAR10",
+        "ssifiers robust to imperceptible perturbations. Taking CIFAR10 as an example, SOTA clean accuracy is about $100$%, bu"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "adversarial robustness limits via scaling law and human alignment studies",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Taking CIFAR10 as an example, SOTA clean accuracy is about $100$%, but SOTA robustness to $\\ell_{\\infty}$-norm bounded perturbations barely exceeds $70$%.",
+      "To understand this gap, we analyze how model size, dataset size, and synthetic data quality affect robustness by developing the first scaling laws for adversarial training.",
+      "We trained various compute-efficient models, with our best achieving $74$% AutoAttack accuracy ($+3$% gain).",
+      "To better understand this predicted limit, we carry out a small-scale human evaluation on the AutoAttack data that fools our top-performing model."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P1",
+    "relevance_score_100": 77,
+    "fine_reason": "Provides strong AutoAttack baselines and analyzes invalid images under the standard L-infinity threat model."
+  },
+  {
+    "paper_id": "icml2024_papers:93",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Diffusion Models Demand Contrastive Guidance for Adversarial Purification to Advance",
+    "abstract": "In adversarial defense, adversarial purification can be viewed as a special generation task with the purpose to remove adversarial attacks and diffusion models excel in adversarial purification for their strong generative power. With different predetermined generation requirements, various types of guidance have been proposed, but few of them focuses on adversarial purification. In this work, we propose to guide diffusion models for adversarial purification using contrastive guidance. We theoretically derive the proper noise level added in the forward process diffusion models for adversarial purification from a feature learning perspective. For the reverse process, it is implied that the role of contrastive loss guidance is to facilitate the evolution towards the signal direction. From the theoretical findings and implications, we design the forward process with the proper amount of Gaussian noise added and the reverse process with the gradient of contrastive loss as the guidance of diffusion models for adversarial purification. Empirically, extensive experiments on CIFAR-10, CIFAR-100, the German Traffic Sign Recognition Benchmark and ImageNet datasets with ResNet and WideResNet classifiers show that our method outperforms most of current adversarial training and adversarial purification methods by a large improvement.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/bai24b/bai24b.pdf",
+    "url": "",
+    "score": 16,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ve Guidance for Adversarial Purification to Advance In adversarial defense, adversarial purification can be viewed as a special g"
+      ],
+      "input_transform_compression": [
+        "Diffusion Models Demand Contrastive Guidance for Adversarial Purification to Advance In adversarial defense, adversarial purific"
+      ],
+      "vision_context": [
+        "al purification. Empirically, extensive experiments on CIFAR-10, CIFAR-100, the German Traffic Sign Recognition Benchm",
+        "100, the German Traffic Sign Recognition Benchmark and ImageNet datasets with ResNet and WideResNet classifiers show t"
+      ],
+      "classification_context": [
+        "Sign Recognition Benchmark and ImageNet datasets with ResNet and WideResNet classifiers show that our method outper",
+        "nition Benchmark and ImageNet datasets with ResNet and WideResNet classifiers show that our method outperforms most of c",
+        "al purification. Empirically, extensive experiments on CIFAR-10, CIFAR-100, the German Traffic Sign Recognition Benchm",
+        "100, the German Traffic Sign Recognition Benchmark and ImageNet datasets with ResNet and WideResNet classifiers show t"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "diffusion models demand contrastive guidance for adversarial purification to advance",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "In adversarial defense, adversarial purification can be viewed as a special generation task with the purpose to remove adversarial attacks and diffusion models excel in adversarial purification for their strong generative power.",
+      "With different predetermined generation requirements, various types of guidance have been proposed, but few of them focuses on adversarial purification.",
+      "In this work, we propose to guide diffusion models for adversarial purification using contrastive guidance.",
+      "We theoretically derive the proper noise level added in the forward process diffusion models for adversarial purification from a feature learning perspective."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 77,
+    "fine_reason": "Uses contrastive guidance in input purification and is relevant to the failed BitCons contrastive branch."
+  },
+  {
+    "paper_id": "icml2025_papers:1943",
+    "venue": "ICML",
+    "year": "2025",
+    "source_file": "icml2025_papers.json",
+    "title": "Diffusion-based Adversarial Purification from the Perspective of the Frequency Domain",
+    "abstract": "The diffusion-based adversarial purification methods attempt to drown adversarial perturbations into a part of isotropic noise through the forward process, and then recover the clean images through the reverse process. Due to the lack of distribution information about adversarial perturbations in the pixel domain, it is often unavoidable to damage normal semantics. We turn to the frequency domain perspective, decomposing the image into amplitude spectrum and phase spectrum. We find that for both spectra, the damage caused by adversarial perturbations tends to increase monotonically with frequency. This means that we can extract the content and structural information of the original clean sample from the frequency components that are less damaged. Meanwhile, theoretical analysis indicates that existing purification methods indiscriminately damage all frequency components, leading to excessive damage to the image. Therefore, we propose a purification method that can eliminate adversarial perturbations while maximizing the preservation of the content and structure of the original image. Specifically, at each time step during the reverse process, for the amplitude spectrum, we replace the low-frequency components of the estimated image’s amplitude spectrum with the corresponding parts of the adversarial image. For the phase spectrum, we project the phase of the estimated image into a designated range of the adversarial image’s phase spectrum, focusing on the low frequencies. Empirical evidence from extensive experiments demonstrates that our method significantly outperforms most current defense methods.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/pei25b/pei25b.pdf",
+    "url": "",
+    "score": 13,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ased adversarial purification methods attempt to drown adversarial perturbations into a part of isotropic noise through the forward pro"
+      ],
+      "input_transform_compression": [
+        "Diffusion-based Adversarial Purification from the Perspective of the Frequency Domain The diffu"
+      ],
+      "vision_context": [
+        "hrough the forward process, and then recover the clean images through the reverse process. Due to the lack of distri",
+        "ion information about adversarial perturbations in the pixel domain, it is often unavoidable to damage normal seman"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "diffusion based adversarial purification from the perspective of the frequency domain",
+    "also_in_sources": [
+      "icml2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "The diffusion-based adversarial purification methods attempt to drown adversarial perturbations into a part of isotropic noise through the forward process, and then recover the clean images through the reverse process.",
+      "Meanwhile, theoretical analysis indicates that existing purification methods indiscriminately damage all frequency components, leading to excessive damage to the image.",
+      "Therefore, we propose a purification method that can eliminate adversarial perturbations while maximizing the preservation of the content and structure of the original image."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 76,
+    "fine_reason": "Analyzes which image-frequency components are damaged by adversarial perturbations and purification."
+  },
+  {
+    "paper_id": "icml2025_papers:3046",
+    "venue": "ICML",
+    "year": "2025",
+    "source_file": "icml2025_papers.json",
+    "title": "One Stone, Two Birds: Enhancing Adversarial Defense Through the Lens of Distributional Discrepancy",
+    "abstract": "Statistical adversarial data detection(SADD) detects whether an upcoming batch containsadversarial examples(AEs) by measuring the distributional discrepancies betweenclean examples(CEs) and AEs. In this paper, we explore the strength of SADD-based methods by theoretically showing that minimizing distributional discrepancy can help reduce the expected loss on AEs. Despite these advantages, SADD-based methods have a potential limitation: they discard inputs that are detected as AEs, leading to the loss of clean information within those inputs. To address this limitation, we propose a two-pronged adversarial defense method, namedDistributional-discrepancy-basedAdversarialDefense (DAD). In the training phase, DAD first optimizes the test power of themaximum mean discrepancy(MMD) to derive MMD-OPT, which isa stone that kills two birds. MMD-OPT first serves as aguiding signalto minimize the distributional discrepancy between CEs and AEs to train a denoiser. Then, it serves as adiscriminatorto differentiate CEs and AEs during inference. Overall, in the inference stage, DAD consists of a two-pronged process: (1) directly feeding the detected CEs into the classifier, and (2) removing noise from the detected AEs by the distributional-discrepancy-based denoiser. Extensive experiments show that DAD outperforms currentstate-of-the-art(SOTA) defense methods bysimultaneouslyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box attacks. Codes are publicly available at: https://github.com/tmlr-group/DAD.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/zhang25bn/zhang25bn.pdf",
+    "url": "",
+    "score": 11,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "One Stone, Two Birds: Enhancing Adversarial Defense Through the Lens of Distributional Discrepancy Statist",
+        "A) defense methods bysimultaneouslyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box"
+      ],
+      "vision_context": [
+        "bysimultaneouslyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box attacks. Co",
+        "slyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box attacks. Codes are publi"
+      ],
+      "classification_context": [
+        "bysimultaneouslyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box attacks. Co",
+        "slyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box attacks. Codes are publi",
+        "A) defense methods bysimultaneouslyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "one stone two birds enhancing adversarial defense through the lens of distributional discrepancy",
+    "also_in_sources": [
+      "icml2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Extensive experiments show that DAD outperforms currentstate-of-the-art(SOTA) defense methods bysimultaneouslyimproving clean and robust accuracy on CIFAR-10 and ImageNet-1K against adaptive white-box attacks."
+    ],
+    "fine_decision": "include",
+    "fine_category": "alignment_defense",
+    "priority": "P1",
+    "relevance_score_100": 76,
+    "fine_reason": "Uses clean/adversarial distribution alignment to train a denoiser and evaluates adaptive white-box attacks."
+  },
+  {
+    "paper_id": "icml2025_papers:2288",
+    "venue": "ICML",
+    "year": "2025",
+    "source_file": "icml2025_papers.json",
+    "title": "Average Certified Radius is a Poor Metric for Randomized Smoothing",
+    "abstract": "Randomized smoothing (RS) is popular for providing certified robustness guarantees against adversarial attacks. The average certified radius (ACR) has emerged as a widely used metric for tracking progress in RS. However, in this work, for the first time we show that ACR is a poor metric for evaluating robustness guarantees provided by RS. We theoretically prove not only that a trivial classifier can have arbitrarily large ACR, but also that ACR is extremely sensitive to improvements on easy samples. In addition, the comparison using ACR has a strong dependence on the certification budget. Empirically, we confirm that existing training strategies, though improving ACR, reduce the model’s robustness on hard samples consistently. To strengthen our findings, we propose strategies, including explicitly discarding hard samples, reweighing the dataset with approximate certified radius, and extreme optimization for easy samples, to replicate the progress in RS training and even achieve the state-of-the-art ACR on CIFAR-10, without training for robustness on the full data distribution. Overall, our results suggest that ACR has introduced a strong undesired bias to the field, and its application should be discontinued in RS. Finally, we suggest using the empirical distribution of $p_A$, the accuracy of the base model on noisy data, as an alternative metric for RS.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/sun25o/sun25o.pdf",
+    "url": "",
+    "score": 7,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "for providing certified robustness guarantees against adversarial attacks. The average certified radius (ACR) has emerged as a w"
+      ],
+      "vision_context": [
+        "training and even achieve the state-of-the-art ACR on CIFAR-10, without training for robustness on the full data dist"
+      ],
+      "classification_context": [
+        "training and even achieve the state-of-the-art ACR on CIFAR-10, without training for robustness on the full data dist"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "average certified radius is a poor metric for randomized smoothing",
+    "also_in_sources": [
+      "icml2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "We theoretically prove not only that a trivial classifier can have arbitrarily large ACR, but also that ACR is extremely sensitive to improvements on easy samples.",
+      "Empirically, we confirm that existing training strategies, though improving ACR, reduce the model’s robustness on hard samples consistently.",
+      "To strengthen our findings, we propose strategies, including explicitly discarding hard samples, reweighing the dataset with approximate certified radius, and extreme optimization for easy samples, to replicate the progress in RS training and even achieve the state-of-the-art ACR on CIFAR-10, without training for robustness on the full data distribution."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P1",
+    "relevance_score_100": 74,
+    "fine_reason": "A metric-failure study useful for the paper's broader argument about misleading robustness evaluation."
+  },
+  {
+    "paper_id": "neurips2025_papers:5477",
+    "venue": "NEURIPS",
+    "year": "2025",
+    "source_file": "neurips2025_papers.json",
+    "title": "MAE-Pure: Semantic-Preserving Adversarial Purification",
+    "abstract": "Adversarial purification is a category of defense techniques that use a generative model to eliminate adversarial perturbations. In pursuit of high performance in the cleansing of adversarial examples, current methods prefer powerful generative models (typically a diffusion model). This study investigates the purification from a novel perspective of preserving semantic relationships among image patches. Our method leverages Mask Autoencoder (MAE), which yields superior performance. Specifically, from both theoretical and experimental analysis, we disclose that the reconstruction performance of MAE is highly susceptible to adversarial noise, since the semantic relationships among patches will change significantly. Based on this intriguing property, we propose a purification scheme, named MAE-Pure, which purifies noises by preserving patch semantic relationships. We prove that this mechanism can be transformed into one tractable optimization problem with respect to the input image. Furthermore, we build a robust MAE-Pure by finetuning the purification model by introducing classification loss to further certify the patch semantic relationships. Additionally, we adapt our insight on mask diffusion model which embodies powerful generative capability to reinforce our method. A series of experiments demonstrate the superiority of our method, achieving new state-of-the-art results.",
+    "authors": [
+      "Zhihao Dou",
+      "Zhiqiang Gao",
+      "Dongfei Cui",
+      "Weida Wang",
+      "Yimeng Luo",
+      "Zeke Xie",
+      "Jun Yan",
+      "Shufei Zhang"
+    ],
+    "keywords": [
+      "adversarial purification",
+      "adversarial defense"
+    ],
+    "pdf": "https://openreview.net/pdf/7aa7248421a8dde2a616af49c85af3234e55b7dc.pdf",
+    "url": "https://openreview.net/forum?id=8mFVIRTr7I",
+    "score": 12,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "se techniques that use a generative model to eliminate adversarial perturbations. In pursuit of high performance in the cleansing of ad"
+      ],
+      "input_transform_compression": [
+        "MAE-Pure: Semantic-Preserving Adversarial Purification Adversarial purification is a category of defense tech"
+      ],
+      "vision_context": [
+        "perspective of preserving semantic relationships among image patches. Our method leverages Mask Autoencoder (MAE),"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "mae pure semantic preserving adversarial purification",
+    "also_in_sources": [
+      "neurips2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial purification is a category of defense techniques that use a generative model to eliminate adversarial perturbations.",
+      "This study investigates the purification from a novel perspective of preserving semantic relationships among image patches.",
+      "Based on this intriguing property, we propose a purification scheme, named MAE-Pure, which purifies noises by preserving patch semantic relationships.",
+      "Furthermore, we build a robust MAE-Pure by finetuning the purification model by introducing classification loss to further certify the patch semantic relationships."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 74,
+    "fine_reason": "Input optimization preserving patch semantics is relevant to reliable-bit semantic preservation."
+  },
+  {
+    "paper_id": "neurips2025_papers:5341",
+    "venue": "NEURIPS",
+    "year": "2025",
+    "source_file": "neurips2025_papers.json",
+    "title": "Model-Free Adversarial Purification via Coarse-To-Fine Tensor Network Representation",
+    "abstract": "Deep neural networks are known to be vulnerable to well-designed adversarial attacks. Although numerous defense strategies have been proposed, many are tailored to specific attacks or tasks and often fail to generalize across diverse scenarios. In this paper, we propose Tensor Network Purification (TNP), a novel model-free optimization-based purification framework built upon a specially designed tensor network decomposition algorithm. TNP depends neither on the pre-trained generative model nor the specific dataset, resulting in robust generalization across diverse adversarial scenarios. To this end, the key challenge lies in relaxing Gaussian-noise assumptions of classical decompositions and accommodating the unknown distribution of adversarial perturbations. Unlike the low-rank representation of classical decompositions, TNP aims to reconstruct the unobserved clean example from an adversarial example. Specifically, TNP leverages progressive downsampling and introduces a novel adversarial optimization objective to address the challenge of minimizing reconstruction error but without inadvertently restoring adversarial perturbations. Extensive experiments conducted on CIFAR-10, CIFAR-100, and ImageNet demonstrate that our method generalizes effectively across various norm threats, attack types, and tasks, providing a versatile and promising adversarial purification technique.",
+    "authors": [
+      "Guang Lin",
+      "Duc Thien Nguyen",
+      "Zerui Tao",
+      "Konstantinos Slavakis",
+      "Toshihisa Tanaka",
+      "Qibin Zhao"
+    ],
+    "keywords": [
+      "Tensor Network Representation",
+      "Robustness"
+    ],
+    "pdf": "https://openreview.net/pdf/9a8e1949830e4f8d89080bd9744b27fdf488cd0f.pdf",
+    "url": "https://openreview.net/forum?id=IaOhbdu2Ov",
+    "score": 15,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "l networks are known to be vulnerable to well-designed adversarial attacks. Although numerous defense strategies have been propos"
+      ],
+      "input_transform_compression": [
+        "Model-Free Adversarial Purification via Coarse-To-Fine Tensor Network Representation Deep"
+      ],
+      "vision_context": [
+        "rial perturbations. Extensive experiments conducted on CIFAR-10, CIFAR-100, and ImageNet demonstrate that our method g",
+        "sive experiments conducted on CIFAR-10, CIFAR-100, and ImageNet demonstrate that our method generalizes effectively ac"
+      ],
+      "classification_context": [
+        "rial perturbations. Extensive experiments conducted on CIFAR-10, CIFAR-100, and ImageNet demonstrate that our method g",
+        "sive experiments conducted on CIFAR-10, CIFAR-100, and ImageNet demonstrate that our method generalizes effectively ac"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "model free adversarial purification via coarse to fine tensor network representation",
+    "also_in_sources": [
+      "neurips2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "In this paper, we propose Tensor Network Purification (TNP), a novel model-free optimization-based purification framework built upon a specially designed tensor network decomposition algorithm.",
+      "Extensive experiments conducted on CIFAR-10, CIFAR-100, and ImageNet demonstrate that our method generalizes effectively across various norm threats, attack types, and tasks, providing a versatile and promising adversarial purification technique."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 74,
+    "fine_reason": "Model-free input purification with explicit adversarial optimization and multiple norm threats."
+  },
+  {
+    "paper_id": "iclr2026_papers:5804",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Progressive Residual Tensor Networks for Adversarial Purification",
+    "abstract": "Adversarial perturbations remain a critical threat to modern vision systems, and tensor network–based purification is a promising direction thanks to its low-rank priors. Yet these methods face a fundamental reconstruction–denoising conflict: preserving pixel fidelity risks recovering adversarial residues, whereas aggressive suppression sacrifices semantic detail. We address this trade-off with a Laplacian pyramid–inspired framework that performs progressive residual reconstruction across scales. At coarse levels, the rank is kept relatively unconstrained to capture global semantic structure, while a monotonically decreasing rank schedule constrains capacity at finer levels, preventing the accumulation of fine-scale perturbations. In addition, we introduce a wavelet-based residual regularization that penalizes the energy of reconstructed high-frequency subbands, discouraging residuals from absorbing adversarial noise without undermining semantic recovery. Extensive experiments on CIFAR-10, CIFAR-100, and ImageNet show that our method preserves strong reconstruction quality on clean images while substantially improving robustness under diverse attacks, demonstrating the effectiveness of a frequency-aware, progressive tensor-network purifier.",
+    "authors": [
+      "Dongping Zhang",
+      "Guang Lin",
+      "Zerui Tao",
+      "Yuning Qiu",
+      "Guoxu Zhou",
+      "Qibin Zhao"
+    ],
+    "keywords": [
+      "adversarial attacks",
+      "adversarial training",
+      "adversarial purification"
+    ],
+    "pdf": "https://openreview.net/pdf/c67d187d4fd11ef886a03991bbe70677341ac7b1.pdf",
+    "url": "https://openreview.net/forum?id=ICbrBVE11Y",
+    "score": 16,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Residual Tensor Networks for Adversarial Purification Adversarial perturbations remain a critical threat to modern vision systems, and"
+      ],
+      "input_transform_compression": [
+        "Progressive Residual Tensor Networks for Adversarial Purification Adversarial perturbations remain a critical threat to"
+      ],
+      "vision_context": [
+        "ethod preserves strong reconstruction quality on clean images while substantially improving robustness under diverse",
+        "arial perturbations remain a critical threat to modern vision systems, and tensor network–based purification is a pr",
+        "damental reconstruction–denoising conflict: preserving pixel fidelity risks recovering adversarial residues, wherea",
+        "ndermining semantic recovery. Extensive experiments on CIFAR-10, CIFAR-100, and ImageNet show that our method preserve"
+      ],
+      "classification_context": [
+        "ndermining semantic recovery. Extensive experiments on CIFAR-10, CIFAR-100, and ImageNet show that our method preserve",
+        "ery. Extensive experiments on CIFAR-10, CIFAR-100, and ImageNet show that our method preserves strong reconstruction q"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "progressive residual tensor networks for adversarial purification",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial perturbations remain a critical threat to modern vision systems, and tensor network–based purification is a promising direction thanks to its low-rank priors.",
+      "Extensive experiments on CIFAR-10, CIFAR-100, and ImageNet show that our method preserves strong reconstruction quality on clean images while substantially improving robustness under diverse attacks, demonstrating the effectiveness of a frequency-aware, progressive tensor-network purifier."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 74,
+    "fine_reason": "Frequency-aware input reconstruction illustrates semantic-preservation versus perturbation-removal trade-offs."
+  },
+  {
+    "paper_id": "icml2024_papers:723",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Be Your Own Neighborhood: Detecting Adversarial Examples by the Neighborhood Relations Built on Self-Supervised Learning",
+    "abstract": "Deep Neural Networks (DNNs) are vulnerable to Adversarial Examples (AEs), hindering their use in safety-critical systems. In this paper, we presentBEYOND, an innovative AE detection framework designed for reliable predictions. BEYOND identifies AEs by distinguishing the AE’s abnormal relation with its augmented versions, i.e. neighbors, from two prospects: representation similarity and label consistency. An off-the-shelf Self-Supervised Learning (SSL) model is used to extract the representation and predict the label for its highly informative representation capacity compared to supervised learning models. We found clean samples maintain a high degree of representation similarity and label consistency relative to their neighbors, in contrast to AEs which exhibit significant discrepancies. We explain this observation and show that leveraging this discrepancy BEYOND can accurately detect AEs. Additionally, we develop a rigorous justification for the effectiveness of BEYOND. Furthermore, as a plug-and-play model, BEYOND can easily cooperate with the Adversarial Trained Classifier (ATC), achieving state-of-the-art (SOTA) robustness accuracy. Experimental results show that BEYOND outperforms baselines by a large margin, especially under adaptive attacks. Empowered by the robust relationship built on SSL, we found that BEYOND outperforms baselines in terms of both detection ability and speed. Project page: https://huggingface.co/spaces/allenhzy/Be-Your-Own-Neighborhood.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/he24l/he24l.pdf",
+    "url": "",
+    "score": 13,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adaptive_evaluation",
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Be Your Own Neighborhood: Detecting Adversarial Examples by the Neighborhood Relations Built on Self-Supervised"
+      ],
+      "adaptive_evaluation": [
+        "performs baselines by a large margin, especially under adaptive attacks. Empowered by the robust relationship built on SSL, we"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "be your own neighborhood detecting adversarial examples by the neighborhood relations built on self supervised learning",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "neighbors, from two prospects: representation similarity and label consistency.",
+      "We found clean samples maintain a high degree of representation similarity and label consistency relative to their neighbors, in contrast to AEs which exhibit significant discrepancies.",
+      "Furthermore, as a plug-and-play model, BEYOND can easily cooperate with the Adversarial Trained Classifier (ATC), achieving state-of-the-art (SOTA) robustness accuracy.",
+      "Experimental results show that BEYOND outperforms baselines by a large margin, especially under adaptive attacks."
+    ],
+    "fine_decision": "include",
+    "fine_category": "consistency_support",
+    "priority": "P1",
+    "relevance_score_100": 72,
+    "fine_reason": "Studies representation and label consistency under adaptive attacks, directly informing consistency-based defenses."
+  },
+  {
+    "paper_id": "icml2024_papers:1223",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Layer-Aware Analysis of Catastrophic Overfitting: Revealing the Pseudo-Robust Shortcut Dependency",
+    "abstract": "Catastrophic overfitting (CO) presents a significant challenge in single-step adversarial training (AT), manifesting as highly distorted deep neural networks (DNNs) that are vulnerable to multi-step adversarial attacks. However, the underlying factors that lead to the distortion of decision boundaries remain unclear. In this work, we delve into the specific changes within different DNN layers and discover that during CO, the former layers are more susceptible, experiencing earlier and greater distortion, while the latter layers show relative insensitivity. Our analysis further reveals that this increased sensitivity in former layers stems from the formation of $\\textit{pseudo-robust shortcuts}$, which alone can impeccably defend against single-step adversarial attacks but bypass genuine-robust learning, resulting in distorted decision boundaries. Eliminating these shortcuts can partially restore robustness in DNNs from the CO state, thereby verifying that dependence on them triggers the occurrence of CO. This understanding motivates us to implement adaptive weight perturbations across different layers to hinder the generation of $\\textit{pseudo-robust shortcuts}$, consequently mitigating CO. Extensive experiments demonstrate that our proposed method, $\\textbf{L}$ayer-$\\textbf{A}$ware Adversarial Weight $\\textbf{P}$erturbation (LAP), can effectively prevent CO and further enhance robustness.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/lin24v/lin24v.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "g (CO) presents a significant challenge in single-step adversarial training (AT), manifesting as highly distorted deep neural netw"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "layer aware analysis of catastrophic overfitting revealing the pseudo robust shortcut dependency",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Catastrophic overfitting (CO) presents a significant challenge in single-step adversarial training (AT), manifesting as highly distorted deep neural networks (DNNs) that are vulnerable to multi-step adversarial attacks."
+    ],
+    "fine_decision": "include",
+    "fine_category": "failure_mechanism",
+    "priority": "P1",
+    "relevance_score_100": 72,
+    "fine_reason": "Pseudo-robust shortcuts and layer-wise distortion provide a close analogue to false masked robustness."
+  },
+  {
+    "paper_id": "iclr2026_papers:8176",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Pro-Trans: Progressive Tensor Ring with Attention Guided Local Smoothing Regularization",
+    "abstract": "The generalization of adversarial defense methods remains a critical open challenge, and optimization-based adversarial purification methods employing tensor network representations have recently shown strong potential. However, such tensor-based defense methods operate solely on the given input without relying on prior knowledge, which inevitably leads to overfitting to adversarial perturbations. Moreover, their iterative optimization procedures incur substantial computational overhead during inference. In this paper, we propose Pro-Trans, a novel tensor-based adversarial purification method that integrates progressive tensor ring with attention guided local smoothing regularization. Specifically, our progressive tensor ring avoids redundant upsampling operations, thereby reducing computational overhead and accelerating convergence. In addition, the proposed regularizer adaptively applies varying degrees of local smoothing regularization across different regions, thereby suppressing perturbations while mitigating semantic loss. Experimental results show that Pro-Trans consistently outperforms existing methods across diverse adversarial settings on CIFAR-10, CIFAR-100, and ImageNet, achieving state-of-the-art performance while maintaining low computational cost. The code will be available upon acceptance.",
+    "authors": [
+      "Hangjie Yi",
+      "Guang Lin",
+      "Wanzeng Kong",
+      "Qibin Zhao"
+    ],
+    "keywords": [
+      "Tensor Networks",
+      "Adversarial Purification",
+      "Adversarial Attack",
+      "Tensor Ring"
+    ],
+    "pdf": "https://openreview.net/pdf/7addce1db7971721a0c625c9911512b9038fb00e.pdf",
+    "url": "https://openreview.net/forum?id=ytIwlWzo0M",
+    "score": 15,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "d Local Smoothing Regularization The generalization of adversarial defense methods remains a critical open challenge, and optimiz"
+      ],
+      "input_transform_compression": [
+        "ains a critical open challenge, and optimization-based adversarial purification methods employing tensor network representations have"
+      ],
+      "vision_context": [
+        "xisting methods across diverse adversarial settings on CIFAR-10, CIFAR-100, and ImageNet, achieving state-of-the-art p",
+        "verse adversarial settings on CIFAR-10, CIFAR-100, and ImageNet, achieving state-of-the-art performance while maintain"
+      ],
+      "classification_context": [
+        "xisting methods across diverse adversarial settings on CIFAR-10, CIFAR-100, and ImageNet, achieving state-of-the-art p",
+        "verse adversarial settings on CIFAR-10, CIFAR-100, and ImageNet, achieving state-of-the-art performance while maintain"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "pro trans progressive tensor ring with attention guided local smoothing regularization",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "The generalization of adversarial defense methods remains a critical open challenge, and optimization-based adversarial purification methods employing tensor network representations have recently shown strong potential.",
+      "In this paper, we propose Pro-Trans, a novel tensor-based adversarial purification method that integrates progressive tensor ring with attention guided local smoothing regularization.",
+      "Experimental results show that Pro-Trans consistently outperforms existing methods across diverse adversarial settings on CIFAR-10, CIFAR-100, and ImageNet, achieving state-of-the-art performance while maintaining low computational cost."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P1",
+    "relevance_score_100": 72,
+    "fine_reason": "Local smoothing purification is an adjacent deterministic input-transformation defense."
+  },
+  {
+    "paper_id": "iclr2026_papers:9014",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Sample-wise Adaptive Weighting for Transfer Consistency in Adversarial Distillation",
+    "abstract": "Adversarial distillation in the standard min–max adversarial training framework aims to transfer adversarial robustness from a large, robust teacher network to a compact student. However, existing work often neglects to incorporate state-of-the-art robust teachers. Through extensive analysis, we find that stronger teachers do not necessarily yield more robust students–a phenomenon known as robust saturation. While typically attributed to capacity gaps, we show that such explanations are incomplete. Instead, we identify adversarial transferability–the fraction of student-crafted adversarial examples that remain effective against the teacher–as a key factor in successful robustness transfer. Based on this insight, we propose Sample-wise Adaptive Adversarial Distillation (SAAD), which reweights training examples by their measured transferability without incurring additional computational cost. Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet show that SAAD consistently improves AutoAttack robustness over prior methods.",
+    "authors": [
+      "Hongsin Lee",
+      "Hye Won Chung"
+    ],
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Distillation",
+      "Robust Saturation"
+    ],
+    "pdf": "https://openreview.net/pdf/a3d7be63ebd9f81481d5bf0245c9a54f598c1ca3.pdf",
+    "url": "https://openreview.net/forum?id=JFaCPwvzGz",
+    "score": 13,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "evaluation_protocol",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ation Adversarial distillation in the standard min–max adversarial training framework aims to transfer adversarial robustness from",
+        "and Tiny-ImageNet show that SAAD consistently improves AutoAttack robustness over prior methods. Adversarial Training Ad"
+      ],
+      "evaluation_protocol": [
+        "and Tiny-ImageNet show that SAAD consistently improves AutoAttack robustness over prior methods. Adversarial Training Ad"
+      ],
+      "vision_context": [
+        "ncurring additional computational cost. Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet show that SAAD consisten",
+        "nal cost. Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet show that SAAD consistently improves AutoAttack robust"
+      ],
+      "classification_context": [
+        "ncurring additional computational cost. Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet show that SAAD consisten",
+        "nal cost. Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet show that SAAD consistently improves AutoAttack robust"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "sample wise adaptive weighting for transfer consistency in adversarial distillation",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial distillation in the standard min–max adversarial training framework aims to transfer adversarial robustness from a large, robust teacher network to a compact student.",
+      "Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet show that SAAD consistently improves AutoAttack robustness over prior methods."
+    ],
+    "fine_decision": "include",
+    "fine_category": "consistency_support",
+    "priority": "P1",
+    "relevance_score_100": 72,
+    "fine_reason": "Analyzes robustness transfer and consistency weighting on CIFAR/Tiny-ImageNet with AutoAttack."
+  },
+  {
+    "paper_id": "icml2024_papers:1157",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "OODRobustBench: a Benchmark and Large-Scale Analysis of Adversarial Robustness under Distribution Shift",
+    "abstract": "Existing works have made great progress in improving adversarial robustness, but typically test their method only on data from the same distribution as the training data, i.e. in-distribution (ID) testing. As a result, it is unclear how such robustness generalizes under input distribution shifts, i.e. out-of-distribution (OOD) testing. This omission is concerning as such distribution shifts are unavoidable when methods are deployed in the wild. To address this issue we propose a benchmark named OODRobustBench to comprehensively assess OOD adversarial robustness using 23 dataset-wise shifts (i.e. naturalistic shifts in input distribution) and 6 threat-wise shifts (i.e., unforeseen adversarial threat models). OODRobustBench is used to assess 706 robust models using 60.7K adversarial evaluations. This large-scale analysis shows that: 1) adversarial robustness suffers from a severe OOD generalization issue; 2) ID robustness correlates strongly with OOD robustness in a positive linear way. The latter enables the prediction of OOD robustness from ID robustness. We then predict and verify that existing methods are unlikely to achieve high OOD robustness. Novel methods are therefore required to achieve OOD robustness beyond our prediction. To facilitate the development of these methods, we investigate a wide range of techniques and identify several promising directions. Code and models are available at: https://github.com/OODRobustBench/OODRobustBench.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/li24bp/li24bp.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ODRobustBench: a Benchmark and Large-Scale Analysis of Adversarial Robustness under Distribution Shift Existing works have made grea"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "oodrobustbench a benchmark and large scale analysis of adversarial robustness under distribution shift",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "naturalistic shifts in input distribution) and 6 threat-wise shifts (i.e., unforeseen adversarial threat models)."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P2",
+    "relevance_score_100": 68,
+    "fine_reason": "Large-scale robustness benchmark covering unseen threat-model shifts."
+  },
+  {
+    "paper_id": "iclr2026_papers:7013",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "SINAI: Strategic Injection of Noise for Adversarial Defense with Improved Accuracy–Robustness Tradeoffs",
+    "abstract": "Vision models are widely used for edge deployment, but they are highly vulnerable to query-based black-box adversarial attacks. Existing noise injection defenses, while promising, often overlook the unique characteristics of vision models, such as the heterogeneity between attention and feedforward modules, which fundamentally shape how injected noise propagates. Thus, previous methods yield suboptimal trade-offs between clean and robust accuracy. In this work, we scrutinize noise injection methods to vision models and provide two insights: (1) noise injection should explicitly consider the activation function, as attention modules with Softmax respond differently from FFN and CNN modules with GeLU or ReLU, and (2) gradient norms vary across logits within the same layer, so uniform noise injection for all the logits can perturb high-gradient logits and hurt clean accuracy, which motivates a fine-grained, logit-aware allocation strategy. Building on these observations, we propose an adaptive noise injection defense that combines module-level and logit-level noise allocation: injecting stronger noise to attention with softmax, while applying fine-grained, logit-aware noise in GeLU/ReLU based FFN and convolutional modules. We then formulate the search process of noise injection hyperparameters as a constrained optimization problem, in which the clean accuracy drop is bounded, and solve it via Bayesian optimization. Experiments on ViT-B-16-224 with ImageNet show that our method improves average robust accuracy by 4.2\\% over feature noise defense under three 10k steps query-based black-box attacks with $\\approx$2\\% clean accuracy drop.",
+    "authors": [
+      "Zhenyu Liu",
+      "Yayue Hou",
+      "Sanchari Sen",
+      "Swagath Venkataramani",
+      "Nan Wu",
+      "Liu Liu"
+    ],
+    "keywords": [
+      "Adversarial Defense",
+      "Vision Models",
+      "Noise Injection",
+      "Black-box Attacks",
+      "Accuracy–Robustness Trade-offs"
+    ],
+    "pdf": "https://openreview.net/pdf/ca51a9f0101abdb5bac536d3138357ec3a232348.pdf",
+    "url": "https://openreview.net/forum?id=FKmSQWLcCF",
+    "score": 11,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "SINAI: Strategic Injection of Noise for Adversarial Defense with Improved Accuracy–Robustness Tradeoffs Vision mod",
+        "methods yield suboptimal trade-offs between clean and robust accuracy. In this work, we scrutinize noise injection methods t"
+      ],
+      "vision_context": [
+        "al Defense with Improved Accuracy–Robustness Tradeoffs Vision models are widely used for edge deployment, but they a",
+        "ayesian optimization. Experiments on ViT-B-16-224 with ImageNet show that our method improves average robust accuracy"
+      ],
+      "classification_context": [
+        "modules with Softmax respond differently from FFN and CNN modules with GeLU or ReLU, and (2) gradient norms vary",
+        "ayesian optimization. Experiments on ViT-B-16-224 with ImageNet show that our method improves average robust accuracy",
+        "methods yield suboptimal trade-offs between clean and robust accuracy. In this work, we scrutinize noise injection methods t"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "sinai strategic injection of noise for adversarial defense with improved accuracy robustness tradeoffs",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "In this work, we scrutinize noise injection methods to vision models and provide two insights: (1) noise injection should explicitly consider the activation function, as attention modules with Softmax respond differently from FFN and CNN modules with GeLU or ReLU, and (2) gradient norms vary across logits within the same layer, so uniform noise injection for all the logits can perturb high-gradient logits and hurt clean accuracy, which motivates a fine-grained, logit-aware allocation strategy.",
+      "Experiments on ViT-B-16-224 with ImageNet show that our method improves average robust accuracy by 4.2\\% over feature noise defense under three 10k steps query-based black-box attacks with $\\approx$2\\% clean accuracy drop."
+    ],
+    "fine_decision": "include",
+    "fine_category": "randomized_defense",
+    "priority": "P2",
+    "relevance_score_100": 68,
+    "fine_reason": "Noise-based defense provides a useful randomized alternative to deterministic low-bit masking."
+  },
+  {
+    "paper_id": "icml2024_papers:1584",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Two Heads are Actually Better than One: Towards Better Adversarial Robustness via Transduction and Rejection",
+    "abstract": "Both transduction and rejection have emerged as important techniques for defending against adversarial perturbations. A recent work by Goldwasser et. al showed that rejection combined with transduction can giveprovableguarantees (for certain problems) that cannot be achieved otherwise. Nevertheless, under recent strong adversarial attacks (GMSA), Goldwasser et al.’s work was shown to have low performance in a practical deep-learning setting. In this paper, we take a step towards realizing the promise of transduction+rejection in more realistic scenarios. Our key observation is that a novel application of a reduction technique by Tramèr, which was until now only used to demonstrate the vulnerability of certain defenses, can be used to actually construct effective defenses. Theoretically, we show that a careful application of this technique in the transductive setting can give significantly improved sample-complexity for robust generalization. Our theory guides us to design a new transductive algorithm for learning a selective model; extensive experiments using state of the art attacks (AutoAttack, GMSA) show that our approach provides significantly better robust accuracy (81.6% on CIFAR-10 and 57.9% on CIFAR-100 under $l_\\infty$ with budget 8/255) than existing techniques. The implementation is available at https://github.com/nilspalumbo/transduction-rejection.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/palumbo24a/palumbo24a.pdf",
+    "url": "",
+    "score": 13,
+    "tier": "B-Method",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "evaluation_protocol",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Two Heads are Actually Better than One: Towards Better Adversarial Robustness via Transduction and Rejection Both transduction and r",
+        ") show that our approach provides significantly better robust accuracy (81.6% on CIFAR-10 and 57.9% on CIFAR-100 under $l_\\in",
+        "extensive experiments using state of the art attacks (AutoAttack, GMSA) show that our approach provides significantly b"
+      ],
+      "evaluation_protocol": [
+        "extensive experiments using state of the art attacks (AutoAttack, GMSA) show that our approach provides significantly b"
+      ],
+      "vision_context": [
+        "rovides significantly better robust accuracy (81.6% on CIFAR-10 and 57.9% on CIFAR-100 under $l_\\infty$ with budget 8/"
+      ],
+      "classification_context": [
+        "rovides significantly better robust accuracy (81.6% on CIFAR-10 and 57.9% on CIFAR-100 under $l_\\infty$ with budget 8/",
+        ") show that our approach provides significantly better robust accuracy (81.6% on CIFAR-10 and 57.9% on CIFAR-100 under $l_\\in"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "two heads are actually better than one towards better adversarial robustness via transduction and rejection",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Our theory guides us to design a new transductive algorithm for learning a selective model; extensive experiments using state of the art attacks (AutoAttack, GMSA) show that our approach provides significantly better robust accuracy (81.6% on CIFAR-10 and 57.9% on CIFAR-100 under $l_\\infty$ with budget 8/255) than existing techniques."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P2",
+    "relevance_score_100": 66,
+    "fine_reason": "Demonstrates how stronger adaptive evaluation changes defense conclusions and reports AutoAttack/GMSA."
+  },
+  {
+    "paper_id": "cvpr2026_papers:3252",
+    "venue": "CVPR",
+    "year": "2026",
+    "source_file": "cvpr2026_papers.json",
+    "title": "Mitigating Error Amplification in Fast Adversarial Training",
+    "abstract": "Fast Adversarial Training (FAT) has proven effective in enhancing model robustness by encouraging networks to learn perturbation-invariant representations.However, FAT often suffers from catastrophic overfitting (CO), where the model overfits to the training attack and fails to generalize to unseen ones. Moreover, robustness-oriented optimization typically leads to notable performance degradation on clean inputs, and such degradation becomes increasingly severe as the perturbation budget grows.In this work, we conduct a comprehensive analysis of how guidance strength affects model performance by modulating perturbation and supervision levels across distinct confidence groups.The findings reveal that low-confidence samples are the primary contributors to CO and the robustness–accuracy trade-off. Building on this insight, we propose a Distribution-aware Dynamic Guidance (DDG) strategy that dynamically adjusts both the perturbation budget and supervision signal. Specifically, DDG scales the perturbation magnitude according to the sample confidence at the ground-truth class, thereby guiding samples toward consistent decision boundaries while mitigating the influence of learning spurious correlations. Simultaneously, it dynamically adjusts the supervision signal based on the prediction state of each sample, preventing overemphasis on incorrect signals. To alleviate potential gradient instability arising from dynamic guidance, we further design a weighted regularization constraint.Extensive experiments on standard benchmarks demonstrate that DDG effectively alleviates both CO and the robustness–accuracy trade-off.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2026/papers/Zhao_Mitigating_Error_Amplification_in_Fast_Adversarial_Training_CVPR_2026_paper.pdf",
+    "url": "https://cvpr.thecvf.com/virtual/2026/poster/37922",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Mitigating Error Amplification in Fast Adversarial Training Fast Adversarial Training (FAT) has proven effective i"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "mitigating error amplification in fast adversarial training",
+    "also_in_sources": [
+      "cvpr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Fast Adversarial Training (FAT) has proven effective in enhancing model robustness by encouraging networks to learn perturbation-invariant representations.However, FAT often suffers from catastrophic overfitting (CO), where the model overfits to the training attack and fails to generalize to unseen ones.",
+      "Specifically, DDG scales the perturbation magnitude according to the sample confidence at the ground-truth class, thereby guiding samples toward consistent decision boundaries while mitigating the influence of learning spurious correlations.",
+      "To alleviate potential gradient instability arising from dynamic guidance, we further design a weighted regularization constraint.Extensive experiments on standard benchmarks demonstrate that DDG effectively alleviates both CO and the robustness–accuracy trade-off."
+    ],
+    "fine_decision": "include",
+    "fine_category": "failure_mechanism",
+    "priority": "P2",
+    "relevance_score_100": 65,
+    "fine_reason": "Analyzes catastrophic overfitting and spurious correlations under perturbation-strength changes."
+  },
+  {
+    "paper_id": "iclr2026_papers:8463",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Multimodal Information is All You Need for Adversarial Purification via Diffusion Models",
+    "abstract": "Adversarial defense aims to find true semantic labels of adversarial examples, where diffusion-based adversarial purification as intriguing adversarial defense methods can restore data perturbed by unseen attacks to clean distribution without training classifiers. However, unimodal diffusion-based approaches rely on noise schedules to implicitly preserve labels, whereas recently proposed multimodal variants add textual control but require adversarial training and heavy distillation. Both approaches lack theoretical guarantees. In this work, we propose MultiDAP that uses multimodal diffusion models for adversarial purification. MultiDAP first learn prompts from clean text-image pair data for clean image generation, where context tokens are numerical instead of text templates such as ``a photo of $\\cdot$'' for rich contextual information and hence enhance adversarial robustness. Given learned prompts and adversarial examples, MultiDAP then purify inputs via minimizing regularized DDPM losses iteratively for only a few steps. Theoretical guarantees for two phases are also provided. In experiments, our proposed model achieve improvement of zero-shot adversarial defense performance over unimodal diffusion models and multimodal variants with text templates.",
+    "authors": [
+      "Mingyuan Bai",
+      "Wei Huang",
+      "Li Tenghui",
+      "Andong Wang",
+      "Chao Li",
+      "Cesar F Caiafa",
+      "Junbin Gao",
+      "Qibin Zhao"
+    ],
+    "keywords": [
+      "adversarial purification",
+      "adversarial defense",
+      "stable diffusion models",
+      "prompt learning",
+      "multimodal learning"
+    ],
+    "pdf": "https://openreview.net/pdf/3144114924367f1a3ada699f303923cb6b597a68.pdf",
+    "url": "https://openreview.net/forum?id=VUJ863LliH",
+    "score": 12,
+    "tier": "A-Core",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "input_transform_compression",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Need for Adversarial Purification via Diffusion Models Adversarial defense aims to find true semantic labels of adversarial examp"
+      ],
+      "input_transform_compression": [
+        "Multimodal Information is All You Need for Adversarial Purification via Diffusion Models Adversarial defense aims to find"
+      ],
+      "vision_context": [
+        "fication. MultiDAP first learn prompts from clean text-image pair data for clean image generation, where context to"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "multimodal information is all you need for adversarial purification via diffusion models",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial defense aims to find true semantic labels of adversarial examples, where diffusion-based adversarial purification as intriguing adversarial defense methods can restore data perturbed by unseen attacks to clean distribution without training classifiers.",
+      "However, unimodal diffusion-based approaches rely on noise schedules to implicitly preserve labels, whereas recently proposed multimodal variants add textual control but require adversarial training and heavy distillation.",
+      "In this work, we propose MultiDAP that uses multimodal diffusion models for adversarial purification.",
+      "Given learned prompts and adversarial examples, MultiDAP then purify inputs via minimizing regularized DDPM losses iteratively for only a few steps."
+    ],
+    "fine_decision": "include",
+    "fine_category": "input_purification",
+    "priority": "P2",
+    "relevance_score_100": 65,
+    "fine_reason": "A more distant purification method, retained for comparison of label/semantic preservation mechanisms."
+  },
+  {
+    "paper_id": "iclr2026_papers:5687",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Probabilistic Robustness for Free? Revisiting Training via a Benchmark",
+    "abstract": "Deep learning models are notoriously vulnerable to imperceptible perturbations. Most existing research centers on adversarial robustness (AR), which evaluates models under worst-case scenarios by examining the existence of deterministic adversarial examples (AEs). In contrast, probabilistic robustness (PR) adopts a statistical perspective, measuring the probability that predictions remain correct under stochastic perturbations. While PR is widely regarded as a practical complement to AR, dedicated training methods for improving PR are still relatively underexplored, albeit with emerging progress. Among the few PR-targeted training methods, we identify three limitations: i) non‑comparable evaluation protocols; ii) limited comparisons to strong AT baselines despite anecdotal PR gains from AT, and; iii) no unified framework to compare the generalization of these methods. Thus, we introduce $\\mathtt{PRBench}$, the first benchmark dedicated to evaluating improvements in PR achieved by different robustness training methods. $\\mathtt{PRBench}$ empirically compares most common AT and PR-targeted training methods using a comprehensive set of metrics, including clean accuracy, PR and AR performance, training efficiency, and generalization error (GE). We also provide theoretical analysis on the GE of PR performance across different training methods. Main findings revealed by $\\mathtt{PRBench}$ include: AT methods are more versatile than PR-targeted training methods in terms of improving both AR and PR performance across diverse hyperparameter settings, while PR-targeted training methods consistently yield lower GE and higher clean accuracy. A leaderboard comprising 222 trained models across 7 datasets and 10 model architectures is publicly available at https://tmpspace.github.io/PRBenchLeaderboard/",
+    "authors": [
+      "Yi Zhang",
+      "Zheng Wang",
+      "Zhen Chen",
+      "Wenjie Ruan",
+      "Qing Guo",
+      "Siddartha Khastgir",
+      "carsten maple",
+      "Xingyu Zhao"
+    ],
+    "keywords": [
+      "Trustworthy AI; Probabilistic Robustness; Benchmark"
+    ],
+    "pdf": "https://openreview.net/pdf/e438b1a9cd092353264fd70d7c251d2058af0dd6.pdf",
+    "url": "https://openreview.net/forum?id=2KgXWnikxR",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "tible perturbations. Most existing research centers on adversarial robustness (AR), which evaluates models under worst-case scenario"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "probabilistic robustness for free revisiting training via a benchmark",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "In contrast, probabilistic robustness (PR) adopts a statistical perspective, measuring the probability that predictions remain correct under stochastic perturbations.",
+      "Main findings revealed by $\\mathtt{PRBench}$ include: AT methods are more versatile than PR-targeted training methods in terms of improving both AR and PR performance across diverse hyperparameter settings, while PR-targeted training methods consistently yield lower GE and higher clean accuracy."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P2",
+    "relevance_score_100": 65,
+    "fine_reason": "Highlights non-comparable protocols and establishes strong adversarial-training baseline comparisons."
+  },
+  {
+    "paper_id": "icml2024_papers:2231",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Uniformly Stable Algorithms for Adversarial Training and Beyond",
+    "abstract": "In adversarial machine learning, neural networks suffer from a significant issue known as robust overfitting, where the robust test accuracy decreases over epochs (Rice et al., 2020). Recent research conducted by Xing et al., 2021;Xiao et al., 2022 has focused on studying the uniform stability of adversarial training. Their investigations revealed that SGD-based adversarial training fails to exhibit uniform stability, and the derived stability bounds align with the observed phenomenon of robust overfitting in experiments. This finding motivates us to develop uniformly stable algorithms specifically tailored for adversarial training. To this aim, we introduce Moreau envelope-$\\mathcal{A}$ (ME-$\\mathcal{A}$), a variant of the Moreau Envelope-type algorithm. We employ a Moreau envelope function to reframe the original problem as a min-min problem, separating the non-strong convexity and non-smoothness of the adversarial loss. Then, this approach alternates between solving the inner and outer minimization problems to achieve uniform stability without incurring additional computational overhead. In practical scenarios, we demonstrate the efficacy of ME-$\\mathcal{A}$ in mitigating the issue of robust overfitting. Beyond its application in adversarial training, this represents a fundamental result in uniform stability analysis, as ME-$\\mathcal{A}$ is the first algorithm to exhibit uniform stability for weakly-convex, non-smooth problems.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/xiao24e/xiao24e.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Uniformly Stable Algorithms for Adversarial Training and Beyond In adversarial machine learning, neural net"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "uniformly stable algorithms for adversarial training and beyond",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "In adversarial machine learning, neural networks suffer from a significant issue known as robust overfitting, where the robust test accuracy decreases over epochs (Rice et al., 2020).",
+      "Recent research conducted by Xing et al., 2021;Xiao et al., 2022 has focused on studying the uniform stability of adversarial training.",
+      "Their investigations revealed that SGD-based adversarial training fails to exhibit uniform stability, and the derived stability bounds align with the observed phenomenon of robust overfitting in experiments.",
+      "This finding motivates us to develop uniformly stable algorithms specifically tailored for adversarial training."
+    ],
+    "fine_decision": "include",
+    "fine_category": "failure_mechanism",
+    "priority": "P2",
+    "relevance_score_100": 64,
+    "fine_reason": "Connects training instability to robust overfitting and proposes a stability-oriented optimizer."
+  },
+  {
+    "paper_id": "neurips2025_papers:5281",
+    "venue": "NEURIPS",
+    "year": "2025",
+    "source_file": "neurips2025_papers.json",
+    "title": "Vulnerable Data-Aware Adversarial Training",
+    "abstract": "Fast adversarial training (FAT) has been considered as one of the most effective alternatives to the computationally-intensive adversarial training. Generally, FAT methods pay equal attention to each sample of the target task. However, the distance between each sample and the decision boundary is different, learning samples which are far from the decision boundary (i.e., less important to adversarial robustness) brings additional training cost and leads to sub-optimal results. To tackle this issue, we present vulnerable data-aware adversarial training (VDAT) in this study. Specifically, we first propose a margin-based vulnerability calculation method to measure the vulnerability of data samples. Moreover, we propose a vulnerability-aware data filtering method to reduce the training data for adversarial training thus improve the training efficiency. The experiments are conducted in terms of adversarial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate that VDAT is up to 76% more efficient than state-of-the-art FAT methods, while achieving improvements regarding the natural accuracy and adversarial accuracy in both scenarios. Furthermore, the visualizations and ablation studies show the effectiveness of both core components designed in VDAT.",
+    "authors": [
+      "Yuqi Feng",
+      "Jiahao Fan",
+      "Yanan Sun"
+    ],
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Robustness",
+      "Decision Boundary Analysis"
+    ],
+    "pdf": "https://openreview.net/pdf/0c873f68a38655feeef37be13f358ee0fb16d4da.pdf",
+    "url": "https://openreview.net/forum?id=yrrU5YChQr",
+    "score": 9,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Vulnerable Data-Aware Adversarial Training Fast adversarial training (FAT) has been considered as"
+      ],
+      "vision_context": [
+        "rial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate t",
+        "neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate that VDAT is up to 76% mor"
+      ],
+      "classification_context": [
+        "rial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate t",
+        "neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate that VDAT is up to 76% mor"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "vulnerable data aware adversarial training",
+    "also_in_sources": [
+      "neurips2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Fast adversarial training (FAT) has been considered as one of the most effective alternatives to the computationally-intensive adversarial training.",
+      "To tackle this issue, we present vulnerable data-aware adversarial training (VDAT) in this study.",
+      "Moreover, we propose a vulnerability-aware data filtering method to reduce the training data for adversarial training thus improve the training efficiency.",
+      "The experiments are conducted in terms of adversarial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 64,
+    "fine_reason": "Sample-wise worst-case selection and training efficiency are relevant to BitMax candidate selection."
+  },
+  {
+    "paper_id": "icml2025_papers:3266",
+    "venue": "ICML",
+    "year": "2025",
+    "source_file": "icml2025_papers.json",
+    "title": "Position: Certified Robustness Does Not (Yet) Imply Model Security",
+    "abstract": "While certified robustness is widely promoted as a solution to adversarial examples in Artificial Intelligence systems, significant challenges remain before these techniques can be meaningfully deployed in real-world applications. We identify critical gaps in current research, including the paradox of detection without distinction, the lack of clear criteria for practitioners to evaluate certification schemes, and the potential security risks arising from users’ expectations surrounding “guaranteed\" robustness claims. These create an alignment issue between how certifications are presented and perceived, relative to their actual capabilities. This position paper is a call to arms for the certification research community, proposing concrete steps to address these fundamental challenges and advance the field toward practical applicability.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/cullen25a/cullen25a.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "rtified robustness is widely promoted as a solution to adversarial examples in Artificial Intelligence systems, significant challe"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "position certified robustness does not yet imply model security",
+    "also_in_sources": [
+      "icml2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "These create an alignment issue between how certifications are presented and perceived, relative to their actual capabilities."
+    ],
+    "fine_decision": "include",
+    "fine_category": "evaluation_support",
+    "priority": "P2",
+    "relevance_score_100": 63,
+    "fine_reason": "Supports careful separation of formal robustness claims from practical security conclusions."
+  },
+  {
+    "paper_id": "icml2025_papers:781",
+    "venue": "ICML",
+    "year": "2025",
+    "source_file": "icml2025_papers.json",
+    "title": "Boosting Adversarial Robustness with CLAT: Criticality Leveraged Adversarial Training",
+    "abstract": "Adversarial training (AT) enhances neural network robustness. Typically, AT updates all trainable parameters, but can lead to overfitting and increased errors on clean data. Research suggests that fine-tuning specific parameters may be more effective; however, methods for identifying these essential parameters and establishing effective optimization objectives remain inadequately addressed. We present CLAT, an innovative adversarial fine-tuning algorithm that mitigates adversarial overfitting by integrating \"criticality\" into the training process. Instead of tuning the entire model, CLAT identifies and fine-tunes fewer parameters in robustness-critical layers—those predominantly learning non-robust features—while keeping the rest of the model fixed. Additionally, CLAT employs a dynamic layer selection process that adapts to changes in layer criticality during training. Empirical results demonstrate that CLAT can be seamlessly integrated with existing adversarial training methods, enhancing clean accuracy and adversarial robustness by over 2% compared to baseline approaches.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/gopal25a/gopal25a.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Boosting Adversarial Robustness with CLAT: Criticality Leveraged Adversarial Training"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "boosting adversarial robustness with clat criticality leveraged adversarial training",
+    "also_in_sources": [
+      "icml2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial training (AT) enhances neural network robustness.",
+      "Empirical results demonstrate that CLAT can be seamlessly integrated with existing adversarial training methods, enhancing clean accuracy and adversarial robustness by over 2% compared to baseline approaches."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 62,
+    "fine_reason": "Selective robust fine-tuning provides an optimization comparison for regularization-induced trade-offs."
+  },
+  {
+    "paper_id": "iclr2026_papers:2294",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Robust Fine-Tuning from Non-Robust Pretrained Models: Mitigating Suboptimal Transfer With Epsilon-Scheduling",
+    "abstract": "Fine-tuning pretrained models is a standard and effective workflow in modern machine learning. However, robust fine-tuning (RFT), which aims to simultaneously achieve adaptation to a downstream task and robustness to adversarial examples, remains challenging. Despite the abundance of non-robust pretrained models in open-source repositories, their potential for RFT is less understood. We address this knowledge gap by systematically examining RFT from such non-robust models. Our experiments reveal that fine-tuning non-robust models with a robust objective, even under small perturbations, can lead to poor performance, a phenomenon that we dub _suboptimal transfer_. In challenging scenarios (eg, difficult tasks, high perturbation), the resulting performance can be so low that it may be considered a transfer failure. We find that fine-tuning using a robust objective impedes task adaptation at the beginning of training and eventually prevents optimal transfer. However, we propose a novel heuristic, _Epsilon-Scheduling_, a schedule over perturbation strength used during training that promotes optimal transfer. Additionally, we introduce _expected robustness_, a metric that captures performance across a range of perturbations, providing a more comprehensive evaluation of the accuracy-robustness trade-off of diverse models at test-time. Extensive experiments on wide range of configurations (six pretrained models and five datasets) show that _Epsilon-Scheduling_ successfully prevents _suboptimal transfer_ and consistently improves expected robustness.",
+    "authors": [
+      "Jonas Ngnawe",
+      "Maxime Heuillet",
+      "Sabyasachi Sahoo",
+      "Yann Pequignot",
+      "Ola Ahmad",
+      "Audrey Durand",
+      "Frederic Precioso",
+      "Christian Gagné"
+    ],
+    "keywords": [
+      "robust fine-tuning",
+      "adversarial finetuning",
+      "adversarial robustness",
+      "fine-tuning",
+      "transfer learning",
+      "image classification"
+    ],
+    "pdf": "https://openreview.net/pdf/eee620f0d94b5fba4845e037a16a87768ef098ab.pdf",
+    "url": "https://openreview.net/forum?id=aIBFTh2ThF",
+    "score": 8,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "classification_context",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "ieve adaptation to a downstream task and robustness to adversarial examples, remains challenging. Despite the abundance of non-rob",
+        "ltaneously achieve adaptation to a downstream task and robustness to adversarial examples, remains challenging. Despite the abundance o"
+      ],
+      "vision_context": [
+        "g adversarial robustness fine-tuning transfer learning image classification"
+      ],
+      "classification_context": [
+        "g adversarial robustness fine-tuning transfer learning image classification"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "robust fine tuning from non robust pretrained models mitigating suboptimal transfer with epsilon scheduling",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Extensive experiments on wide range of configurations (six pretrained models and five datasets) show that _Epsilon-Scheduling_ successfully prevents _suboptimal transfer_ and consistently improves expected robustness."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 62,
+    "fine_reason": "Perturbation-strength scheduling helps interpret optimization collapse under overly strong auxiliary objectives."
+  },
+  {
+    "paper_id": "icml2025_papers:1384",
+    "venue": "ICML",
+    "year": "2025",
+    "source_file": "icml2025_papers.json",
+    "title": "On the Clean Generalization and Robust Overfitting in Adversarial Training from Two Theoretical Views: Representation Complexity and Training Dynamics",
+    "abstract": "Similar to surprising performance in the standard deep learning, deep nets trained by adversarial training also generalize well for unseen clean data (natural data). However, despite adversarial training can achieve low robust training error, there exists a significant robust generalization gap. We call this phenomenon the Clean Generalization and Robust Overfitting (CGRO). In this work, we study the CGRO phenomenon in adversarial training from two views: representation complexity and training dynamics. Specifically, we consider a binary classification setting with $N$ separated training data points. First, we prove that, based on the assumption that we assume there is $\\operatorname{poly}(D)$-size clean classifier (where $D$ is the data dimension), ReLU net with only $O(N D)$ extra parameters is able to leverages robust memorization to achieve the CGRO, while robust classifier still requires exponential representation complexity in worst case. Next, we focus on a structured-data case to analyze training dynamics, where we train a two-layer convolutional network with $O(N D)$ width against adversarial perturbation. We then show that a three-stage phase transition occurs during learning process and the network provably converges to robust memorization regime, which thereby results in the CGRO. Besides, we also empirically verify our theoretical analysis by experiments in real-image recognition datasets.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v267/main/assets/li25ba/li25ba.pdf",
+    "url": "",
+    "score": 6,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core",
+      "vision_context"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "On the Clean Generalization and Robust Overfitting in Adversarial Training from Two Theoretical Views: Representation Complexity"
+      ],
+      "vision_context": [
+        "verify our theoretical analysis by experiments in real-image recognition datasets."
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "on the clean generalization and robust overfitting in adversarial training from two theoretical views representation complexity and training dynamics",
+    "also_in_sources": [
+      "icml2025_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Similar to surprising performance in the standard deep learning, deep nets trained by adversarial training also generalize well for unseen clean data (natural data).",
+      "However, despite adversarial training can achieve low robust training error, there exists a significant robust generalization gap.",
+      "We call this phenomenon the Clean Generalization and Robust Overfitting (CGRO).",
+      "In this work, we study the CGRO phenomenon in adversarial training from two views: representation complexity and training dynamics."
+    ],
+    "fine_decision": "include",
+    "fine_category": "failure_mechanism",
+    "priority": "P2",
+    "relevance_score_100": 61,
+    "fine_reason": "Directly analyzes robust memorization, robust generalization gaps, and training dynamics."
+  },
+  {
+    "paper_id": "icml2024_papers:2436",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "On the Duality Between Sharpness-Aware Minimization and Adversarial Training",
+    "abstract": "Adversarial Training (AT), which adversarially perturb the input samples during training, has been acknowledged as one of the most effective defenses against adversarial attacks, yet suffers from inevitably decreased clean accuracy. Instead of perturbing the samples, Sharpness-Aware Minimization (SAM) perturbs the model weights during training to find a more flat loss landscape and improve generalization. However, as SAM is designed for better clean accuracy, its effectiveness in enhancing adversarial robustness remains unexplored. In this work, considering the duality between SAM and AT, we investigate the adversarial robustness derived from SAM. Intriguingly, we find that using SAM alone can improve adversarial robustness. To understand this unexpected property of SAM, we first provide empirical and theoretical insights into how SAM can implicitly learn more robust features, and conduct comprehensive experiments to show that SAM can improve adversarial robustness notably without sacrificing any clean accuracy, shedding light on the potential of SAM to be a substitute for AT when accuracy comes at a higher priority. Code is available at https://github.com/weizeming/SAM_AT.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/zhang24w/zhang24w.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "n the Duality Between Sharpness-Aware Minimization and Adversarial Training Adversarial Training (AT), which adversarially perturb"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "on the duality between sharpness aware minimization and adversarial training",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Adversarial Training (AT), which adversarially perturb the input samples during training, has been acknowledged as one of the most effective defenses against adversarial attacks, yet suffers from inevitably decreased clean accuracy."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 61,
+    "fine_reason": "Useful comparison between input-space and weight-space perturbation objectives."
+  },
+  {
+    "paper_id": "iclr2026_papers:9117",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Class-Wise Disparity in Adversarial Training: Implicit Bias Perspective",
+    "abstract": "Disparities in class-wise robust accuracies frequently arise in adversarial training, where certain classes suffer significantly lower robustness than others, even when trained on balanced data. This phenomenon has been identified and termed robust fairness in prior work, highlighting the challenge of ensuring equitable robustness across classes. In this work, we investigate the root causes of such disparities and identify a strong correlation between the norms of head parameters (i.e., the last layer’s weights) and class-wise robust accuracies. Our theoretical and empirical analyses show that adversarial training tends to amplify these disparities by disproportionately affecting head norms, which in turn influence class-wise performance. To address this, we propose a simple yet effective solution that mitigates these imbalances by directly fine-tuning the head parameters while keeping the feature extractor fixed. Unlike existing methods that rely on class reweighting or remargining strategies, our approach requires no validation set and introduces minimal computational overhead. Experiments across various datasets and architectures demonstrate that our method significantly reduces disparities in class-wise robust accuracies without degrading overall performance, providing a practical and principled step toward improving robust fairness in adversarial learning.",
+    "authors": [
+      "Dongyoon Yang",
+      "Jihu Lee",
+      "Hyunsoo Yoon"
+    ],
+    "keywords": [
+      "Robust fairness",
+      "adversarial robustness"
+    ],
+    "pdf": "https://openreview.net/pdf/35bdbd38c77ac590350a33f14fc600c1718dbbf6.pdf",
+    "url": "https://openreview.net/forum?id=df4mr7eQg7",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Class-Wise Disparity in Adversarial Training: Implicit Bias Perspective Disparities in class-wise r"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "class wise disparity in adversarial training implicit bias perspective",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Disparities in class-wise robust accuracies frequently arise in adversarial training, where certain classes suffer significantly lower robustness than others, even when trained on balanced data.",
+      "Our theoretical and empirical analyses show that adversarial training tends to amplify these disparities by disproportionately affecting head norms, which in turn influence class-wise performance."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 60,
+    "fine_reason": "Relevant for class-wise robustness diagnostics beyond aggregate accuracy."
+  },
+  {
+    "paper_id": "iclr2026_papers:4271",
+    "venue": "ICLR",
+    "year": "2026",
+    "source_file": "iclr2026_papers.json",
+    "title": "Nasty Adversarial Training: A Probability Sparsity Perspective for Robustness Enhancement",
+    "abstract": "The vulnerability of deep neural networks to adversarial examples poses significant challenges to their reliable deployment. Among existing empirical defenses, adversarial training and robust distillation have proven the most effective. In this paper, we identify a property originally associated with model intellectual property, i.e., probability sparsity induced by nasty training, and demonstrate that it can also provide interpretable improvements to adversarial robustness. We begin by analyzing how nasty training induces sparse probability distributions and qualitatively explore the spatial metric preferences this sparsity introduces to the model. Building on these insights, we propose a simple yet effective adversarial training method, nasty adversarial training (NAT), which incorporates probability sparsity as a regularization mechanism to boost adversarial robustness. Both theoretical analysis and experimental results validate the effectiveness of NAT, highlighting its potential to enhance the adversarial robustness of deep neural networks in an interpretable manner.",
+    "authors": [
+      "Yuhang Zhou",
+      "Zhongyun Hua",
+      "Zhaoquan Gu",
+      "Keke Tang",
+      "Rushi Lan",
+      "Yushu Zhang",
+      "Qing Liao",
+      "Leo Yu Zhang"
+    ],
+    "keywords": [
+      "adversarial training",
+      "adversarial robustness"
+    ],
+    "pdf": "https://openreview.net/pdf/171bd210170c757c151e4f7098f9c5154c6ca05c.pdf",
+    "url": "https://openreview.net/forum?id=eCXpA14KHd",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Nasty Adversarial Training: A Probability Sparsity Perspective for Robustness Enh"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "nasty adversarial training a probability sparsity perspective for robustness enhancement",
+    "also_in_sources": [
+      "iclr2026_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "Among existing empirical defenses, adversarial training and robust distillation have proven the most effective.",
+      "Building on these insights, we propose a simple yet effective adversarial training method, nasty adversarial training (NAT), which incorporates probability sparsity as a regularization mechanism to boost adversarial robustness."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 60,
+    "fine_reason": "A recent adversarial-training regularizer useful as an auxiliary-objective comparison."
+  },
+  {
+    "paper_id": "icml2024_papers:2137",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "Benign Overfitting in Adversarial Training of Neural Networks",
+    "abstract": "Benign overfitting is the phenomenon wherein none of the predictors in the hypothesis class can achieve perfect accuracy (i.e., non-realizable or noisy setting), but a model that interpolates the training data still achieves good generalization. A series of recent works aim to understand this phenomenon for regression and classification tasks using linear predictors as well as two-layer neural networks. In this paper, we study such a benign overfitting phenomenon in an adversarial setting. We show that under a distributional assumption, interpolating neural networks found using adversarial training generalize well despite inference-time attacks. Specifically, we provide convergence and generalization guarantees for adversarial training of two-layer networks (with smooth as well as non-smooth activation functions) showing that under moderate $\\ell_2$ norm perturbation budget, the trained model has near-zero robust training loss and near-optimal robust generalization error. We support our theoretical findings with an empirical study on synthetic and real-world data.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/wang24cn/wang24cn.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "Benign Overfitting in Adversarial Training of Neural Networks Benign overfitting is the phenomeno"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "benign overfitting in adversarial training of neural networks",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "We show that under a distributional assumption, interpolating neural networks found using adversarial training generalize well despite inference-time attacks.",
+      "Specifically, we provide convergence and generalization guarantees for adversarial training of two-layer networks (with smooth as well as non-smooth activation functions) showing that under moderate $\\ell_2$ norm perturbation budget, the trained model has near-zero robust training loss and near-optimal robust generalization error."
+    ],
+    "fine_decision": "include",
+    "fine_category": "failure_mechanism",
+    "priority": "P2",
+    "relevance_score_100": 58,
+    "fine_reason": "Theoretical background on robust generalization and overfitting in adversarial training."
+  },
+  {
+    "paper_id": "icml2024_papers:1056",
+    "venue": "ICML",
+    "year": "2024",
+    "source_file": "icml2024_papers.json",
+    "title": "DataFreeShield: Defending Adversarial Attacks without Training Data",
+    "abstract": "Recent advances in adversarial robustness rely on an abundant set of training data, where using external or additional datasets has become a common setting. However, in real life, the training data is often kept private for security and privacy issues, while only the pretrained weight is available to the public. In such scenarios, existing methods that assume accessibility to the original data become inapplicable. Thus we investigate the pivotal problem of data-free adversarial robustness, where we try to achieve adversarial robustness without accessing any real data. Through a preliminary study, we highlight the severity of the problem by showing that robustness without the original dataset is difficult to achieve, even with similar domain datasets. To address this issue, we propose DataFreeShield, which tackles the problem from two perspectives: surrogate dataset generation and adversarial training using the generated data. Through extensive validation, we show that DataFreeShield outperforms baselines, demonstrating that the proposed method sets the first entirely data-free solution for the adversarial robustness problem.",
+    "authors": [],
+    "keywords": [],
+    "pdf": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/lee24f/lee24f.pdf",
+    "url": "",
+    "score": 5,
+    "tier": "C-Foundation",
+    "selected": true,
+    "matched_groups": [
+      "adversarial_core"
+    ],
+    "evidence": {
+      "adversarial_core": [
+        "DataFreeShield: Defending Adversarial Attacks without Training Data Recent advances in adversarial r"
+      ]
+    },
+    "penalties": {},
+    "has_abstract": true,
+    "normalized_title": "datafreeshield defending adversarial attacks without training data",
+    "also_in_sources": [
+      "icml2024_papers.json"
+    ],
+    "fine_screen_version": 1,
+    "abstract_reviewed": true,
+    "fine_evidence": [
+      "To address this issue, we propose DataFreeShield, which tackles the problem from two perspectives: surrogate dataset generation and adversarial training using the generated data."
+    ],
+    "fine_decision": "include",
+    "fine_category": "adversarial_training_support",
+    "priority": "P2",
+    "relevance_score_100": 58,
+    "fine_reason": "Retained as a modern adversarial-training baseline, but not directly tied to bit-plane mechanisms."
+  }
+]

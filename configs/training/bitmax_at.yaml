@@ -1,0 +1,34 @@
+method: bitmax_at
+
+epochs: 110
+lr_init: 0.1
+lr_scheduler: multi_step
+lr_steps: [100, 105]
+lr_gamma: 0.1
+optimizer: sgd
+momentum: 0.9
+weight_decay: 5e-4
+
+epsilon: 8
+alpha: 2
+n_steps: 10
+
+perturbation: none
+
+awp:
+  gamma: 0.01
+  warmup: 0
+
+rwp:
+  gamma: 0.01
+  warmup: 0
+
+# BitMax explores discrete low-bit variants after PGD, projects them back into
+# the clean-centered threat ball, and trains on the per-sample maximum CE view.
+bitmax_planes: [0, 1, 2]
+bitmax_candidates: 2
+bitmax_refine_steps: 2
+
+# Legacy auxiliary BitCons is deliberately disabled for this method.
+bitcons: false
+bitcons_contrast: false
