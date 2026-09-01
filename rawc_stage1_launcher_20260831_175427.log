@@ -1,0 +1,45 @@
+[RA-WC-BITCONS] run_id=rawc_stage1_s4243_20260831_175427 stage=all gpus=0 1 tasks=3
+[RA-WC-BITCONS] logs=/mnt/data/share/xq/source/BitCons-AT/logs/rawc_bitcons_stage1_rawc_stage1_s4243_20260831_175427
+GPUs: [0, 1]
+AutoAttack: OK
+----------------------------------------------------------------------
+Ran 45 tests in 2.826s
+
+OK
+[INFO] MissingDataset not found or invalid at /tmp/missing-dataset; downloading it.
+[TASK][GPU 0] bitmax_only config=bitcons_at bitcons=false
+[TASK][GPU 1] rawc_bitcons config=bitcons_at bitcons=true
+[TRAIN][GPU 0] bitmax_only
+[TRAIN][GPU 1] rawc_bitcons
+[EVAL][GPU 0] bitmax_only best (full attack suite)
+[DONE][GPU 0] bitmax_only
+[TASK][GPU 0] corrected_pgd_base config=pgd_at bitcons=false
+[TRAIN][GPU 0] corrected_pgd_base
+[EVAL][GPU 1] rawc_bitcons best (full attack suite)
+[DONE][GPU 1] rawc_bitcons
+[EVAL][GPU 0] corrected_pgd_base best (full attack suite)
+[DONE][GPU 0] corrected_pgd_base
+[RA-WC-BITCONS] run_id=rawc_stage1_s4243_20260831_175427 stage=all gpus=0 1 tasks=3
+[RA-WC-BITCONS] logs=/mnt/data/share/xq/source/BitCons-AT/logs/rawc_bitcons_stage1_rawc_stage1_s4243_20260831_175427
+GPUs: [0, 1]
+AutoAttack: OK
+----------------------------------------------------------------------
+Ran 45 tests in 2.931s
+
+OK
+[INFO] MissingDataset not found or invalid at /tmp/missing-dataset; downloading it.
+[TASK][GPU 0] bitmax_only config=bitcons_at bitcons=false
+[TASK][GPU 1] rawc_bitcons config=bitcons_at bitcons=true
+[SKIP][GPU 0] bitmax_only training already complete
+[SKIP][GPU 0] bitmax_only best evaluation already complete
+[SKIP][GPU 1] rawc_bitcons training already complete
+[SKIP][GPU 1] rawc_bitcons best evaluation already complete
+[DONE][GPU 0] bitmax_only
+[DONE][GPU 1] rawc_bitcons
+[TASK][GPU 0] corrected_pgd_base config=pgd_at bitcons=false
+[SKIP][GPU 0] corrected_pgd_base training already complete
+[SKIP][GPU 0] corrected_pgd_base best evaluation already complete
+[DONE][GPU 0] corrected_pgd_base
+[SUMMARY] All tasks completed successfully.
+[SUMMARY] Status:  /mnt/data/share/xq/source/BitCons-AT/logs/rawc_bitcons_stage1_rawc_stage1_s4243_20260831_175427/status.tsv
+[SUMMARY] Results: /mnt/data/share/xq/source/BitCons-AT/logs/rawc_bitcons_stage1_rawc_stage1_s4243_20260831_175427/results.tsv

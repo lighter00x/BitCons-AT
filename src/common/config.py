@@ -100,6 +100,10 @@ class Config:
 
         if contrast and self.data.get('method') == 'cons_at':
             raise ValueError('BitCons contrast is not implemented for cons_at')
+        if contrast and self.data.get('method') == 'bitcons_at':
+            raise ValueError(
+                'Legacy BitCons contrast is not supported by bitcons_at'
+            )
 
         planes = self.data.get('bitcons_planes', [])
         if any(plane < 0 or plane > 7 for plane in planes):
@@ -123,6 +127,17 @@ class Config:
             raise ValueError('bitcons_align_weight must be non-negative')
         if self.data.get('bitcons_warmup', 0) < 0:
             raise ValueError('bitcons_warmup must be non-negative')
+        if self.data.get('bitcons_start_epoch', 0) < 0:
+            raise ValueError('bitcons_start_epoch must be non-negative')
+        if self.data.get('bitcons_conflict_mode', 'none') not in (
+            'none', 'monitor', 'suppress'
+        ):
+            raise ValueError('Unknown bitcons_conflict_mode')
+        conflict_scale = self.data.get('bitcons_conflict_scale', 0.1)
+        if conflict_scale < 0 or conflict_scale > 1:
+            raise ValueError('bitcons_conflict_scale must be between 0 and 1')
+        if self.data.get('bitcons_max_loss_ratio', 1.0) <= 0:
+            raise ValueError('bitcons_max_loss_ratio must be positive')
         if self.data.get('bitcons_contrast_lam', 0) < 0:
             raise ValueError('bitcons_contrast_lam must be non-negative')
         if self.data.get('bitcons_contrast_temp', 1) <= 0:
@@ -130,7 +145,7 @@ class Config:
         if self.data.get('temperature', 1) <= 0:
             raise ValueError('temperature must be positive')
 
-        if self.data.get('method') == 'bitmax_at':
+        if self.data.get('method') in ('bitmax_at', 'bitcons_at'):
             bitmax_planes = sorted(set(self.data.get('bitmax_planes', [])))
             if (
                 not bitmax_planes
@@ -143,6 +158,19 @@ class Config:
                 raise ValueError('bitmax_candidates must be positive')
             if self.data.get('bitmax_refine_steps', -1) < 0:
                 raise ValueError('bitmax_refine_steps must be non-negative')
+            if self.data.get('bitmax_bit_view', 'selected') not in (
+                'selected', 'best_bit'
+            ):
+                raise ValueError('Unknown bitmax_bit_view')
+
+        if self.data.get('method') == 'bitcons_at':
+            if self.data.get('bitcons_gain_tau', 0) <= 0:
+                raise ValueError('bitcons_gain_tau must be positive')
+            risk_mode = self.data.get('bitcons_risk_mode', 'gain')
+            if risk_mode not in ('gain', 'discrepancy'):
+                raise ValueError('Unknown bitcons_risk_mode')
+            if self.data.get('bitcons_discrepancy_tau', 0.01) <= 0:
+                raise ValueError('bitcons_discrepancy_tau must be positive')
 
         if self.data.get('method') == 'bitplane_at':
             bitplane_planes = sorted(set(self.data.get('bitplane_planes', [])))

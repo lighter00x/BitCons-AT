@@ -1,0 +1,16 @@
+[FAMILY-BITCONS] run_id=family_stage2_s4243_20260901_022933 stage=all gpus=0 1
+GPUs: [0, 1]
+AutoAttack: OK
+----------------------------------------------------------------------
+Ran 50 tests in 2.857s
+
+OK
+[INFO] MissingDataset not found or invalid at /tmp/missing-dataset; downloading it.
+[TRAIN][GPU 1] family_disc_bitcons
+[TRAIN][GPU 0] family_bitmax_only
+[EVAL][GPU 0] family_bitmax_only full attack suite
+[EVAL][GPU 1] family_disc_bitcons full attack suite
+[DONE][GPU 0] family_bitmax_only
+[DONE][GPU 1] family_disc_bitcons
+[SUMMARY] Status: /mnt/data/share/xq/source/BitCons-AT/logs/bitcons_family_stage2_family_stage2_s4243_20260901_022933/status.tsv
+[SUMMARY] Results: /mnt/data/share/xq/source/BitCons-AT/logs/bitcons_family_stage2_family_stage2_s4243_20260901_022933/results.tsv

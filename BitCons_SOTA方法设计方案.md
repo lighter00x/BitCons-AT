@@ -94,7 +94,7 @@ d_i = JS(p_bit_i, stopgrad(p_adv_i))
 risk_i = clamp(relu(gain_i) / tau_gain, 0, 1)
 reliable_i = 1[predict(x_adv_i) = y_i and margin_adv_i > m]
 lambda_i = lambda_max * curriculum(epoch) * risk_i * reliable_i
-L_cons = sum_i lambda_i * d_i / max(sum_i lambda_i, 1)
+L_cons = mean_i lambda_i * d_i
 ```
 
 总损失：
@@ -281,11 +281,16 @@ epoch 90..end:   refine=2，保持 risk/reliable/conflict gate
 
 ## 10. 最终实施顺序
 
+当前代码状态（2026-08-31）：P1、P2 已实现并通过完整测试；
+`run_rawc_bitcons_stage1.sh` 已提供 Corrected PGD Base、BitMax-only 和
+RA-WC-BitCons 的同预算入口。P3 及之后的模块必须等待 Stage-1 的
+AutoAttack、gate rate、loss gain 和一致性幅度结果后再决定，避免在无效主干上堆叠复杂度。
+
 ```text
-P0  完成 Quantize-only 和当前 BitMax 结果，补齐因果基线
-P1  新建 bitcons_at.py，实现 BitMax-only hard-max robust CE
-P2  实现 per-sample JS + risk/reliable gate，得到 RA-WC-BitCons
-P3  加 BitCons curriculum，完成 D/E/F/G 消融
+P0  完成 Quantize-only 和当前 BitMax 结果，补齐因果基线（部分完成）
+P1  新建 bitcons_at.py，实现 BitMax-only hard-max robust CE（已完成）
+P2  实现 per-sample JS + risk/reliable gate，得到 RA-WC-BitCons（已完成）
+P3  加 BitCons curriculum，完成 D/E/F/G 消融（权重课程已完成，候选课程待验证）
 P4  记录梯度 cosine，必要时实现 Conflict-Safe BitCons
 P5  有稳定正增益后实现连续 bit support 搜索 BitMax-S
 P6  做 Pixel-aware/Layer-aware 扩展

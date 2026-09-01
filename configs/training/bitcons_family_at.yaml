@@ -1,0 +1,47 @@
+method: bitcons_at
+
+epochs: 110
+lr_init: 0.1
+lr_scheduler: multi_step
+lr_steps: [100, 105]
+lr_gamma: 0.1
+optimizer: sgd
+momentum: 0.9
+weight_decay: 5e-4
+
+epsilon: 8
+alpha: 2
+n_steps: 10
+perturbation: none
+
+awp:
+  gamma: 0.01
+  warmup: 0
+rwp:
+  gamma: 0.01
+  warmup: 0
+
+# Search P0/P01/P012, select the strongest discrete seed per sample, then
+# spend the refine budget only on that seed. Robust CE still includes PGD.
+bitmax_planes: [0, 1, 2]
+bitmax_candidates: 2
+bitmax_family_search: true
+bitmax_refine_best_only: true
+bitmax_refine_steps: 2
+bitmax_bit_view: best_bit
+
+# Discrepancy gating remains BitCons: align the strongest legal bit view to a
+# detached, correctly classified PGD reference. Set bitcons: false for the
+# Family-BitMax-only causal ablation.
+bitcons: true
+bitcons_contrast: false
+bitcons_alpha: 0.1
+bitcons_start_epoch: 10
+bitcons_warmup: 30
+bitcons_warmup_schedule: linear
+bitcons_risk_mode: discrepancy
+bitcons_discrepancy_tau: 0.001
+bitcons_normalize_discrepancy_loss: true
+bitcons_gain_tau: 0.5
+bitcons_margin_threshold: 0.0
+temperature: 1.0

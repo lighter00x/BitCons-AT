@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Four-run BitMax exploration. Each GPU runs one task at a time.
+# Timeline: Phase 4 - BitMax candidate-search precursor to current BitCons.
+# Purpose: compare PGD with P01/P012 worst low-bit candidates and candidate
+# counts K=2/K=4, while projecting every candidate into the clean-centered
+# L_inf ball. This tests whether discrete bit risk exists beyond standard PGD.
+# Status: supporting inner-optimizer exploration. BitMax is not the paper's
+# replacement for BitCons; the current main comparison is RA-WC-BitCons.
+# Four runs use two workers, one task per GPU at a time.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"

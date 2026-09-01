@@ -1,6 +1,13 @@
 #!/bin/bash
 set -uo pipefail
 
+# Timeline: Phase 0 - original repository training example (legacy utility).
+# Purpose: launch PGD-AT/TRADES/MART/RPAT baselines on four fixed GPU IDs and
+# demonstrate the basic src/train.py CLI. It does not test BitCons and has no
+# preflight, resume, manifest, or consolidated evaluation support.
+# Status: historical example only; do not use for the current paper pipeline.
+# Use run_rawc_bitcons_stage1_dual.sh for the current main experiment.
+
 mkdir -p logs
 desc="test"
 nohup python src/train.py \

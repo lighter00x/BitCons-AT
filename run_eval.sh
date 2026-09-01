@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Timeline: cross-phase evaluation utility; not an experiment stage by itself.
+# Purpose: locate existing output directories and schedule checkpoint evaluation
+# across one or more GPUs. Historical Base/Core/Full experiments used it before
+# newer stage-specific launchers embedded their own evaluation and manifests.
+# Status: general-purpose/manual evaluation helper. For reproducible stage runs,
+# prefer the evaluation section of that stage's launcher.
+#
 # Robust launcher for evaluation jobs.
 #
 # Common usage:

@@ -117,6 +117,98 @@ def bitcons_align_loss(
         )
 
 
+def bitcons_js_per_sample(
+    logits_view: torch.Tensor,
+    logits_reference: torch.Tensor,
+    temperature: float = 1.0,
+    detach_reference: bool = True,
+) -> torch.Tensor:
+    """Return a JS consistency loss for each sample in the batch."""
+    if temperature <= 0:
+        raise ValueError('temperature must be positive')
+    reference = logits_reference.detach() if detach_reference else logits_reference
+    prob_view = F.softmax(logits_view / temperature, dim=1).clamp_min(1e-8)
+    prob_reference = F.softmax(reference / temperature, dim=1).clamp_min(1e-8)
+    mean_prob = 0.5 * (prob_view + prob_reference)
+    js_view = (prob_view * (prob_view.log() - mean_prob.log())).sum(dim=1)
+    js_reference = (
+        prob_reference * (prob_reference.log() - mean_prob.log())
+    ).sum(dim=1)
+    return 0.5 * (js_view + js_reference)
+
+
+def bitcons_risk_weights(
+    bit_losses: torch.Tensor,
+    adversarial_losses: torch.Tensor,
+    adversarial_logits: torch.Tensor,
+    labels: torch.Tensor,
+    gain_tau: float,
+    margin_threshold: float = 0.0,
+):
+    """Gate consistency by incremental bit risk and reference reliability."""
+    if gain_tau <= 0:
+        raise ValueError('gain_tau must be positive')
+    if bit_losses.shape != adversarial_losses.shape:
+        raise ValueError('bit and adversarial losses must have the same shape')
+
+    gains = (bit_losses.detach() - adversarial_losses.detach()).clamp_min(0.0)
+    risk = (gains / gain_tau).clamp(max=1.0)
+
+    detached_logits = adversarial_logits.detach()
+    predictions = detached_logits.argmax(dim=1)
+    true_logits = detached_logits.gather(1, labels[:, None]).squeeze(1)
+    other_logits = detached_logits.clone()
+    other_logits.scatter_(1, labels[:, None], float('-inf'))
+    margins = true_logits - other_logits.max(dim=1).values
+    reliable = predictions.eq(labels) & margins.gt(margin_threshold)
+    weights = risk * reliable.to(risk.dtype)
+    return weights, gains, margins, reliable
+
+
+def bitcons_discrepancy_weights(
+    discrepancies: torch.Tensor,
+    adversarial_logits: torch.Tensor,
+    labels: torch.Tensor,
+    discrepancy_tau: float,
+    margin_threshold: float = 0.0,
+):
+    """Weight reliable references by bit/PGD predictive discrepancy."""
+    if discrepancy_tau <= 0:
+        raise ValueError('discrepancy_tau must be positive')
+    if discrepancies.ndim != 1 or discrepancies.size(0) != labels.size(0):
+        raise ValueError('discrepancies must contain one value per sample')
+
+    detached_logits = adversarial_logits.detach()
+    predictions = detached_logits.argmax(dim=1)
+    true_logits = detached_logits.gather(1, labels[:, None]).squeeze(1)
+    other_logits = detached_logits.clone()
+    other_logits.scatter_(1, labels[:, None], float('-inf'))
+    margins = true_logits - other_logits.max(dim=1).values
+    reliable = predictions.eq(labels) & margins.gt(margin_threshold)
+    risk = (discrepancies.detach() / discrepancy_tau).clamp(0.0, 1.0)
+    weights = risk * reliable.to(risk.dtype)
+    return weights, margins, reliable
+
+
+def get_risk_adaptive_bitcons_weight(config, epoch: int) -> float:
+    """Warm up the maximum consistency weight after an optional PGD burn-in."""
+    max_weight = float(getattr(config, 'bitcons_alpha', 0.0) or 0.0)
+    start_epoch = int(getattr(config, 'bitcons_start_epoch', 0) or 0)
+    warmup = int(getattr(config, 'bitcons_warmup', 0) or 0)
+    schedule = (
+        getattr(config, 'bitcons_warmup_schedule', 'linear') or 'linear'
+    )
+    if epoch < start_epoch:
+        return 0.0
+    if warmup <= 0 or epoch >= start_epoch + warmup:
+        return max_weight
+
+    progress = (epoch - start_epoch) / warmup
+    if schedule == 'cosine':
+        progress = 0.5 * (1.0 - math.cos(math.pi * progress))
+    return max_weight * progress
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Feature-space contrastive loss
 # ─────────────────────────────────────────────────────────────────────────────

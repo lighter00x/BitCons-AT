@@ -147,7 +147,10 @@ def main():
 
         pgd10_masked_acc = None
         natural_masked_acc = None
-        if getattr(config, 'bitcons', False):
+        if (
+            getattr(config, 'bitcons', False)
+            and getattr(config, 'method', None) != 'bitcons_at'
+        ):
             bc_planes = list(getattr(config, 'bitcons_planes', [0, 1, 2]))
             pgd10_masked_acc = evaluate_pgd_10_masked(model, device, test_loader, bc_planes)    # 在pgd10 + bitcons下的准确率
             natural_masked_acc = evaluate_natural_masked(model, device, test_loader, bc_planes) # 直接是干净样本 + bitcons下的准确率

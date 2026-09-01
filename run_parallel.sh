@@ -1,6 +1,13 @@
 #!/bin/bash
 set -uo pipefail
 
+# Timeline: Phase 0 - generic multi-GPU baseline launcher (legacy utility).
+# Purpose: enumerate dataset/model/host-method combinations and distribute
+# ordinary baseline training across a manually configured GPU list. The file's
+# current defaults target TinyNet and four GPUs, not the current CIFAR-10 study.
+# Status: reusable engineering helper, but not a paper experiment definition.
+# Do not compare its outputs directly with the fixed-seed Stage-1 experiments.
+
 # 定义可用资源和任务参数
 GPUS=(0 1 2 3)
 # DATASETS=("cifar10" "cifar100" "tinynet")

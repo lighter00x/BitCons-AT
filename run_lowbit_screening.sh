@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Stage-1 screening for the revised low-bit BitCons design.
-# Each GPU runs one job at a time; the two workers run concurrently.
+# Timeline: Phase 2 - low-bit auxiliary-stream screening (historical study).
+# Purpose: move fragile planes from the original higher-bit choice to P01/P012,
+# sweep smaller alignment weights, and separate Mask-CE/Align/Contrast effects.
+# It showed that weaker low-bit alignment avoided some collapse but still did
+# not beat the standard robust baseline consistently.
+# Status: historical reproduction only; superseded by threat-ball candidates
+# and risk-adaptive consistency. Each GPU runs one job at a time.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"

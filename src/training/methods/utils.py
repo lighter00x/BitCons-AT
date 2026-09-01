@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 
+import torch
 from torch.nn.modules.batchnorm import _BatchNorm
 
 
@@ -18,6 +19,43 @@ def freeze_batchnorm_stats(model):
     finally:
         for module, track_running_stats in batchnorm_states.items():
             module.track_running_stats = track_running_stats
+
+
+def get_classifier_parameters(model):
+    """Return parameters of the model's final classifier."""
+    for attribute in ('fc', 'linear', 'classifier'):
+        module = getattr(model, attribute, None)
+        if module is not None:
+            return [parameter for parameter in module.parameters()]
+    raise ValueError('Model has no recognized final classifier')
+
+
+def loss_gradient_cosine(loss_a, loss_b, parameters, eps=1e-12):
+    """Measure cosine between two loss gradients on selected parameters."""
+    parameters = list(parameters)
+    grads_a = torch.autograd.grad(
+        loss_a,
+        parameters,
+        retain_graph=True,
+        allow_unused=True,
+    )
+    grads_b = torch.autograd.grad(
+        loss_b,
+        parameters,
+        retain_graph=True,
+        allow_unused=True,
+    )
+    pairs = [
+        (grad_a, grad_b)
+        for grad_a, grad_b in zip(grads_a, grads_b)
+        if grad_a is not None and grad_b is not None
+    ]
+    if not pairs:
+        return 0.0
+    dot = sum((grad_a * grad_b).sum() for grad_a, grad_b in pairs)
+    norm_a = sum(grad_a.square().sum() for grad_a, _ in pairs).sqrt()
+    norm_b = sum(grad_b.square().sum() for _, grad_b in pairs).sqrt()
+    return float((dot / (norm_a * norm_b + eps)).detach().item())
 
 
 class LossComponentMeter:

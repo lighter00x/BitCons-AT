@@ -4,6 +4,7 @@ from .mart import mart_train
 from .cons_at import cons_at_train
 from .rpat import rpat_train
 from .bitmax_at import bitmax_at_train
+from .bitcons_at import bitcons_at_train
 
 
 def get_train_fn(config):
@@ -31,10 +32,12 @@ def get_train_fn(config):
         return rpat_train
     elif config.method == "bitmax_at":
         return bitmax_at_train
+    elif config.method == "bitcons_at":
+        return bitcons_at_train
     else:
         available_methods = [
             "pgd_at", "trades", "mart", "cons_at", "rpat", "bitmax_at",
-            "bitplane_at", "quantize_at",
+            "bitplane_at", "quantize_at", "bitcons_at",
         ]
         raise ValueError(
             f"Unknown training method: '{config.method}'. "

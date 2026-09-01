@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT / 'src'))
 
 from training.methods.cons_at import cons_at_train
 from training.methods.bitmax_at import bitmax_at_train
+from training.methods.bitcons_at import bitcons_at_train
 from training.methods.mart import mart_train
 from training.methods.pgd_at import pgd_at_train
 from training.methods.rpat import rpat_train
@@ -61,12 +62,24 @@ def make_config(ce_weight=1.0, align_weight=1.0, contrast=False):
         bitcons_align_weight=align_weight,
         bitcons_warmup=0,
         bitcons_warmup_schedule='linear',
+        bitcons_start_epoch=0,
+        bitcons_gain_tau=0.5,
+        bitcons_margin_threshold=-100.0,
         bitcons_contrast=contrast,
         bitcons_contrast_lam=1.0,
         bitcons_contrast_temp=0.5,
         bitmax_planes=[0, 1, 2],
         bitmax_candidates=2,
         bitmax_refine_steps=1,
+        bitmax_family_search=False,
+        bitmax_refine_best_only=False,
+        bitmax_bit_view='selected',
+        bitcons_risk_mode='gain',
+        bitcons_discrepancy_tau=0.01,
+        bitcons_normalize_discrepancy_loss=False,
+        bitcons_conflict_mode='none',
+        bitcons_conflict_scale=0.1,
+        bitcons_max_loss_ratio=1.0,
         perturbation='none',
         awp={'gamma': 0.01, 'warmup': 0},
         rwp={'gamma': 0.01, 'warmup': 0},
@@ -148,6 +161,54 @@ class TrainingMethodsSmokeTest(unittest.TestCase):
         config = make_config(contrast=False)
         config.bitcons = False
         self.run_method(bitmax_at_train, config)
+
+    def test_risk_adaptive_bitcons_at_trains(self):
+        config = make_config(contrast=False)
+        config.bitcons_alpha = 0.05
+        self.run_method(bitcons_at_train, config)
+
+    def test_bitcons_at_supports_bitmax_only_ablation(self):
+        config = make_config(contrast=False)
+        config.bitcons = False
+        self.run_method(bitcons_at_train, config)
+
+    def test_family_discrepancy_bitcons_at_trains(self):
+        config = make_config(contrast=False)
+        config.bitmax_family_search = True
+        config.bitmax_refine_best_only = True
+        config.bitmax_bit_view = 'best_bit'
+        config.bitcons_risk_mode = 'discrepancy'
+        config.bitcons_normalize_discrepancy_loss = True
+        self.run_method(bitcons_at_train, config)
+
+    def test_conflict_safe_bitcons_at_trains_and_logs_diagnostics(self):
+        config = make_config(contrast=False)
+        config.bitmax_family_search = True
+        config.bitmax_refine_best_only = True
+        config.bitmax_bit_view = 'best_bit'
+        config.bitcons_risk_mode = 'discrepancy'
+        config.bitcons_normalize_discrepancy_loss = True
+        config.bitcons_conflict_mode = 'suppress'
+
+        torch.manual_seed(7)
+        model = TinyClassifier().to(self.device)
+        optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+        loss, _, components = bitcons_at_train(
+            config,
+            model,
+            self.device,
+            [(self.images.clone(), self.labels.clone())],
+            optimizer,
+            self.criterion,
+            epoch=1,
+        )
+
+        self.assertTrue(math.isfinite(loss))
+        self.assertTrue(math.isfinite(components['bitcons_gradient_cosine']))
+        self.assertGreaterEqual(components['bitcons_conflict_rate'], 0.0)
+        self.assertLessEqual(components['bitcons_conflict_rate'], 1.0)
+        self.assertGreaterEqual(components['bitcons_aux_scale'], 0.0)
+        self.assertLessEqual(components['bitcons_aux_scale'], 1.0)
 
     def test_weight_perturbations_train_with_full_bitcons(self):
         for perturbation_name in ('awp', 'rwp'):

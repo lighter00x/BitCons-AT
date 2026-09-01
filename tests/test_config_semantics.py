@@ -91,6 +91,50 @@ class ConfigSemanticsTest(unittest.TestCase):
         self.assertEqual(overridden.bitmax_planes, [0, 1])
         self.assertEqual(overridden.bitmax_candidates, 4)
 
+    def test_risk_adaptive_bitcons_defaults_and_overrides(self):
+        config = load_config('--config', 'bitcons_at')
+
+        self.assertEqual(config.method, 'bitcons_at')
+        self.assertTrue(config.bitcons)
+        self.assertEqual(config.bitcons_alpha, 0.05)
+        self.assertEqual(config.bitcons_start_epoch, 20)
+        self.assertEqual(config.bitcons_gain_tau, 0.5)
+        self.assertEqual(config.bitcons_margin_threshold, 0.0)
+
+        overridden = load_config(
+            '--config', 'bitcons_at',
+            '--bitcons_start_epoch', '10',
+            '--bitcons_gain_tau', '0.25',
+            '--bitcons_margin_threshold', '-1.5',
+        )
+        self.assertEqual(overridden.bitcons_start_epoch, 10)
+        self.assertEqual(overridden.bitcons_gain_tau, 0.25)
+        self.assertEqual(overridden.bitcons_margin_threshold, -1.5)
+
+    def test_risk_adaptive_bitcons_rejects_invalid_gain_scale(self):
+        with self.assertRaisesRegex(ValueError, 'bitcons_gain_tau'):
+            load_config(
+                '--config', 'bitcons_at', '--bitcons_gain_tau', '0'
+            )
+
+    def test_family_discrepancy_config(self):
+        config = load_config('--config', 'bitcons_family_at')
+
+        self.assertTrue(config.bitmax_family_search)
+        self.assertTrue(config.bitmax_refine_best_only)
+        self.assertEqual(config.bitmax_bit_view, 'best_bit')
+        self.assertEqual(config.bitcons_risk_mode, 'discrepancy')
+        self.assertEqual(config.bitcons_discrepancy_tau, 0.001)
+        self.assertTrue(config.bitcons_normalize_discrepancy_loss)
+
+    def test_conflict_safe_config(self):
+        config = load_config('--config', 'bitcons_conflict_at')
+
+        self.assertEqual(config.bitcons_alpha, 0.25)
+        self.assertEqual(config.bitcons_conflict_mode, 'suppress')
+        self.assertEqual(config.bitcons_conflict_scale, 0.1)
+        self.assertEqual(config.bitcons_max_loss_ratio, 0.02)
+
     def test_bitplane_bpda_defaults_and_override(self):
         config = load_config('--config', 'bitplane_at')
         self.assertEqual(config.method, 'bitplane_at')

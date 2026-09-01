@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Adaptive bit-plane defense exploration: attacks see the BPDA wrapper.
+# Timeline: Phase 3 - fixed BitPlane/BPDA exploration (completed history).
+# Purpose: test whether deterministic clearing of P0/P01/P012 at inference
+# yields real robustness when attacks see the non-differentiable wrapper through
+# BPDA. The small gains motivated stronger causal controls but were insufficient
+# as a standalone contribution.
+# Status: retained as a fixed-transform/BPDA baseline; not the current ordinary-
+# inference RA-WC-BitCons method. Attacks in this script see the BPDA wrapper.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"

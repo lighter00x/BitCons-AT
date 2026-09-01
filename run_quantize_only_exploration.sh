@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Quantize-only causal control for the completed BPDA bit-plane exploration.
+# Timeline: Phase 3.5 - quantization causal control after the BPDA study.
+# Purpose: separate the effect of ordinary 8-bit rounding from clearing low bit
+# planes, using an adaptive BPDA evaluation under the same CIFAR-10 protocol.
+# Status: supporting control only. Run it when the matching control result is
+# missing; quantization/BPDA do not replace BitCons in the current paper method.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"

@@ -71,6 +71,27 @@ def get_args():
     parser.add_argument('--bitcons_warmup_schedule', type=str, default=None,
                         choices=['linear', 'cosine'],
                         help='Warmup schedule shape (default: linear)')
+    parser.add_argument('--bitcons_start_epoch', type=int, default=None,
+                        help='Epoch that starts risk-adaptive BitCons consistency')
+    parser.add_argument('--bitcons_gain_tau', type=float, default=None,
+                        help='Loss-gain scale used by risk-adaptive BitCons')
+    parser.add_argument('--bitcons_risk_mode', type=str, default=None,
+                        choices=['gain', 'discrepancy'],
+                        help='Signal used to gate risk-adaptive BitCons')
+    parser.add_argument('--bitcons_discrepancy_tau', type=float, default=None,
+                        help='JS scale used by discrepancy-gated BitCons')
+    parser.add_argument('--bitcons_normalize_discrepancy_loss',
+                        action=argparse.BooleanOptionalAction, default=None,
+                        help='Normalize and cap discrepancy consistency by tau')
+    parser.add_argument('--bitcons_conflict_mode', type=str, default=None,
+                        choices=['none', 'monitor', 'suppress'],
+                        help='Classifier-gradient conflict handling mode')
+    parser.add_argument('--bitcons_conflict_scale', type=float, default=None,
+                        help='Auxiliary scale for conflicting batches')
+    parser.add_argument('--bitcons_max_loss_ratio', type=float, default=None,
+                        help='Maximum weighted BitCons/robust loss ratio')
+    parser.add_argument('--bitcons_margin_threshold', type=float, default=None,
+                        help='Minimum adversarial true-class margin for alignment')
     parser.add_argument('--bitcons_contrast_lam', type=float, default=None,
                         help='Feature contrastive loss weight relative to BitCons alpha')
     parser.add_argument('--bitcons_contrast_temp', type=float, default=None,
@@ -84,6 +105,15 @@ def get_args():
                         help='Number of projected low-bit candidates per sample')
     parser.add_argument('--bitmax_refine_steps', type=int, default=None,
                         help='PGD refinement steps after each discrete bit jump')
+    parser.add_argument('--bitmax_family_search',
+                        action=argparse.BooleanOptionalAction, default=None,
+                        help='Search P0/P01/... low-bit candidate families')
+    parser.add_argument('--bitmax_refine_best_only',
+                        action=argparse.BooleanOptionalAction, default=None,
+                        help='Refine only the per-sample strongest bit seed')
+    parser.add_argument('--bitmax_bit_view', type=str, default=None,
+                        choices=['selected', 'best_bit'],
+                        help='Return PGD-inclusive winner or strongest bit view')
     parser.add_argument('--bitplane_planes', nargs='+', type=int, default=None,
                         metavar='P',
                         help='Low bit-planes masked by the BPDA model wrapper')

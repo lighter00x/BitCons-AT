@@ -50,6 +50,41 @@ BitCons-AT/
 
 ## Quick Start
 
+### Current main method: RA-WC-BitCons
+
+The paper-oriented implementation is `bitcons_at`. It keeps ordinary,
+differentiable inference and uses BitMax only during training to search for a
+high-loss legal low-bit view. The robust classification loss takes the
+per-sample worst case between PGD and that view. BitCons then aligns the bit
+view to a detached PGD reference only when the bit view adds risk and the PGD
+reference is reliable.
+
+Run the two causal variants with the same config:
+
+```bash
+# BitMax-only: worst-view robust CE, without consistency
+python src/train.py --dataset cifar10 --model resnet18 \
+    --config bitcons_at --no-bitcons --desc stage1
+
+# RA-WC-BitCons: BitMax plus risk-adaptive worst-case consistency
+python src/train.py --dataset cifar10 --model resnet18 \
+    --config bitcons_at --bitcons --desc stage1
+```
+
+The consistency coefficient starts at epoch 20 and warms up to `0.05` by
+epoch 60 by default. Its gate and candidate diagnostics are written to
+`loss_components.csv`. The legacy masking-stream experiments under `pgd_at`
+remain available for reproduction, but they are not the current main method.
+
+For the controlled first-stage comparison, preview the three-run launcher:
+
+```bash
+DRY_RUN=1 ./run_rawc_bitcons_stage1.sh
+```
+
+It compares corrected PGD-AT, BitMax-only, and RA-WC-BitCons with the same
+dataset, model, seed, epoch budget, attack parameters, and checkpoint metric.
+
 ### 1. Dependencies
 
 ```bash

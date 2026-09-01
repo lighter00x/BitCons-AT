@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# One-command CIFAR-10 paper experiment suite.
+# Timeline: Phase 1 - original BitCons Base/Core/Full study (completed history).
+# Purpose: compare the legacy masking-stream BitCons across PGD-AT, TRADES,
+# MART, and RPAT, plus the PGD-AT 2^3 Mask-CE/Align/Contrast ablation. This
+# experiment established that the original unconditional auxiliary objectives
+# did not improve standard-input robustness and could cause robust collapse.
+# Status: retained for exact reproduction; it is not the current paper method.
 # Two workers run in parallel; each GPU runs one train/eval job at a time.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
